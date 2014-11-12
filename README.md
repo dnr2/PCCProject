@@ -1,4 +1,4 @@
-glass_speech
+PCC Project Repository
 ============
 
-Speech helper - Google glass app
+
