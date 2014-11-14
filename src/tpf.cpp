@@ -1,6 +1,7 @@
 #include <iostream>
 #include <getopt.h>
 #include <stdlib.h>
+#include "tpf_algorithm.h"
 
 using namespace std;
 
