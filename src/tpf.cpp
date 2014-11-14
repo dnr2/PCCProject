@@ -27,10 +27,9 @@ int main(int argc, char **argv)
 	int options = 0;
 
 	//Lê as opções de execução da busca	
-	while (1)
-	{
+	while (1){
 		static struct option long_options[] =
-        {
+		{
           {"help",     no_argument,       0, 'h'},
           {"edit",     required_argument, 0, 'e'},
           {"pattern",  required_argument, 0, 'p'},
@@ -45,8 +44,7 @@ int main(int argc, char **argv)
 
         options += 2;
 
-        switch (c)
-        {
+        switch (c){
         	case 'e':
         		dist = atoi(optarg);
         		cout << "distancia igual a " << dist << endl;
@@ -65,25 +63,24 @@ int main(int argc, char **argv)
 	}
 
 	if (options >= argc 
-		|| argc == 1)
-	{
+		|| argc == 1){
 		help();
 	}
 
-	if (!patternfile)
-	{
+	// se um pattern file não definido, o próximo parâmetro e pattern
+	if (!patternfile){
 		pattern = argv[1];
 		options += 1;
 		cout << "pattern: " << pattern << endl;
 	}
 
+	// lê os nomes dos arquivos de texto
 	cout << "Files:" << endl;
 	int textFiles = argc - options;
 	string files[textFiles];
-	for (int i = options+1; i < argc; i++)
-	{
+	for (int i = options+1; i < argc; i++){
 		files[i-options-1] = argv[i];
-		cout << argv[i] << endl;
+		cout << files[i-options-1] << endl;
 	}
 
 
