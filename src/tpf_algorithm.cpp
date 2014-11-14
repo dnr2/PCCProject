@@ -42,6 +42,27 @@ void init() {
 	P = 1;
 }
 
+
+// Add a word to the prefix tree and give it the number w
+void add(const char *wort, int w) {
+	int c = 0;
+	for (int i = 0; wort[i]; i++) {
+		int &cs = adj[c][dec(wort[i])]; // Don't forget the ``\verb|&|''
+		if (cs == -1) {
+			cs = P;
+			vadj[c].push_back(P);
+			ltt[P] = wort[i];
+			wend[P].clear();
+			fill_n(adj[P], LETTERS, -1);
+			vadj[P].clear();
+			P++;
+		}
+		c = cs;
+	}
+	wend[c].push_back(w);
+}
+
+///ahocorasick
 int suf[DOTS], preend[DOTS], dep[DOTS], par[DOTS];
 
 void initaho() {
