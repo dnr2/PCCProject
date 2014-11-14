@@ -21,7 +21,8 @@ void help()
 
 int main(int argc, char **argv)
 {
-
+	ios_base::sync_with_stdio(0);cin.tie(0); // make COUT and CIN faster
+	
 	int c;
 	int options = 0;
 
@@ -38,9 +39,9 @@ int main(int argc, char **argv)
         
         int option_index = 0;
 
-        c = getopt_long (argc, argv, "he:p:", long_options, &option_index);
+        c = getopt_long (argc, argv, "he:p:", long_options, &option_index); 
 
-        if (c == -1)	break;
+        if (c == -1) break;
 
         options += 2;
 
