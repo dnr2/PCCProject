@@ -139,6 +139,8 @@ int char_mask(char *i_pattern, bitset *C)
 
 int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance, char **o_results)
 {
+	int text_len = strlen(i_textfile);//TEMPORARIO
+
 	int results = 0;
 	int pattern_len = strlen(i_pattern);
 	bitset<pattern_len> C[ALPHABET_SIZE];
@@ -152,8 +154,22 @@ int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance, char **o_re
 		S[q] = S[q-1] << 1;
 	}
 
-	for (int j = 1; j <= ; j++){
+	bitset<pattern_len> S1, S2;
 
+	for (int j = 1; j <= ; j++){
+		S1 = S[0];
+		S[0] = (S[0] << 1) | C[(int) i_textfile[j]];
+		for (int q = 1; q <= i_distance; q++){
+			S2 = S[q];
+			S[q] = 		((S[q] << 1) | C[(int) i_textfile[j]])
+					&	(S1 << 1)
+					&	(S[q-1] << 1)
+					&	S1
+			S1 = S2;
+		}
+		if (S[i_distance] < msb){
+			results += 1;
+		}
 	}
 
 	return TPF_OK;
