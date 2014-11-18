@@ -117,7 +117,7 @@ int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, 
 
 // ---- Inicio WU-MANBER ---- //
 
-bitset[] char_mask(char *i_pattern)
+int char_mask(char *i_pattern, bitset *C)
 {
 	int pattern_len = strlen(i_pattern);
 	bitset<pattern_len> C[ALPHABET_SIZE];
@@ -134,14 +134,27 @@ bitset[] char_mask(char *i_pattern)
 		Mk <<= 1;
 	}
 
-	return C;
+	return TPF_OK;
 }
 
 int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance, char **o_results)
 {
 	int results = 0;
+	int pattern_len = strlen(i_pattern);
+	bitset<pattern_len> C[ALPHABET_SIZE];
+	char_mask(i_pattern, C);
+	long msb = 2 ** (pattern_len-1);
 
+	bitset<pattern_len> S[i_distance+1];
+	S[0].set();
 
+	for (int q = 1; q <= i_distance; q++){
+		S[q] = S[q-1] << 1;
+	}
+
+	for (int j = 1; j <= ; j++){
+
+	}
 
 	return TPF_OK;
 }
