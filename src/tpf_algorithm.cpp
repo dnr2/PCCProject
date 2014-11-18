@@ -115,6 +115,24 @@ int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, 
 
 // ---- Fim AHO-CORASICK ---- //
 
+// ---- Inicio WU-MANBER ---- //
+
+int tpf_wu_manber(char *i_pattern, char *i_textfile, char **o_results)
+{
+	return TPF_OK;
+}
+
+// ---- Fim WU-MANBER ---- //
+
+// ---- Inicio WU-MANBER ---- //
+
+int tpf_boyer_moore(char *i_pattern, char *i_textfile, char **o_results)
+{
+	return TPF_OK;
+}
+
+// ---- Fim WU-MANBER ---- //
+
 
 // ignore
 
