@@ -117,21 +117,45 @@ int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, 
 
 // ---- Inicio WU-MANBER ---- //
 
-int tpf_wu_manber(char *i_pattern, char *i_textfile, char **o_results)
+bitset[] char_mask(char *i_pattern)
 {
+	int pattern_len = strlen(i_pattern);
+	bitset<pattern_len> C[ALPHABET_SIZE];
+
+	for (int i = 0; i < ALPHABET_SIZE; i++){
+		C[i].set();
+	}
+
+	bitset<pattern_len> Mk;
+	Mk.set(pattern_len);
+
+	for (int k = 1; k <= pattern_len; k++){
+		C[(int) i_pattern[k]] &= ~Mk;
+		Mk <<= 1;
+	}
+
+	return C;
+}
+
+int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance, char **o_results)
+{
+	int results = 0;
+
+
+
 	return TPF_OK;
 }
 
 // ---- Fim WU-MANBER ---- //
 
-// ---- Inicio WU-MANBER ---- //
+// ---- Inicio BOYER-MOORE ---- //
 
 int tpf_boyer_moore(char *i_pattern, char *i_textfile, char **o_results)
 {
 	return TPF_OK;
 }
 
-// ---- Fim WU-MANBER ---- //
+// ---- Fim BOYER-MOORE ---- //
 
 
 // ignore

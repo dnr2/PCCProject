@@ -1,4 +1,7 @@
 #ifndef _TPF_ALGORITHM
+#include <string>
+#include <bitset>
+
 #define _TPF_ALGORITHM
 
 #define TPF_EXACT 				1
