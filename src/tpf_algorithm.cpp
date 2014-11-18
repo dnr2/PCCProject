@@ -24,11 +24,13 @@ int tpf_find(char **i_patterns, int i_pattern_amount, char *i_textfile, int i_tp
 
 using namespace std;
 
+#define MAXNODES 1000
+
 int P; // Number of nodes in the prefix tree
-char ltt[DOTS]; // Character for this node
-vector<int> wend[DOTS]; // Numbers of the words ending here
-int adj[DOTS][ALPHABET_SIZE]; // [node][character]: child node (-1 if non-existent)
-vector<int> vadj[DOTS]; // Numbers of the child nodes
+char ltt[MAXNODES]; // Character for this node
+vector<int> wend[MAXNODES]; // Numbers of the words ending here
+int adj[MAXNODES][ALPHABET_SIZE]; // [node][character]: child node (-1 if non-existent)
+vector<int> vadj[MAXNODES]; // Numbers of the child nodes
 
 int dec(char c) { // ``character $\rightarrow$ number'' mapping, for example:
 	return c-'a';
@@ -62,7 +64,7 @@ void add(const char *wort, int w) {
 }
 
 ///ahocorasick
-int suf[DOTS], preend[DOTS], dep[DOTS], par[DOTS];
+int suf[MAXNODES], preend[MAXNODES], dep[MAXNODES], par[MAXNODES];
 
 void initaho() {
 	queue<int> qu;

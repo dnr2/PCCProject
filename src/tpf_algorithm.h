@@ -1,6 +1,10 @@
 #ifndef _TPF_ALGORITHM
 #include <string>
 #include <bitset>
+#include <vector>
+#include <queue>
+#include <iostream>
+#include <cstring>
 
 #define _TPF_ALGORITHM
 
