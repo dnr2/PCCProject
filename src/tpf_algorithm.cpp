@@ -24,11 +24,10 @@ int tpf_find(char **i_patterns, int i_pattern_amount, char *i_textfile, int i_tp
 
 using namespace std;
 
-
 int P; // Number of nodes in the prefix tree
 char ltt[DOTS]; // Character for this node
 vector<int> wend[DOTS]; // Numbers of the words ending here
-int adj[DOTS][LETTERS]; // [node][character]: child node (-1 if non-existent)
+int adj[DOTS][ALPHABET_SIZE]; // [node][character]: child node (-1 if non-existent)
 vector<int> vadj[DOTS]; // Numbers of the child nodes
 
 int dec(char c) { // ``character $\rightarrow$ number'' mapping, for example:
@@ -37,7 +36,7 @@ int dec(char c) { // ``character $\rightarrow$ number'' mapping, for example:
 
 void init() {
 	wend[0].clear();
-	fill_n(adj[0], LETTERS, -1);
+	fill_n(adj[0], ALPHABET_SIZE, -1);
 	vadj[0].clear();
 	P = 1;
 }
@@ -53,7 +52,7 @@ void add(const char *wort, int w) {
 			vadj[c].push_back(P);
 			ltt[P] = wort[i];
 			wend[P].clear();
-			fill_n(adj[P], LETTERS, -1);
+			fill_n(adj[P], ALPHABET_SIZE, -1);
 			vadj[P].clear();
 			P++;
 		}
