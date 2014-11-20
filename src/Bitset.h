@@ -158,8 +158,9 @@ class Bitset
 				}
 			}
 
-			reverse(ret.begin(), ret.end());
-			return ret;
+			string str = ret.substr(0, this->n_bits);
+			reverse(str.begin(), str.end());
+			return str;
 		}
 		bool operator< (const Bitset &arg)
 		{
