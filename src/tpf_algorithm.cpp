@@ -162,14 +162,6 @@ int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance)
 		S[q] = S[q-1] << 1;
 	}
 
-	/*for (int q = 0; q <= i_distance; q++){
-		cout << "S[" << q << "]: \t" << S[q].toString() << endl;
-	}*/
-
-	/*for (int q = 0; q < ALPHABET_SIZE; q++){
-		cout << "C[" << q << "]: \t\t" << C[q].toString() << endl;
-	}*/
-
 	Bitset S1(pattern_len);
 	Bitset S2(pattern_len);
 
@@ -178,21 +170,28 @@ int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance)
 		S[0] = (S[0] << 1) | C[(int) i_textfile[j]];
 		for (int q = 1; q <= i_distance; q++){
 			S2 = S[q];
+			/*cout << "S2\t\t" << S2.toString() << endl;
+			cout << "((S["<<q<<"] << 1) | C["<<(int) i_textfile[j]<<"])\t" << ((S[q] << 1) | C[(int) i_textfile[j]]).toString() << endl;
+			cout <<	"(S1 << 1)\t" << (S1 << 1).toString() << endl;
+			cout <<	"(S["<<q-1<<"] << 1)\t" << (S[q-1] << 1).toString() << endl;
+			cout <<	"S1\t" << S1.toString() << endl ;*/
 			S[q] = 		((S[q] << 1) | C[(int) i_textfile[j]])
 					&	(S1 << 1)
 					&	(S[q-1] << 1)
 					&	S1;
 			S1 = S2;
-			cout << "C[" << (int) i_textfile[j] << "]: \t\t" << C[(int) i_textfile[j]].toString() << endl;
-
-		}
+			cout << "S["<<q<<"]\t" << S[q].toString() << endl ;		}
 		if (S[i_distance] < msb){
+			cout << "*****	RESULT_MATCH 	*****" << endl ;
 			results += 1;
 
-			/*cout << "S[i_distance] < msb" << endl;
-			cout << "S[i_distance]: \t" << S[i_distance].toString() << endl;
-			cout << "msb: \t\t" << msb.toString() << endl << endl;*/
+			cout << "S["<<i_distance<<"] < msb" << endl;
+			cout << "S["<<i_distance<<"]: \t" << S[i_distance].toString() << endl;
+			cout << "msb: \t" << msb.toString() << endl << endl;
 
+		}else{
+			
+			cout << "NO RESULT" << endl << endl ;
 		}
 	}
 

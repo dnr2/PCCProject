@@ -4,6 +4,7 @@
 #include <cmath>
 #include <string>
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
@@ -144,25 +145,6 @@ class Bitset
 			return ret;
 		}
 
-		bool operator< (const Bitset &arg)
-		{
-			this->bits[(this->size)-1] &= (1ULL << (this->n_bits%ULL_BITS)) - 1ULL;
-			arg.bits[(arg.size)-1] &= (1ULL << (arg.n_bits%ULL_BITS)) - 1ULL;
-
-			int max_size = max(this->size, arg.size);
-
-			for (int i = max_size-1; i >= 0; i--){
-				unsigned long long a, b;
-				a = i >= this->size ? 0 : this->bits[i];
-				b = i >= arg.size ? 0 : arg.bits[i];
-
-				if (a < b) return true;
-				else if( a > b) return false;  
-			}
-
-			return false;
-		}
-
 		string toString()
 		{
 			string ret;
@@ -175,8 +157,32 @@ class Bitset
 					temp >>= 1;
 				}
 			}
+
+			reverse(ret.begin(), ret.end());
 			return ret;
 		}
+		bool operator< (const Bitset &arg)
+		{
+			Bitset ret;
+			ret = (*this);
+
+			ret.bits[(this->size)-1] &= (1ULL << (this->n_bits%ULL_BITS)) - 1ULL;
+			arg.bits[(arg.size)-1] &= (1ULL << (arg.n_bits%ULL_BITS)) - 1ULL;
+
+			int max_size = max(ret.size, arg.size);
+
+			for (int i = max_size-1; i >= 0; i--){
+				unsigned long long a, b;
+				a = i >= ret.size ? 0 : ret.bits[i];
+				b = i >= arg.size ? 0 : arg.bits[i];
+
+				if (a < b) return true;
+				else if( a > b) return false;  
+			}
+
+			return false;
+		}
+
 };
 
 #endif
