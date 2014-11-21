@@ -2,7 +2,7 @@
 #include "Bitset.h"
 #include <assert.h>
 
-/*int tpf_find(char **i_patterns, int i_pattern_amount, char *i_textfile, int i_tpf_type, char **o_results)
+/*int tpf_find(char **pats, int pat_amount, char *i_textfile, int i_tpf_type, char **o_results)
 {
 	// TODO: adicionar distancia de edição como parametro e checar se é maior que o padrão
 	int ret = TPF_OK;
@@ -10,7 +10,7 @@
 		case TPF_EXACT:
 			break;
 		case TPF_EXACT_PATTERNFILE:
-			ret = tpf_aho_corasick(i_patterns, i_pattern_amount, i_textfile, o_results);
+			ret = tpf_aho_corasick(pats, pat_amount, i_textfile, o_results);
 			break;
 		case TPF_APPROXIMATE:
 			break;
@@ -110,7 +110,7 @@ void search(const char *text) {
 	}
 }
 
-int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, char **o_results)
+int tpf_aho_corasick(char **pats, int pat_amount, char *i_textfile, char **o_results)
 {
 	
 	return TPF_OK;
@@ -120,49 +120,49 @@ int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, 
 
 // ---- Inicio WU-MANBER ---- //
 
-int char_mask(char *i_pattern, Bitset *C)
+int char_mask(string &pat, Bitset *C)
 {
-	int pattern_len = strlen(i_pattern);
+	int m = pat.length();
 
 	for (int i = 0; i < ALPHABET_SIZE; i++){
-		C[i] = Bitset(pattern_len);
+		C[i] = Bitset(m);
 		C[i].set();
 	}
 
-	Bitset Mk(pattern_len);
+	Bitset Mk(m);
 	Mk.set(0);
 
-	for (int k = 0; k < pattern_len; k++){
-		C[(int) i_pattern[k]] = C[(int) i_pattern[k]] & ~Mk;
+	for (int k = 0; k < m; k++){
+		C[(int) pat[k]] = C[(int) pat[k]] & ~Mk;
 		Mk = Mk << 1;
 	}
 
 	return TPF_OK;
 }
 
-int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance)
+int tpf_wu_manber(string &pat, char *i_textfile, int i_distance)
 {
 	int text_len = strlen(i_textfile);//TEMPORARIO
 
 	int results = 0;
-	int pattern_len = strlen(i_pattern);
+	int m = pat.length();
 	Bitset *C = new Bitset[ALPHABET_SIZE];
-	char_mask(i_pattern, C);
+	char_mask(pat, C);
 
 	// msb = 2 ** (m-1)
-	Bitset msb(pattern_len);
-	msb.set(pattern_len-1);
+	Bitset msb(m);
+	msb.set(m-1);
 
 	Bitset *S = new Bitset[i_distance+1];
-	S[0] = Bitset(pattern_len);
+	S[0] = Bitset(m);
 	S[0].set();
 
 	for (int q = 1; q <= i_distance; q++){
 		S[q] = S[q-1] << 1;
 	}
 
-	Bitset S1(pattern_len);
-	Bitset S2(pattern_len);
+	Bitset S1(m);
+	Bitset S2(m);
 
 	for (int j = 0; j < text_len; j++){
 		S1 = S[0];
@@ -180,9 +180,9 @@ int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance)
 			results += 1;
 
 			string str(i_textfile);
-			int begin =  max(0, j-pattern_len-i_distance);
+			int begin =  max(0, j-m-i_distance);
 			cout << "substring("<<begin<<", "<<j+1<<")" <<endl;
-			cout << str.substr(begin, pattern_len+i_distance+1) << endl;
+			cout << str.substr(begin, m+i_distance+1) << endl;
 		}
 	}
 
@@ -195,76 +195,76 @@ int tpf_wu_manber(char *i_pattern, char *i_textfile, int i_distance)
 
 // ---- Inicio BOYER-MOORE ---- //
 
-vector<int> border(char *i_pattern)
+vector<int> border(string &pat)
 {
-	int pattern_len = strlen(i_pattern);
-	vector<int> B(pattern_len+1);
+	int m = pat.length();
+	vector<int> B(m+1);
 	fill(B.begin()+1, B.end(), 0);
 	B[0] = -1;
 
 	int i = 1;
 
-	while (i < pattern_len){
+	while (i < m){
 		int j = 0;
-		while(i+j<pattern_len && i_pattern[i+j]==i_pattern[j]){
+		while(i+j<m && pat[i+j]==pat[j]){
 			j += 1;
 			B[i+j] = j;
 		}
         i += j - B[j];
 	}
-	
+
 	cout << "[";
-	for (i = 0; i < pattern_len; i++){
+	for (i = 0; i < m; i++){
 		cout << B[i] << ", ";
 	}
-	cout << B[pattern_len] << "]" << endl;
+	cout << B[m] << "]" << endl;
 	return B;
 }
 
-vector<int> good_suffix(char *i_pattern)
+vector<int> good_suffix(string &pat)
 {
-	int pattern_len = strlen(i_pattern);
-	vector<int> Pi = border(i_pattern);
-	vector<int> PiR = border(i_pattern);
-	vector<int> S(pattern_len+1);
-	fill(S.begin(), S.end(), pattern_len-Pi[pattern_len]);
+	int m = pat.length();
+	vector<int> Pi = border(pat);
+	vector<int> PiR = border(pat);
+	vector<int> S(m+1);
+	fill(S.begin(), S.end(), m-Pi[m]);
 
-	for (int l = 1; l <= pattern_len; l++){
-		int j = pattern_len - 1 - PiR[l];
-		assert(j<pattern_len && j>=0);
-		if (i_pattern[j]!=i_pattern[pattern_len-l-1] && S[j] > l-PiR[l]) {
+	for (int l = 1; l <= m; l++){
+		int j = m - 1 - PiR[l];
+		assert(j<m && j>=0);
+		if (pat[j]!=pat[m-l-1] && S[j] > l-PiR[l]) {
 			S[j] = l-PiR[l];
 		}
 	}
 
 	cout << "[";
-	for (int i = 0; i < pattern_len; i++){
+	for (int i = 0; i < m; i++){
 		cout << S[i] << ", ";
 	}
-	cout << S[pattern_len] << "]" << endl;
+	cout << S[m] << "]" << endl;
 	return S;
 
 }
 
-vector<int> bad_char(char *i_pattern)
+vector<int> bad_char(string &pat)
 {
-	int pattern_len = strlen(i_pattern);
+	int m = pat.length();
 	vector<int> C(ALPHABET_SIZE);
 	fill(C.begin(), C.end(), -1);
 
-	for (int j = 0; j < pattern_len; j++){
-		C[(int) i_pattern[j]] = j;
+	for (int j = 0; j < m; j++){
+		C[(int) pat[j]] = j;
 	}
 
 	cout << "[";
-	for (int i = 0; i < pattern_len; i++){
+	for (int i = 0; i < m; i++){
 		cout << C[i] << ", ";
 	}
-	cout << C[pattern_len] << "]" << endl;
+	cout << C[m] << "]" << endl;
 	return C;
 }
 
-int tpf_boyer_moore(char *i_pattern, char *i_textfile, char **o_results)
+int tpf_boyer_moore(string &pat, char *i_textfile, char **o_results)
 {
 	return TPF_OK;
 }
@@ -276,14 +276,14 @@ int tpf_boyer_moore(char *i_pattern, char *i_textfile, char **o_results)
 
 int main(){
 	
-	/*char padrao[9] = "bao";
-	char texto[85] = "baobabaobabaobabaobabaobabaoba baoba";
+	string padrao("bao");
+	char texto[85] = "baobabaobab";
 	int distancia = 0;
 
 	tpf_wu_manber(padrao, texto, distancia);
-*/
-	char padrao[30] = "boraefjsbor";
-	vector<int> S = good_suffix(padrao);
+
+/*	char padrao[30] = "boraefjsbor";
+	vector<int> S = good_suffix(padrao);*/
 
 
 	return 0;
