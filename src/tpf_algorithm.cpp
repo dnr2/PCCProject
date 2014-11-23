@@ -2,7 +2,7 @@
 #include "Bitset.h"
 #include <assert.h>
 
-/*int tpf_find(char **pats, int pat_amount, char *i_textfile, int i_tpf_type, char **o_results)
+/*int tpf_find(char **pats, int pat_amount, char *txt, int i_tpf_type, char **o_results)
 {
 	// TODO: adicionar distancia de edição como parametro e checar se é maior que o padrão
 	int ret = TPF_OK;
@@ -10,7 +10,7 @@
 		case TPF_EXACT:
 			break;
 		case TPF_EXACT_PATTERNFILE:
-			ret = tpf_aho_corasick(pats, pat_amount, i_textfile, o_results);
+			ret = tpf_aho_corasick(pats, pat_amount, txt, o_results);
 			break;
 		case TPF_APPROXIMATE:
 			break;
@@ -110,7 +110,7 @@ void search(const char *text) {
 	}
 }
 
-int tpf_aho_corasick(char **pats, int pat_amount, char *i_textfile, char **o_results)
+int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results)
 {
 	
 	return TPF_OK;
@@ -140,9 +140,9 @@ int char_mask(string &pat, Bitset *C)
 	return TPF_OK;
 }
 
-int tpf_wu_manber(string &pat, char *i_textfile, int i_distance)
+int tpf_wu_manber(string &pat, char *txt, int i_distance)
 {
-	int text_len = strlen(i_textfile);//TEMPORARIO
+	int text_len = strlen(txt);//TEMPORARIO
 
 	int results = 0;
 	int m = pat.length();
@@ -166,10 +166,10 @@ int tpf_wu_manber(string &pat, char *i_textfile, int i_distance)
 
 	for (int j = 0; j < text_len; j++){
 		S1 = S[0];
-		S[0] = (S[0] << 1) | C[(int) i_textfile[j]];
+		S[0] = (S[0] << 1) | C[(int) txt[j]];
 		for (int q = 1; q <= i_distance; q++){
 			S2 = S[q];
-			S[q] = 		((S[q] << 1) | C[(int) i_textfile[j]])
+			S[q] = 		((S[q] << 1) | C[(int) txt[j]])
 					&	(S1 << 1)
 					&	(S[q-1] << 1)
 					&	S1;
@@ -179,7 +179,7 @@ int tpf_wu_manber(string &pat, char *i_textfile, int i_distance)
 			cout << "*****	RESULT_MATCH 	*****" << endl ;
 			results += 1;
 
-			string str(i_textfile);
+			string str(txt);
 			int begin =  max(0, j-m-i_distance);
 			cout << "substring("<<begin<<", "<<j+1<<")" <<endl;
 			cout << str.substr(begin, m+i_distance+1) << endl;
@@ -264,8 +264,31 @@ vector<int> bad_char(string &pat)
 	return C;
 }
 
-int tpf_boyer_moore(string &pat, char *i_textfile, char **o_results)
+int tpf_boyer_moore(string &pat, char *txt)
 {
+	int m = pat.length();
+	int n = strlen(txt);
+	vector<int> C = bad_char(pat);
+	vector<int> S = good_suffix(pat);
+	int occ = 0;
+	int i = 0;
+
+	while (i <= n-m){
+		int j = m-1;
+		while (j >= 0 && txt[i+j]==pat[j]){
+			j -= 1;
+		}
+		if (j < 0){
+			occ += 1;
+			string str(txt);
+			cout << "substring("<<i<<", "<<i+m<<")" <<endl;
+			cout << str.substr(i, m) << endl;
+			i += S[m+j+1];
+		}
+		else{
+			i += max(j-C[(int) txt[i+j]], S[j]);
+		}
+	}
 	return TPF_OK;
 }
 
@@ -277,10 +300,10 @@ int tpf_boyer_moore(string &pat, char *i_textfile, char **o_results)
 int main(){
 	
 	string padrao("bao");
-	char texto[85] = "baobabaobab";
+	char texto[85] = "abaobabaobab";
 	int distancia = 0;
 
-	tpf_wu_manber(padrao, texto, distancia);
+	tpf_boyer_moore(padrao, texto);
 
 /*	char padrao[30] = "boraefjsbor";
 	vector<int> S = good_suffix(padrao);*/
