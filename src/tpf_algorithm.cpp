@@ -43,7 +43,6 @@ void init() {
 	P = 1;
 }
 
-
 // Add a word to the prefix tree and give it the number w
 void add(const char *wort, int w) {
 	int c = 0;
@@ -91,7 +90,7 @@ void initaho() {
 	}
 }
 
-vector<pair<int,int>> matches; // All pairs (a,b) such that word number b starts at position a
+vector< pair< int,int > > matches; // All pairs (a,b) such that word number b starts at position a
 
 void search(const char *text) {
 	matches.clear();
@@ -112,7 +111,6 @@ void search(const char *text) {
 int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, char **o_results)
 {
 	
-	return TPF_OK;
 }
 
 // ---- Fim AHO-CORASICK ---- //
@@ -191,7 +189,14 @@ int tpf_boyer_moore(char *i_pattern, char *i_textfile, char **o_results)
 
 // ignore
 
-int main(){
+int main()
+{
+	init();
+	for( int i =0ç i < i_pattern_amount; i++){
+		add( i_patterns[i], i+1 );
+	}
+	initaho();
+	search( i_textfile );	
 	
 	return 0;
 }
