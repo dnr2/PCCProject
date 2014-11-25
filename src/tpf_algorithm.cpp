@@ -2,11 +2,11 @@
 #include "Bitset.h"
 #include <assert.h>
 
-// ---- defini??o de fun??es ---- //
+// ---- definir a funcoes ---- //
 
 int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results);
 
-// ---- fim de defini??o ---- //
+// ---- fim de definicao ---- //
 
 
 int tpf_find(char **pats, int pat_amount, char *txt, int i_tpf_type, char **o_results)
