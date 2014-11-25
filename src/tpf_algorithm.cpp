@@ -328,7 +328,7 @@ void teste_aho_corasick()
 	
 	int pos =0, sz = strlen( i_text);
 	while( pos < sz){
-		printf("%3d - ", pos );
+		printf("pos %3d - ", pos );
 		for(int i = 0; i < 25; i++){
 			printf("%c", i_text[pos++]);
 		}
@@ -338,7 +338,7 @@ void teste_aho_corasick()
 	i_pattern_amount = 0;
 	
 	while( cin >> i_patterns[i_pattern_amount] ){
-		printf("%d - %s\n", i_pattern_amount, i_patterns[i_pattern_amount] );
+		printf("%d - %s\n", i_pattern_amount + 1, i_patterns[i_pattern_amount] );
 		i_pattern_amount++;
 	}
 	
