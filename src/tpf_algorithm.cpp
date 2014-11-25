@@ -2,6 +2,13 @@
 #include "Bitset.h"
 #include <assert.h>
 
+// ---- defini??o de fun??es ---- //
+
+int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results);
+
+// ---- fim de defini??o ---- //
+
+
 int tpf_find(char **pats, int pat_amount, char *txt, int i_tpf_type, char **o_results)
 {
 	// TODO: adicionar distancia de edição como parametro e checar se é maior que o padrão
@@ -35,8 +42,8 @@ vector<int> wend[MAXNODES]; // Numbers of the words ending here
 int adj[MAXNODES][ALPHABET_SIZE]; // [node][character]: child node (-1 if non-existent)
 vector<int> vadj[MAXNODES]; // Numbers of the child nodes
 
-int dec(char c) { // ``character $\rightarrow$ number'' mapping, for example:
-	return c-'a';
+int dec(char c) { // "character -> number", change if the alphabet is alpha numeric
+	return c;
 }
 
 void init() {
@@ -65,7 +72,7 @@ void add(const char *wort, int w) {
 	wend[c].push_back(w);
 }
 
-///ahocorasick
+///aho-corasick
 int suf[MAXNODES], preend[MAXNODES], dep[MAXNODES], par[MAXNODES];
 
 void initaho() {
@@ -104,8 +111,10 @@ void search(const char *text) {
 		c = c == -1 ? 0 : adj[c][dec(text[i])];
 		int t = c;
 		while(t != -1) {
-			for (int w : wend[t])
+			for (int w : wend[t]){
 				matches.push_back(pair<int,int>(i-dep[t]+1, w));
+				printf("palavra numero %d aparece na posicao %d\n", w, i-dep[t]+1);
+			}
 			t = preend[t];
 		}
 	}
@@ -296,26 +305,72 @@ int tpf_boyer_moore(string &pat, char *txt)
 // ---- Fim BOYER-MOORE ---- //
 
 
-// ignore
+// ============ ignore ============ // 
 
-int main()
-{
+
+//TESTE AHO-CORASICK
+
+
+
+int i_pattern_amount;
+char i_patterns[100][100];
+char i_text[1000];
+char str_aux[1000];
+
+
+void teste_aho_corasick()
+{	
+	
+	while( gets( str_aux ) ){
+		if( str_aux[0] == '%' && str_aux[1] == '%') break;
+		strcat(i_text, str_aux);
+	}
+	
+	int pos =0, sz = strlen( i_text);
+	while( pos < sz){
+		printf("%3d - ", pos );
+		for(int i = 0; i < 25; i++){
+			printf("%c", i_text[pos++]);
+		}
+		cout << endl;
+	}
+	
+	i_pattern_amount = 0;
+	
+	while( cin >> i_patterns[i_pattern_amount] ){
+		printf("%d - %s\n", i_pattern_amount, i_patterns[i_pattern_amount] );
+		i_pattern_amount++;
+	}
+	
 	init();
 	for( int i =0; i < i_pattern_amount; i++){
 		add( i_patterns[i], i+1 );
 	}
 	initaho();
-	search( i_textfile );	
-	
+	search( i_text );	
+}
+
+//TESTE BOYER-MOORE
+
+void teste_boyer_moore()
+{
+			
 	string padrao("bao");
 	char texto[85] = "abaobabaobab";
 	int distancia = 0;
-
+	
+	
 	tpf_boyer_moore(padrao, texto);
+	
+	/*
+	char padrao[30] = "boraefjsbor";
+	vector<int> S = good_suffix(padrao);
+	*/
+}
 
-/*	char padrao[30] = "boraefjsbor";
-	vector<int> S = good_suffix(padrao);*/
+int main(){
 
-
+	teste_aho_corasick();
+	
 	return 0;
 }
