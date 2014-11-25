@@ -31,7 +31,6 @@ int tpf_find(char **pats, int pat_amount, char *txt, int i_tpf_type, char **o_re
 
 // ---- Inicio AHO-CORASICK ---- //
 
-
 using namespace std;
 
 #define MAXNODES 1000
