@@ -149,7 +149,7 @@ int char_mask(string &pat, Bitset *C)
 	return TPF_OK;
 }
 
-int tpf_wu_manber(string &pat, char *txt, int i_distance)
+int tpf_wu_manber(string &pat, char *txt, int error)
 {
 	int text_len = strlen(txt);//TEMPORARIO
 
@@ -162,11 +162,11 @@ int tpf_wu_manber(string &pat, char *txt, int i_distance)
 	Bitset msb(m);
 	msb.set(m-1);
 
-	Bitset *S = new Bitset[i_distance+1];
+	Bitset *S = new Bitset[error+1];
 	S[0] = Bitset(m);
 	S[0].set();
 
-	for (int q = 1; q <= i_distance; q++){
+	for (int q = 1; q <= error; q++){
 		S[q] = S[q-1] << 1;
 	}
 
@@ -176,7 +176,7 @@ int tpf_wu_manber(string &pat, char *txt, int i_distance)
 	for (int j = 0; j < text_len; j++){
 		S1 = S[0];
 		S[0] = (S[0] << 1) | C[(int) txt[j]];
-		for (int q = 1; q <= i_distance; q++){
+		for (int q = 1; q <= error; q++){
 			S2 = S[q];
 			S[q] = 		((S[q] << 1) | C[(int) txt[j]])
 					&	(S1 << 1)
@@ -184,14 +184,14 @@ int tpf_wu_manber(string &pat, char *txt, int i_distance)
 					&	S1;
 			S1 = S2;
 		}
-		if (S[i_distance] < msb){
+		if (S[error] < msb){
 			cout << "*****	RESULT_MATCH 	*****" << endl ;
 			results += 1;
 
 			string str(txt);
-			int begin =  max(0, j-m-i_distance);
+			int begin =  max(0, j-m-error);
 			cout << "substring("<<begin<<", "<<j+1<<")" <<endl;
-			cout << str.substr(begin, m+i_distance+1) << endl;
+			cout << str.substr(begin, m+error+1) << endl;
 		}
 	}
 
