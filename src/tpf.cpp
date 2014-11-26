@@ -24,34 +24,41 @@ vector<string> handle_wildcard(string &str)
 	vector<string> files;
 	files.reserve(5);
 
-	// verifica se tem wildcard
-	unsigned found = str.find('*');
-	// sem wildcard
-	if (found == string::npos){
-		files.push_back(str);
-		return files;
-	}
-
-	found = str.find_last_of("/\\");
+	unsigned found = str.find_last_of("/\\");
 	bool no_path = found==string::npos;
 	string path = no_path ? "./" : str.substr(0,found+1);
 	string file = no_path ? str : str.substr(found+1);
+
+	// verifica se tem wildcard
+	found = file.find_last_of('*');
+	// sem wildcard
+	if (found == string::npos){
+		ifstream check(str);
+		if (check.good())
+			files.push_back(str);
+		else
+			cout << "Arquivo de texto << " << str << " >> inválido" << endl;
+		return files;
+	}
+	// se tiver wildcard, lê até antes do asterisco
+	file = file.substr(0, found);
 
   	// le arquivos do diretorio
 	DIR *dp;
 	struct dirent *ep;
 
 	dp = opendir (path.c_str());
-	if (dp != NULL)
-	{
+	if (dp != NULL)	{
 		while (ep = readdir (dp)){
-			//if (0 == fnmatch(file.c_str(), ep->d_name, 0)){
+			string possible_match(ep->d_name);
+			if (possible_match.find(file) != string::npos){
 				puts (ep->d_name);
-				string match(ep->d_name);
-				files.push_back(match);
-			//}
+				files.push_back(possible_match);
+			}
 		}
 		(void) closedir (dp);
+	} else {
+		cout << "Diretório << " << path << " >> inválido" << endl;
 	}
 
 	return files;
@@ -126,10 +133,10 @@ int main(int argc, char **argv)
 		string pat(argv[options]);
 		patterns.push_back(pat);
 	} else{
-		std::ifstream infile(pat_file);
+		ifstream infile(pat_file);
 
-		if (! infile.is_open()){
-			cout << "Arquivo de padrão <<" << pat_file << ">> inválido" << endl;
+		if (! infile.good()){
+			cout << "Arquivo de padrão << " << pat_file << " >> inválido" << endl;
 		}
 
 		string pat;
