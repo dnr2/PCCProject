@@ -33,42 +33,54 @@ int tpf_find(char **pats, int pat_amount, char *txt, int i_tpf_type, char **o_re
 
 using namespace std;
 
-#define MAXNODES 1000
+#define MAXNODES 1000 
+#define INITIAL_MAX_NODES 1000 
 
-int P; // Number of nodes in the prefix tree
-char ltt[MAXNODES]; // Character for this node
-vector<int> wend[MAXNODES]; // Numbers of the words ending here
-int adj[MAXNODES][ALPHABET_SIZE]; // [node][character]: child node (-1 if non-existent)
-vector<int> vadj[MAXNODES]; // Numbers of the child nodes
+int P; // Numero de nos na arvore de prefixo 
+vector<char> ltt; // caractere para este no
+vector<int> word_end[MAXNODES]; // Numero das palavras terminando aqui
+vector<int> adj[ALPHABET_SIZE]; // lista de adjacencia: [no][charactere] = no filho (-1 se nao-existente)
+vector<int> vadj[MAXNODES]; // Numero dos nos filhos
 
-int dec(char c) { // "character -> number", change if the alphabet is alpha numeric
+int dec(char c) { // mapa "charactere -> numero", mudar se o alfabeto for alfanumerico
 	return c;
 }
 
 void init() {
-	wend[0].clear();
-	fill_n(adj[0], ALPHABET_SIZE, -1);
+	word_end[0].clear();
+	
+	for( int i = 0; i < ALPHABET_SIZE; i++){
+		adj[i].reserve( INITIAL_MAX_NODES );
+		adj[i].clear();
+		adj[i].push_back(-1);
+	}	
+	
 	vadj[0].clear();
 	P = 1;
+	
+	ltt.reserve( INITIAL_MAX_NODES );
+	ltt.clear();
 }
 
-// Add a word to the prefix tree and give it the number w
-void add(const char *wort, int w) {
+// Adicionar a palavra no arvore de prefixos e associa a ela o numero w
+void add(const char *word, int w){
 	int c = 0;
-	for (int i = 0; wort[i]; i++) {
-		int &cs = adj[c][dec(wort[i])]; // Don't forget the ``\verb|&|''
-		if (cs == -1) {
+	for (int i = 0; word[i]; i++) {
+		int &cs = adj[dec(word[i])][c]; // Nao esquecer o '&' para referencia
+		if (cs == -1){
 			cs = P;
 			vadj[c].push_back(P);
-			ltt[P] = wort[i];
-			wend[P].clear();
-			fill_n(adj[P], ALPHABET_SIZE, -1);
+			ltt.push_back(word[i]);
+			word_end[P].clear();
+			for( int x = 0; x < ALPHABET_SIZE; x++){
+				adj[x].push_back( -1 );
+			}			
 			vadj[P].clear();
 			P++;
 		}
 		c = cs;
 	}
-	wend[c].push_back(w);
+	word_end[c].push_back(w);
 }
 
 ///aho-corasick
@@ -86,10 +98,10 @@ void initaho() {
 			suf[i] = preend[i] = -1;
 		else {
 			int s = suf[par[i]];
-			while(s != -1 && adj[s][dec(ltt[i])] == -1)
+			while(s != -1 && adj[dec(ltt[i])][s] == -1)
 				s = suf[s];
-			suf[i] = s == -1 ? 0 : adj[s][dec(ltt[i])];
-			preend[i] = wend[suf[i]].size() ? suf[i] : preend[suf[i]];
+			suf[i] = s == -1 ? 0 : adj[dec(ltt[i])][s];
+			preend[i] = word_end[suf[i]].size() ? suf[i] : preend[suf[i]];
 		}
 		for (int k : vadj[i]) {
 			par[k] = i;
@@ -99,19 +111,19 @@ void initaho() {
 	}
 }
 
-vector< pair< int,int > > matches; // All pairs (a,b) such that word number b starts at position a
+// vector< pair< int,int > > matches; // All pairs (a,b) such that word number b starts at position a
 
 void search(const char *text) {
-	matches.clear();
+	//matches.clear();
 	int c = 0;
 	for (int i = 0; text[i]; i++) {
-		while(c != -1 && adj[c][dec(text[i])] == -1)
+		while(c != -1 && adj[dec(text[i])][c] == -1)
 			c = suf[c];
-		c = c == -1 ? 0 : adj[c][dec(text[i])];
+		c = c == -1 ? 0 : adj[dec(text[i])][c];
 		int t = c;
 		while(t != -1) {
-			for (int w : wend[t]){
-				matches.push_back(pair<int,int>(i-dep[t]+1, w));
+			for (int w : word_end[t]){
+				//matches.push_back(pair<int,int>(i-dep[t]+1, w));
 				printf("palavra numero %d aparece na posicao %d\n", w, i-dep[t]+1);
 			}
 			t = preend[t];
@@ -356,7 +368,7 @@ void teste_boyer_moore()
 			
 	string padrao("bao");
 	char texto[85] = "abaobabaobab";
-	int distancia = 0;
+	//int distancia = 0;
 	
 	
 	tpf_boyer_moore(padrao, texto);
