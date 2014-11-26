@@ -9,16 +9,26 @@ int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results);
 // ---- fim de defini??o ---- //
 
 
-int tpf_find(char **pats, int pat_amount, char *txt, int i_tpf_type, char **o_results)
+int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
 {
 	// TODO: adicionar distancia de edição como parametro e checar se é maior que o padrão
 	int ret = TPF_OK;
-	switch (i_tpf_type){
+
+	for (string &pat : patterns){
+		if (pat.length() < error){
+			ret = TPF_ERROR_TOO_LONG;
+			return ret;
+		}
+	}
+
+	switch (tpf_type){
+		// Boyer Moore
 		case TPF_EXACT:
 			break;
+		// Aho-Corasick
 		case TPF_EXACT_PATTERNFILE:
-			ret = tpf_aho_corasick(pats, pat_amount, txt, o_results);
 			break;
+		// Wu-Manber
 		case TPF_APPROXIMATE:
 			break;
 		default:

@@ -176,4 +176,14 @@ int main(int argc, char **argv)
 		cout << file << endl;
 	cout << endl;
 
+	// int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count);
+	if (! edit){
+		int type = patternfile ? TPF_EXACT_PATTERNFILE : TPF_EXACT;
+		for (string &file : textfiles)
+			int ret = tpf_find(patterns, file, 0, type, count);
+	} else {
+		for (string &txt : textfiles)
+			int ret = tpf_find(patterns, file, error, TPF_APPROXIMATE, count);
+	}
+
 }
