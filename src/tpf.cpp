@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-
+	
 	cout << "COUNT\t" << (count?"TRUE":"FALSE") << endl << endl;
 
 	cout << "EDIT\t" << (edit?"TRUE":"FALSE") << endl;

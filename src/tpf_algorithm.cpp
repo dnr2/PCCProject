@@ -111,10 +111,8 @@ void initaho() {
 	}
 }
 
-// vector< pair< int,int > > matches; // All pairs (a,b) such that word number b starts at position a
 
-void search(const char *text) {
-	//matches.clear();
+void search(const char *text) {	
 	int c = 0;
 	for (int i = 0; text[i]; i++) {
 		while(c != -1 && adj[dec(text[i])][c] == -1)
@@ -122,8 +120,7 @@ void search(const char *text) {
 		c = c == -1 ? 0 : adj[dec(text[i])][c];
 		int t = c;
 		while(t != -1) {
-			for (int w : word_end[t]){
-				//matches.push_back(pair<int,int>(i-dep[t]+1, w));
+			for (int w : word_end[t]){				
 				printf("palavra numero %d aparece na posicao %d\n", w, i-dep[t]+1);
 			}
 			t = preend[t];
@@ -133,6 +130,8 @@ void search(const char *text) {
 
 int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results)
 {
+	
+	
 	return TPF_OK;
 }
 
