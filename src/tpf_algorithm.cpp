@@ -273,9 +273,10 @@ int tpf_boyer_moore(string &pat, string &textfile, bool count)
 			while (j >= 0 && line[i+j]==pat[j]){
 				j -= 1;
 			}
+			// line[i+j]==pat[j] para o padrão todo! deu match!
 			if (j < 0){
 				occ += 1;
-				i += S[m+j+1];
+				i += S[0];
 				if (!printed && !count){
 					cout << textfile << ":" << line << endl;
 					printed = true;
