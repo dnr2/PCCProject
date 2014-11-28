@@ -45,9 +45,9 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 
 // ---- Inicio AHO-CORASICK ---- //
 
-int aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pats, bool print_occ) {	
-	int c = 0; 
-	bool occ = 0;
+bool aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pats, bool print_occ, vector<int> & occ) {	
+	int c = 0;	
+	bool found = false;
 	for (int i = 0; txt[i]; i++) {
 		while(c != -1 && tree.adj[c][(int)txt[i]] == -1)
 			c = tree.suf[c];
@@ -57,12 +57,13 @@ int aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pat
 			for (int w : tree.word_end[t]){				
 				// printf("palavra %d aparece na posicao %d\n", w, i-(tree.dep[t])+1);
 				if( print_occ ) cout << "'" << pats[w] << "', ";
-				occ++;
+				found = true;
+				occ[w]++;
 			}
 			t = tree.preend[t];
 		}
 	}
-	return occ;
+	return found;
 }
 
 int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
@@ -84,20 +85,24 @@ int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
 	
 	tree.complete_tree();	
 	
-	int occ = 0;
+	vector<int> occ = vector<int>( (int) pats.size());
 	
 	while ( getline(istream , line) ){
+	
 		if(!count){
-			if( aho_corasick_search( line , tree, pats, true) > 0 ){
+			if( aho_corasick_search( line , tree, pats, true, occ) > 0 ){
 				cout << "found at:" << endl;
 				cout << textfile << ":" << line << endl;
 			}
 		} else {
-			occ += aho_corasick_search( line , tree, pats, false);
+			aho_corasick_search( line , tree, pats, false, occ);
 		}
 	}
 	if (count){
-		cout << textfile << ":" << occ << endl;
+		for( int i =0; i < (int)pats.size();i++){
+			cout << pats[i] << endl;
+			cout << textfile << ":" << occ[i] << endl;
+		}
 	}
 	return TPF_OK;
 }
