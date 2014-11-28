@@ -44,7 +44,7 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 // ---- Inicio AHO-CORASICK ---- //
 
 
-void tpf_aho_corasick(char *txt, TreeAhoCorasick & tree) {	
+void aho_corasick_search(char *txt, TreeAhoCorasick & tree) {	
 	int c = 0;
 	for (int i = 0; txt[i]; i++) {
 		while(c != -1 && tree.adj[c][(int)txt[i]] == -1)
