@@ -1,11 +1,10 @@
 #include "tpf_algorithm.h"
 #include "Bitset.h"
 
-// ---- defini??o de fun??es ---- //
+#include "TreeAhoCorasick.h"
+#include <assert.h>
 
-int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results);
-
-// ---- fim de defini??o ---- //
+using namespace std;
 
 int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
 {
@@ -13,7 +12,7 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	int ret = TPF_OK;
 
 	for (string &pat : patterns){
-		if (pat.length() < error){
+		if ( (int) pat.length() < error){
 			ret = TPF_ERROR_TOO_LONG;
 			return ret;
 		}
@@ -45,95 +44,25 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 // ---- Inicio AHO-CORASICK ---- //
 
 
-
-#define MAXNODES 1000
-
-int P; // Number of nodes in the prefix tree
-char ltt[MAXNODES]; // Character for this node
-vector<int> wend[MAXNODES]; // Numbers of the words ending here
-int adj[MAXNODES][ALPHABET_SIZE]; // [node][character]: child node (-1 if non-existent)
-vector<int> vadj[MAXNODES]; // Numbers of the child nodes
-
-int dec(char c) { // "character -> number", change if the alphabet is alpha numeric
-	return c;
-}
-
-void init() {
-	wend[0].clear();
-	fill_n(adj[0], ALPHABET_SIZE, -1);
-	vadj[0].clear();
-	P = 1;
-}
-
-// Add a word to the prefix tree and give it the number w
-void add(const char *wort, int w) {
+void tpf_aho_corasick(char *txt, TreeAhoCorasick & tree) {	
 	int c = 0;
-	for (int i = 0; wort[i]; i++) {
-		int &cs = adj[c][dec(wort[i])]; // Don't forget the ``\verb|&|''
-		if (cs == -1) {
-			cs = P;
-			vadj[c].push_back(P);
-			ltt[P] = wort[i];
-			wend[P].clear();
-			fill_n(adj[P], ALPHABET_SIZE, -1);
-			vadj[P].clear();
-			P++;
-		}
-		c = cs;
-	}
-	wend[c].push_back(w);
-}
-
-///aho-corasick
-int suf[MAXNODES], preend[MAXNODES], dep[MAXNODES], par[MAXNODES];
-
-void initaho() {
-	queue<int> qu;
-	qu.push(0);
-	par[0] = -1;
-	dep[0] = 0;
-	while(!qu.empty()) {
-		int i = qu.front();
-		qu.pop();
-		if (i == 0)
-			suf[i] = preend[i] = -1;
-		else {
-			int s = suf[par[i]];
-			while(s != -1 && adj[s][dec(ltt[i])] == -1)
-				s = suf[s];
-			suf[i] = s == -1 ? 0 : adj[s][dec(ltt[i])];
-			preend[i] = wend[suf[i]].size() ? suf[i] : preend[suf[i]];
-		}
-		for (int k : vadj[i]) {
-			par[k] = i;
-			dep[k] = dep[i]+1;
-			qu.push(k);
-		}
-	}
-}
-
-vector< pair< int,int > > matches; // All pairs (a,b) such that word number b starts at position a
-
-void search(const char *text) {
-	matches.clear();
-	int c = 0;
-	for (int i = 0; text[i]; i++) {
-		while(c != -1 && adj[c][dec(text[i])] == -1)
-			c = suf[c];
-		c = c == -1 ? 0 : adj[c][dec(text[i])];
+	for (int i = 0; txt[i]; i++) {
+		while(c != -1 && tree.adj[c][(int)txt[i]] == -1)
+			c = tree.suf[c];
+		c = c == -1 ? 0 : tree.adj[c][(int)txt[i]];
 		int t = c;
 		while(t != -1) {
-			for (int w : wend[t]){
-				matches.push_back(pair<int,int>(i-dep[t]+1, w));
-				printf("palavra numero %d aparece na posicao %d\n", w, i-dep[t]+1);
+			for (int w : tree.word_end[t]){				
+				printf("palavra numero %d aparece na posicao %d\n", w, i-(tree.dep[t])+1);
 			}
-			t = preend[t];
+			t = tree.preend[t];
 		}
 	}
 }
 
 int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results)
 {
+	
 	return TPF_OK;
 }
 
@@ -339,8 +268,6 @@ int tpf_boyer_moore(string &pat, string &textfile, bool count)
 
 //TESTE AHO-CORASICK
 
-
-
 int i_pattern_amount;
 char i_patterns[100][100];
 char i_text[1000];
@@ -370,11 +297,11 @@ void teste_aho_corasick()
 		printf("%d - %s\n", i_pattern_amount + 1, i_patterns[i_pattern_amount] );
 		i_pattern_amount++;
 	}
-	
-	init();
+	TreeAhoCorasick tree;
+	tree.init();		
 	for( int i =0; i < i_pattern_amount; i++){
-		add( i_patterns[i], i+1 );
+		tree.add( i_patterns[i], i+1 );
 	}
-	initaho();
-	search( i_text );	
+	tree.initaho();
+	tpf_aho_corasick( i_text , tree);
 }
