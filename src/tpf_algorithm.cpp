@@ -229,25 +229,27 @@ int tpf_boyer_moore(string &pat, string &textfile, bool count)
 	string line;
 
 	while (istream >> line){
-		int n = line.length();
+		string txt(line.c_str());
+		int n = txt.length();
 		int i = 0;
 		bool printed = false;
 
 		while (i <= n-m){
 			int j = m-1;
-			while (j >= 0 && line[i+j]==pat[j]){
+			while (j >= 0 && txt[i+j]==pat[j]){
 				j -= 1;
 			}
 			if (j < 0){
 				occ += 1;
 				i += S[m+j+1];
 				if (!printed && !count){
+					cout << "xomba" << endl;
 					cout << textfile << ":" << line << endl;
 					printed = true;
 				}
 			}
 			else{
-				i += max(j-C[(int) line[i+j]], S[j]);
+				i += max(j-C[(int) txt[i+j]], S[j]);
 			}
 		}
 	
