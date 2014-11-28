@@ -1,13 +1,9 @@
 #include "tpf_algorithm.h"
 #include "Bitset.h"
+#include "TreeAhoCorasick.h"
 #include <assert.h>
 
-// ---- definir a funcoes ---- //
-
-int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results);
-
-// ---- fim de definicao ---- //
-
+using namespace std;
 
 int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
 {
@@ -15,7 +11,7 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	int ret = TPF_OK;
 
 	for (string &pat : patterns){
-		if (pat.length() < error){
+		if ( (int) pat.length() < error){
 			ret = TPF_ERROR_TOO_LONG;
 			return ret;
 		}
@@ -41,106 +37,24 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 
 // ---- Inicio AHO-CORASICK ---- //
 
-using namespace std;
-
-#define MAXNODES 1000 
-#define INITIAL_MAX_NODES 1000 
-
-int P; // Numero de nos na arvore de prefixo 
-vector<char> ltt; // caractere para este no
-vector<int> word_end[MAXNODES]; // Numero das palavras terminando aqui
-vector<int> adj[ALPHABET_SIZE]; // lista de adjacencia: [no][charactere] = no filho (-1 se nao-existente)
-vector<int> vadj[MAXNODES]; // Numero dos nos filhos
-
-int dec(char c) { // mapa "charactere -> numero", mudar se o alfabeto for alfanumerico
-	return c;
-}
-
-void init() {
-	word_end[0].clear();
-	
-	for( int i = 0; i < ALPHABET_SIZE; i++){
-		adj[i].reserve( INITIAL_MAX_NODES );
-		adj[i].clear();
-		adj[i].push_back(-1);
-	}	
-	
-	vadj[0].clear();
-	P = 1;
-	
-	ltt.reserve( INITIAL_MAX_NODES );
-	ltt.clear();
-}
-
-// Adicionar a palavra no arvore de prefixos e associa a ela o numero w
-void add(const char *word, int w){
+void tpf_aho_corasick(char *txt, TreeAhoCorasick & tree) {	
 	int c = 0;
-	for (int i = 0; word[i]; i++) {
-		int &cs = adj[dec(word[i])][c]; // Nao esquecer o '&' para referencia
-		if (cs == -1){
-			cs = P;
-			vadj[c].push_back(P);
-			ltt.push_back(word[i]);
-			word_end[P].clear();
-			for( int x = 0; x < ALPHABET_SIZE; x++){
-				adj[x].push_back( -1 );
-			}			
-			vadj[P].clear();
-			P++;
-		}
-		c = cs;
-	}
-	word_end[c].push_back(w);
-}
-
-///aho-corasick
-int suf[MAXNODES], preend[MAXNODES], dep[MAXNODES], par[MAXNODES];
-
-void initaho() {
-	queue<int> qu;
-	qu.push(0);
-	par[0] = -1;
-	dep[0] = 0;
-	while(!qu.empty()) {
-		int i = qu.front();
-		qu.pop();
-		if (i == 0)
-			suf[i] = preend[i] = -1;
-		else {
-			int s = suf[par[i]];
-			while(s != -1 && adj[dec(ltt[i])][s] == -1)
-				s = suf[s];
-			suf[i] = s == -1 ? 0 : adj[dec(ltt[i])][s];
-			preend[i] = word_end[suf[i]].size() ? suf[i] : preend[suf[i]];
-		}
-		for (int k : vadj[i]) {
-			par[k] = i;
-			dep[k] = dep[i]+1;
-			qu.push(k);
-		}
-	}
-}
-
-
-void search(const char *text) {	
-	int c = 0;
-	for (int i = 0; text[i]; i++) {
-		while(c != -1 && adj[dec(text[i])][c] == -1)
-			c = suf[c];
-		c = c == -1 ? 0 : adj[dec(text[i])][c];
+	for (int i = 0; txt[i]; i++) {
+		while(c != -1 && tree.adj[c][(int)txt[i]] == -1)
+			c = tree.suf[c];
+		c = c == -1 ? 0 : tree.adj[c][(int)txt[i]];
 		int t = c;
 		while(t != -1) {
-			for (int w : word_end[t]){				
-				printf("palavra numero %d aparece na posicao %d\n", w, i-dep[t]+1);
+			for (int w : tree.word_end[t]){				
+				printf("palavra numero %d aparece na posicao %d\n", w, i-(tree.dep[t])+1);
 			}
-			t = preend[t];
+			t = tree.preend[t];
 		}
 	}
 }
 
 int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results)
 {
-	
 	
 	return TPF_OK;
 }
@@ -330,8 +244,6 @@ int tpf_boyer_moore(string &pat, char *txt)
 
 //TESTE AHO-CORASICK
 
-
-
 int i_pattern_amount;
 char i_patterns[100][100];
 char i_text[1000];
@@ -361,13 +273,13 @@ void teste_aho_corasick()
 		printf("%d - %s\n", i_pattern_amount + 1, i_patterns[i_pattern_amount] );
 		i_pattern_amount++;
 	}
-	
-	init();
+	TreeAhoCorasick tree;
+	tree.init();		
 	for( int i =0; i < i_pattern_amount; i++){
-		add( i_patterns[i], i+1 );
+		tree.add( i_patterns[i], i+1 );
 	}
-	initaho();
-	search( i_text );	
+	tree.initaho();
+	tpf_aho_corasick( i_text , tree);
 }
 
 //TESTE BOYER-MOORE

@@ -8,12 +8,15 @@
 
 using namespace std;
 
-const int ULL_SIZE = sizeof(unsigned long long);
-const int ULL_BITS = ULL_SIZE * 8;
-
 class Bitset
 {
+	
+	static const int ULL_SIZE = sizeof(unsigned long long);
+	static const int ULL_BITS = ULL_SIZE * 8;
+		
 	public:
+		
+		
 		
 		unsigned long long *bits;
 		int size;

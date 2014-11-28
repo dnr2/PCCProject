@@ -19,6 +19,8 @@
 
 #define ALPHABET_SIZE 			256
 
+using namespace std;
+
 int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count);
 
 //int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, char **o_results);
