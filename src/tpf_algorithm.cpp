@@ -25,7 +25,9 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 		tpf_boyer_moore(pat, textfile, count);
 
 	} else if (tpf_type == TPF_EXACT_PATTERNFILE){ // Aho-Corasick
-
+		
+		tpf_aho_corasick(patterns, textfile, count);
+		
 	} else if (tpf_type == TPF_APPROXIMATE){ // Wu-Manber
 	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 
@@ -44,7 +46,7 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 // ---- Inicio AHO-CORASICK ---- //
 
 
-void aho_corasick_search(char *txt, TreeAhoCorasick & tree) {	
+void aho_corasick_search(char * txt, TreeAhoCorasick & tree) {	
 	int c = 0;
 	for (int i = 0; txt[i]; i++) {
 		while(c != -1 && tree.adj[c][(int)txt[i]] == -1)
@@ -60,9 +62,19 @@ void aho_corasick_search(char *txt, TreeAhoCorasick & tree) {
 	}
 }
 
-int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results)
+int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
 {
-	
+	ifstream istream(textfile);
+
+	if (! istream.good()){
+		return TPF_ERROR_READING_FILE;
+	}
+	string line;
+
+	cout << "pattern:" << pats[0] << endl;
+
+	while (istream >> line){
+	}
 	return TPF_OK;
 }
 
@@ -124,8 +136,7 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 	cout << "pattern:" << pat << endl;
 
 	while (istream >> line){
-		int n = line.length();
-		int i = 0;
+		int n = line.length();		
 		bool printed = false;
 
 		for (int j = 0; j < n; j++){
@@ -303,5 +314,5 @@ void teste_aho_corasick()
 		tree.add( i_patterns[i], i+1 );
 	}
 	tree.complete_tree();
-	tpf_aho_corasick( i_text , tree);
+	aho_corasick_search( i_text , tree);
 }

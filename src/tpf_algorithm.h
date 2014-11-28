@@ -35,6 +35,6 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count);
 
 int tpf_boyer_moore(string &pat, string &textfile, bool count);
 
-//int tpf_aho_corasick(char **i_patterns, int i_pattern_amount, char *i_textfile, char **o_results);
+int tpf_aho_corasick(vector<string> &pats, string &textfile, bool count);
 
 #endif
