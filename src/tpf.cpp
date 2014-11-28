@@ -1,12 +1,4 @@
-#include <iostream>
-#include <getopt.h>
-#include <stdlib.h>
-#include <fstream>
-#include <dirent.h>
-#include <sys/types.h>
 #include "tpf_algorithm.h"
-
-using namespace std;
 
 void help()
 {
@@ -182,7 +174,7 @@ int main(int argc, char **argv)
 		for (string &file : textfiles)
 			int ret = tpf_find(patterns, file, 0, type, count);
 	} else {
-		for (string &txt : textfiles)
+		for (string &file : textfiles)
 			int ret = tpf_find(patterns, file, error, TPF_APPROXIMATE, count);
 	}
 

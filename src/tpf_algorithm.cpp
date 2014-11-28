@@ -1,13 +1,11 @@
 #include "tpf_algorithm.h"
 #include "Bitset.h"
-#include <assert.h>
 
 // ---- defini??o de fun??es ---- //
 
 int tpf_aho_corasick(char **pats, int pat_amount, char *txt, char **o_results);
 
 // ---- fim de defini??o ---- //
-
 
 int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
 {
@@ -21,27 +19,32 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 		}
 	}
 
-	switch (tpf_type){
-		// Boyer Moore
-		case TPF_EXACT:
-			break;
-		// Aho-Corasick
-		case TPF_EXACT_PATTERNFILE:
-			break;
-		// Wu-Manber
-		case TPF_APPROXIMATE:
-			break;
-		default:
-			return TPF_ERR_NO_SUCH_OPTION;
-			break;
+	if (tpf_type == TPF_EXACT){ // Boyer Moore
+	// int tpf_boyer_moore(string &pat, string &textfile, bool count)
+		string pat = patterns[0];
+
+		tpf_boyer_moore(pat, textfile, count);
+
+	} else if (tpf_type == TPF_EXACT_PATTERNFILE){ // Aho-Corasick
+
+	} else if (tpf_type == TPF_APPROXIMATE){ // Wu-Manber
+	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
+
+		for (string &pat : patterns){
+			tpf_wu_manber(pat, textfile, error, count);
+		}
+
+	} else {
+		ret = TPF_ERR_NO_SUCH_OPTION;
 	}
+
 	return ret;
 }
 
 
 // ---- Inicio AHO-CORASICK ---- //
 
-using namespace std;
+
 
 #define MAXNODES 1000
 
@@ -159,14 +162,13 @@ int char_mask(string &pat, Bitset *C)
 	return TPF_OK;
 }
 
-int tpf_wu_manber(string &pat, char *txt, int error)
+int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 {
-	int text_len = strlen(txt);//TEMPORARIO
-
-	int results = 0;
 	int m = pat.length();
 	Bitset *C = new Bitset[ALPHABET_SIZE];
 	char_mask(pat, C);
+
+	int occ = 0;
 
 	// msb = 2 ** (m-1)
 	Bitset msb(m);
@@ -183,29 +185,46 @@ int tpf_wu_manber(string &pat, char *txt, int error)
 	Bitset S1(m);
 	Bitset S2(m);
 
-	for (int j = 0; j < text_len; j++){
-		S1 = S[0];
-		S[0] = (S[0] << 1) | C[(int) txt[j]];
-		for (int q = 1; q <= error; q++){
-			S2 = S[q];
-			S[q] = 		((S[q] << 1) | C[(int) txt[j]])
-					&	(S1 << 1)
-					&	(S[q-1] << 1)
-					&	S1;
-			S1 = S2;
-		}
-		if (S[error] < msb){
-			cout << "*****	RESULT_MATCH 	*****" << endl ;
-			results += 1;
+	ifstream istream(textfile);
 
-			string str(txt);
-			int begin =  max(0, j-m-error);
-			cout << "substring("<<begin<<", "<<j+1<<")" <<endl;
-			cout << str.substr(begin, m+error+1) << endl;
+	if (! istream.good()){
+		return TPF_ERROR_READING_FILE;
+	}
+	string line;
+
+	cout << "pattern:" << pat << endl;
+
+	while (istream >> line){
+		int n = line.length();
+		int i = 0;
+		bool printed = false;
+
+		for (int j = 0; j < n; j++){
+			S1 = S[0];
+			S[0] = (S[0] << 1) | C[(int) line[j]];
+			for (int q = 1; q <= error; q++){
+				S2 = S[q];
+				S[q] = 		((S[q] << 1) | C[(int) line[j]])
+						&	(S1 << 1)
+						&	(S[q-1] << 1)
+						&	S1;
+				S1 = S2;
+			}
+			if (S[error] < msb){
+				occ += 1;
+				
+				if (!printed && !count){
+					cout << textfile << ":" << line << endl;
+					printed = true;
+				}
+			}
 		}
+	
 	}
 
-	cout << "Results: " << results << endl<< endl;
+	if (count){
+		cout << textfile << ":" << occ << endl;
+	}
 
 	return TPF_OK;
 }
@@ -232,11 +251,6 @@ vector<int> border(string &pat)
         i += j - B[j];
 	}
 
-	cout << "[";
-	for (i = 0; i < m; i++){
-		cout << B[i] << ", ";
-	}
-	cout << B[m] << "]" << endl;
 	return B;
 }
 
@@ -255,12 +269,6 @@ vector<int> good_suffix(string &pat)
 			S[j] = l-PiR[l];
 		}
 	}
-
-	cout << "[";
-	for (int i = 0; i < m; i++){
-		cout << S[i] << ", ";
-	}
-	cout << S[m] << "]" << endl;
 	return S;
 
 }
@@ -274,40 +282,52 @@ vector<int> bad_char(string &pat)
 	for (int j = 0; j < m; j++){
 		C[(int) pat[j]] = j;
 	}
-
-	cout << "[";
-	for (int i = 0; i < m; i++){
-		cout << C[i] << ", ";
-	}
-	cout << C[m] << "]" << endl;
 	return C;
 }
 
-int tpf_boyer_moore(string &pat, char *txt)
+int tpf_boyer_moore(string &pat, string &textfile, bool count)
 {
 	int m = pat.length();
-	int n = strlen(txt);
 	vector<int> C = bad_char(pat);
 	vector<int> S = good_suffix(pat);
 	int occ = 0;
-	int i = 0;
+	
+	ifstream istream(textfile);
 
-	while (i <= n-m){
-		int j = m-1;
-		while (j >= 0 && txt[i+j]==pat[j]){
-			j -= 1;
-		}
-		if (j < 0){
-			occ += 1;
-			string str(txt);
-			cout << "substring("<<i<<", "<<i+m<<")" <<endl;
-			cout << str.substr(i, m) << endl;
-			i += S[m+j+1];
-		}
-		else{
-			i += max(j-C[(int) txt[i+j]], S[j]);
-		}
+	if (! istream.good()){
+		return TPF_ERROR_READING_FILE;
 	}
+	string line;
+
+	while (istream >> line){
+		int n = line.length();
+		int i = 0;
+		bool printed = false;
+
+		while (i <= n-m){
+			int j = m-1;
+			while (j >= 0 && line[i+j]==pat[j]){
+				j -= 1;
+			}
+			if (j < 0){
+				occ += 1;
+				i += S[m+j+1];
+				if (!printed && !count){
+					cout << textfile << ":" << line << endl;
+					printed = true;
+				}
+			}
+			else{
+				i += max(j-C[(int) line[i+j]], S[j]);
+			}
+		}
+	
+	}
+
+	if (count){
+		cout << textfile << ":" << occ << endl;
+	}
+
 	return TPF_OK;
 }
 
@@ -357,29 +377,4 @@ void teste_aho_corasick()
 	}
 	initaho();
 	search( i_text );	
-}
-
-//TESTE BOYER-MOORE
-
-void teste_boyer_moore()
-{
-			
-	string padrao("bao");
-	char texto[85] = "abaobabaobab";
-	int distancia = 0;
-	
-	
-	tpf_boyer_moore(padrao, texto);
-	
-	/*
-	char padrao[30] = "boraefjsbor";
-	vector<int> S = good_suffix(padrao);
-	*/
-}
-
-int main(){
-
-	teste_aho_corasick();
-	
-	return 0;
 }
