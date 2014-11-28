@@ -45,7 +45,7 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 
 // ---- Inicio AHO-CORASICK ---- //
 
-int aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pats) {	
+int aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pats, bool print_occ) {	
 	int c = 0; 
 	bool occ = 0;
 	for (int i = 0; txt[i]; i++) {
@@ -56,7 +56,7 @@ int aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pat
 		while(t != -1) {
 			for (int w : tree.word_end[t]){				
 				// printf("palavra %d aparece na posicao %d\n", w, i-(tree.dep[t])+1);
-				cout << "'" << pats[w] << "', ";
+				if( print_occ ) cout << "'" << pats[w] << "', ";
 				occ++;
 			}
 			t = tree.preend[t];
@@ -88,12 +88,12 @@ int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
 	
 	while ( getline(istream , line) ){
 		if(!count){
-			if( aho_corasick_search( line , tree, pats) > 0 ){
+			if( aho_corasick_search( line , tree, pats, true) > 0 ){
 				cout << "found at:" << endl;
 				cout << textfile << ":" << line << endl;
 			}
 		} else {
-			occ += aho_corasick_search( line , tree, pats);
+			occ += aho_corasick_search( line , tree, pats, false);
 		}
 	}
 	if (count){
