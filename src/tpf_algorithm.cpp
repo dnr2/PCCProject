@@ -29,10 +29,11 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 		tpf_aho_corasick(patterns, textfile, count);
 		
 	} else if (tpf_type == TPF_APPROXIMATE){ // Wu-Manber
-	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
-
+	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)		
+		
 		for (string &pat : patterns){
-			tpf_wu_manber(pat, textfile, error, count);
+			//tpf_wu_manber(pat, textfile, error, count);
+			tpf_sellers(pat, textfile, error, count);			
 		}
 
 	} else {
@@ -100,7 +101,7 @@ int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
 	}
 	if (count){
 		for( int i =0; i < (int)pats.size();i++){
-			cout << pats[i] << endl;
+			cout << "pattern:" << pats[i] << endl;
 			cout << textfile << ":" << occ[i] << endl;
 		}
 	}
@@ -188,7 +189,6 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 				}
 			}
 		}
-	
 	}
 
 	if (count){
@@ -199,6 +199,68 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 }
 
 // ---- Fim WU-MANBER ---- //
+
+// ---- Inicio SELLERS ---- //
+
+
+int tpf_sellers(string &pat, string &textfile, int error, bool count)
+{
+	int m = pat.length();
+	int occ = 0;
+	ifstream istream(textfile);
+
+	if (! istream.good()){
+		return TPF_ERROR_READING_FILE;
+	}
+	string line;
+
+	cout << "pattern:" << pat << endl;
+	
+	while ( getline(istream, line) ){
+		vector< vector<int> > D;
+		// x = pat size m
+		// y = line size n
+		
+		bool printed = false;
+	
+		int n = line.length();
+		// cout << n << " " << line <<endl;
+		// cout << m << " " << pat <<endl;
+		
+		for( int i = 0; i <= m+1; i++){
+			D.push_back( vector<int>( n+1 ));
+		}
+		
+		for( int i =0; i <=m; i++) 
+			D[i][0] = i;
+		for( int j =0; j <=n; j++) 
+			D[0][j] = 0;
+
+		for( int j =1; j <=n; j++){			
+			for( int i = 1; i<=m; i++){
+				
+				D[i][j] = min( D[i-1][j-1] + ((pat[i-1] == line[j-1])? 0 : 1), 
+					min( D[i][j-1] + 1, D[i][j-1] + 1 ));
+					
+				// cerr << "lol = " << j << " " << i << " " << D[i][j] << endl;					
+			}
+			if( D[m][j] <= error ){
+				occ++;
+				if( !count && !printed ){
+					cout << textfile << ":" << line << endl;
+					printed = true;
+				}
+			}
+		}
+	}
+	
+	if (count){
+		cout << textfile << ":" << occ << endl;
+	}	
+	
+	return TPF_OK;
+}
+// ---- Fim SELLERS ---- //
 
 // ---- Inicio BOYER-MOORE ---- //
 

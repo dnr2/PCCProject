@@ -33,6 +33,8 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 
 int tpf_wu_manber(string &pat, string &textfile, int error, bool count);
 
+int tpf_sellers(string &pat, string &textfile, int error, bool count);
+
 int tpf_boyer_moore(string &pat, string &textfile, bool count);
 
 int tpf_aho_corasick(vector<string> &pats, string &textfile, bool count);

@@ -177,5 +177,5 @@ int main(int argc, char **argv)
 		for (string &file : textfiles)
 			tpf_find(patterns, file, error, TPF_APPROXIMATE, count);
 	}
-	
+	return 0;
 }
