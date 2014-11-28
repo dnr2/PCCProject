@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 	}
 
 	
-	cout << "COUNT\t" << (count?"TRUE":"FALSE") << endl << endl;
+/*	cout << "COUNT\t" << (count?"TRUE":"FALSE") << endl << endl;
 
 	cout << "EDIT\t" << (edit?"TRUE":"FALSE") << endl;
 	cout << "Value:\t" << error << endl << endl;
@@ -166,16 +166,16 @@ int main(int argc, char **argv)
 	cout << "ARQUIVOS DE TEXTO:" << endl;
 	for(string &file : textfiles)
 		cout << file << endl;
-	cout << endl;
+	cout << endl;*/
 
 	// int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count);
 	if (! edit){
 		int type = patternfile ? TPF_EXACT_PATTERNFILE : TPF_EXACT;
 		for (string &file : textfiles)
-			int ret = tpf_find(patterns, file, 0, type, count);
+			tpf_find(patterns, file, 0, type, count);
 	} else {
 		for (string &file : textfiles)
-			int ret = tpf_find(patterns, file, error, TPF_APPROXIMATE, count);
+			tpf_find(patterns, file, error, TPF_APPROXIMATE, count);
 	}
 	
 }
