@@ -45,9 +45,9 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 
 // ---- Inicio AHO-CORASICK ---- //
 
-
-void aho_corasick_search(char * txt, TreeAhoCorasick & tree) {	
-	int c = 0;
+int aho_corasick_search(string txt, TreeAhoCorasick & tree, vector<string> & pats) {	
+	int c = 0; 
+	bool occ = 0;
 	for (int i = 0; txt[i]; i++) {
 		while(c != -1 && tree.adj[c][(int)txt[i]] == -1)
 			c = tree.suf[c];
@@ -55,25 +55,49 @@ void aho_corasick_search(char * txt, TreeAhoCorasick & tree) {
 		int t = c;
 		while(t != -1) {
 			for (int w : tree.word_end[t]){				
-				printf("palavra numero %d aparece na posicao %d\n", w, i-(tree.dep[t])+1);
+				// printf("palavra %d aparece na posicao %d\n", w, i-(tree.dep[t])+1);
+				cout << "'" << pats[w] << "', ";
+				occ++;
 			}
 			t = tree.preend[t];
 		}
 	}
+	return occ;
 }
 
 int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
 {
+	
 	ifstream istream(textfile);
 
 	if (! istream.good()){
 		return TPF_ERROR_READING_FILE;
 	}
 	string line;
-
-	cout << "pattern:" << pats[0] << endl;
-
-	while (istream >> line){
+	
+	//inicializar Aho-Corasick
+	TreeAhoCorasick tree;
+	tree.init();		
+	for( int i =0; i < (int) pats.size(); i++){
+		tree.add( pats[i], i );
+	}
+	
+	tree.complete_tree();	
+	
+	int occ = 0;
+	
+	while ( getline(istream , line) ){
+		if(!count){
+			if( aho_corasick_search( line , tree, pats) > 0 ){
+				cout << "found at:" << endl;
+				cout << textfile << ":" << line << endl;
+			}
+		} else {
+			occ += aho_corasick_search( line , tree, pats);
+		}
+	}
+	if (count){
+		cout << textfile << ":" << occ << endl;
 	}
 	return TPF_OK;
 }
@@ -136,7 +160,7 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 	cout << "pattern:" << pat << endl;
 
 	while (istream >> line){
-		int n = line.length();		
+		int n = line.length();
 		bool printed = false;
 
 		for (int j = 0; j < n; j++){
@@ -274,47 +298,3 @@ int tpf_boyer_moore(string &pat, string &textfile, bool count)
 }
 
 // ---- Fim BOYER-MOORE ---- //
-
-
-// ============ ignore ============ // 
-
-
-//TESTE AHO-CORASICK
-
-int i_pattern_amount;
-char i_patterns[100][100];
-char i_text[1000];
-char str_aux[1000];
-
-
-void teste_aho_corasick()
-{	
-	
-	while( gets( str_aux ) ){
-		if( str_aux[0] == '%' && str_aux[1] == '%') break;
-		strcat(i_text, str_aux);
-	}
-	
-	int pos =0, sz = strlen( i_text);
-	while( pos < sz){
-		printf("pos %3d - ", pos );
-		for(int i = 0; i < 25; i++){
-			printf("%c", i_text[pos++]);
-		}
-		cout << endl;
-	}
-	
-	i_pattern_amount = 0;
-	
-	while( cin >> i_patterns[i_pattern_amount] ){
-		printf("%d - %s\n", i_pattern_amount + 1, i_patterns[i_pattern_amount] );
-		i_pattern_amount++;
-	}
-	TreeAhoCorasick tree;
-	tree.init();		
-	for( int i =0; i < i_pattern_amount; i++){
-		tree.add( i_patterns[i], i+1 );
-	}
-	tree.complete_tree();
-	aho_corasick_search( i_text , tree);
-}

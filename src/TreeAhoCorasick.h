@@ -37,7 +37,7 @@ class TreeAhoCorasick
 		}
 		
 		// Adicionar a palavra no arvore de prefixos e associa a ela o numero pat_num
-		void add(const char *pat, int pat_num){
+		void add(string pat, int pat_num){
 			int c = 0;
 			for (int i = 0; pat[i]; i++) {
 				int &cs = adj[c][(int)pat[i]]; // Nao esquecer o '&' para referencia

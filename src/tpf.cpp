@@ -41,7 +41,7 @@ vector<string> handle_wildcard(string &str)
 
 	dp = opendir (path.c_str());
 	if (dp != NULL)	{
-		while (ep = readdir (dp)){
+		while ((ep = readdir(dp))){
 			string possible_match(ep->d_name);
 			if (possible_match.find(file) != string::npos){
 				puts (ep->d_name);
@@ -177,5 +177,5 @@ int main(int argc, char **argv)
 		for (string &file : textfiles)
 			int ret = tpf_find(patterns, file, error, TPF_APPROXIMATE, count);
 	}
-
+	
 }
