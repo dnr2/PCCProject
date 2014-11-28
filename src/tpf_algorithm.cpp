@@ -278,7 +278,7 @@ void teste_aho_corasick()
 	for( int i =0; i < i_pattern_amount; i++){
 		tree.add( i_patterns[i], i+1 );
 	}
-	tree.initaho();
+	tree.complete_tree();
 	tpf_aho_corasick( i_text , tree);
 }
 

@@ -56,7 +56,7 @@ class TreeAhoCorasick
 		}
 		
 		// completar arvore
-		void initaho() {
+		void complete_tree() {
 			queue<int> fila;
 			fila.push(0);
 			par[0] = -1;
