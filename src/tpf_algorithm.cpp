@@ -159,7 +159,7 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 
 	cout << "pattern:" << pat << endl;
 
-	while (istream >> line){
+	while ( getline(istream, line) ){
 		int n = line.length();
 		bool printed = false;
 
@@ -263,28 +263,26 @@ int tpf_boyer_moore(string &pat, string &textfile, bool count)
 	}
 	string line;
 
-	while (istream >> line){
-		string txt(line.c_str());
-		int n = txt.length();
+	while ( getline(istream, line) ){
+		int n = line.length();
 		int i = 0;
 		bool printed = false;
 
 		while (i <= n-m){
 			int j = m-1;
-			while (j >= 0 && txt[i+j]==pat[j]){
+			while (j >= 0 && line[i+j]==pat[j]){
 				j -= 1;
 			}
 			if (j < 0){
 				occ += 1;
 				i += S[m+j+1];
 				if (!printed && !count){
-					cout << "xomba" << endl;
 					cout << textfile << ":" << line << endl;
 					printed = true;
 				}
 			}
 			else{
-				i += max(j-C[(int) txt[i+j]], S[j]);
+				i += max(j-C[(int) line[i+j]], S[j]);
 			}
 		}
 	
