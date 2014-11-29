@@ -497,7 +497,6 @@ texto.txt:	you can move him.
 texto.txt:	embrace your own safety and give over this attempt.
 texto.txt:rosalind	my father loved sir rowland as his soul,
 texto.txt:	if you do keep your promises in love
-texto.txt:	but justly, as you have exceeded all promise,
 texto.txt:	sir, you have wrestled well and overthrown
 texto.txt:	o poor orlando, thou art overthrown!
 texto.txt:	high commendation, true applause and love,
@@ -510,7 +509,6 @@ texto.txt:	to think my poverty is treacherous.
 texto.txt:celia	dear sovereign, hear me speak.
 texto.txt:	i cannot live out of her company.
 texto.txt:celia	no, hath not? rosalind lacks then the love
-texto.txt:	which teacheth thee that thou and i am one:
 texto.txt:rosalind	i'll have no worse a name than jove's own page;
 texto.txt:	leave me alone to woo him. let's away,
 texto.txt:	to that which had too much:' then, being there alone,
@@ -563,7 +561,6 @@ texto.txt:	twelvemonth to a crooked-pated, old, cuckoldly ram,
 texto.txt:	must find love's prick and rosalind.
 texto.txt:	and i to live and die her slave.
 texto.txt:rosalind	o most gentle pulpiter! what tedious homily of love
-texto.txt:	have you wearied your parishioners withal, and never
 texto.txt:	themselves without the verse and therefore stood
 texto.txt:	meet; but mountains may be removed with earthquakes
 texto.txt:	south-sea of discovery; i prithee, tell me who is it
@@ -620,7 +617,6 @@ texto.txt:celia	'was' is not 'is:' besides, the oath of a lover is
 texto.txt:	his lover; as a puisny tilter, that spurs his horse
 texto.txt:	after the shepherd that complain'd of love,
 texto.txt:	between the pale complexion of true love
-texto.txt:	and the red glow of scorn and proud disdain,
 texto.txt:rosalind	o, come, let us remove:
 texto.txt:	the sight of lovers feedeth those in love.
 texto.txt:	i'll prove a busy actor in their play.
@@ -683,7 +679,6 @@ texto.txt:	or else by him my love deny,
 texto.txt:	thou love such a woman? what, to make thee an
 texto.txt:	love hath made thee a tame snake, and say this to
 texto.txt:	her: that if she love me, i charge her to love
-texto.txt:	thee; if she will not, i will never have her unless
 texto.txt:	thou entreat for her. if you be a true lover,
 texto.txt:	[enter oliver]
 texto.txt:oliver	good morrow, fair ones: pray you, if you know,
@@ -753,9 +748,7 @@ texto.txt:	you to your land and love and great allies:
 texto.txt:	and you to wrangling; for thy loving voyage
 texto.txt:	and good plays prove the better by the help of good
 texto.txt:	with the women. i charge you, o women, for the love
-texto.txt:	you bear to men, to like as much of this play as
 texto.txt:	please you: and i charge you, o men, for the love
-texto.txt:	you bear to women--as i perceive by your simpering,
 texto.txt:	who wanting guilders to redeem their lives
 texto.txt:	both by the syracusians and ourselves,
 texto.txt:	with her i lived in joy; our wealth increased
@@ -784,7 +777,6 @@ texto.txt:	will lose his beauty; yet the gold bides still,
 texto.txt:	safe at the centaur; and the heedful slave
 texto.txt:	as you love strokes, so jest with me again.
 texto.txt:	your sauciness will jest upon my love
-texto.txt:	and make a common of my serious hours.
 texto.txt:dromio of syracuse	there's no time for a man to recover his hair that
 texto.txt:of syracuse	may he not do it by fine and recovery?
 texto.txt:dromio of syracuse	yes, to pay a fine for a periwig and recover the
@@ -875,7 +867,6 @@ texto.txt:	if they set down before 's, for the remove
 texto.txt:	he would show most love. when yet he was but
 texto.txt:	than now in first seeing he had proved himself a
 texto.txt:	sincerely: had i a dozen sons, each in my love
-texto.txt:	alike and none less dear than thine and my good
 texto.txt:	marcius, i had rather had eleven die nobly for their
 texto.txt:	or all or lose his hire.
 texto.txt:	when she did suckle hector, look'd not lovelier
@@ -999,7 +990,6 @@ texto.txt:	scars to move laughter only.
 texto.txt:coriolanus	the fires i' the lowest hell fold-in the people!
 texto.txt:	beating your officers, cursing yourselves,
 texto.txt:	her enemies' marks upon me. i do love
-texto.txt:	my country's good with a respect more tender,
 texto.txt:	as reek o' the rotten fens, whose loves i prize
 texto.txt:	making not reservation of yourselves,
 texto.txt:	still your own foes, deliver you as most
@@ -1013,7 +1003,6 @@ texto.txt:	while i remain above the ground, you shall
 texto.txt:	requite your love!
 texto.txt:	favour is well approved by your tongue. what's the
 texto.txt:	are still together, who twin, as 'twere, in love
-texto.txt:	unseparable, shall within this hour,
 texto.txt:	my birth-place hate i, and my love's upon
 texto.txt:	and suffer'd me by the voice of slaves to be
 texto.txt:	that my revengeful services may prove
@@ -1021,7 +1010,6 @@ texto.txt:	thou darest not this and that to prove more fortunes
 texto.txt:	longer to live most weary, and present
 texto.txt:	and cannot live but to thy shame, unless
 texto.txt:	as hotly and as nobly with thy love
-texto.txt:	as ever in ambitious strength i did
 texto.txt:	i loved the maid i married; never man
 texto.txt:	or lose mine arm fort: thou hast beat me out
 texto.txt:	twelve several times, and i have nightly since
@@ -1072,7 +1060,6 @@ texto.txt:	you wish'd us parties, we'll deliver you
 texto.txt:	i seem'd his follower, not partner, and
 texto.txt:	ere he express himself, or move the people
 texto.txt:	no more infected with my country's love
-texto.txt:	than when i parted hence, but still subsisting
 texto.txt:	than shame to the romans: and we here deliver,
 texto.txt:	too great for what contains it. boy! o slave!
 texto.txt:	that, like an eagle in a dove-cote, i
@@ -1358,7 +1345,6 @@ texto.txt:	by whom i grant she lives. 'tis now the time
 texto.txt:cornelius	first, she confess'd she never loved you, only
 texto.txt:cymbeline	she alone knew this;
 texto.txt:cornelius	your daughter, whom she bore in hand to love
-texto.txt:	with such integrity, she did confess
 texto.txt:	and prove it in thy feeling. heaven mend all!
 texto.txt:	will have it thus, that nothing but our lives
 texto.txt:	augustus lives to think on't: and so much
@@ -1377,7 +1363,6 @@ texto.txt:	proved us unspeaking sots.
 texto.txt:	and she alone were cold: whereat i, wretch,
 texto.txt:	which must approve thee honest: 'if pisanio
 texto.txt:belarius	[to guiderius and arviragus]  though you did love
-texto.txt:	this youth, i blame ye not:
 texto.txt:	prove holy water on thee! imogen,
 texto.txt:	now fear is from me, i'll speak troth. lord cloten,
 texto.txt:	if i discover'd not which way she was gone,
@@ -1516,7 +1501,6 @@ texto.txt:	nay, task me to my word; approve me, lord.
 texto.txt:	under whose government come they along?
 texto.txt:	on any soul removed but on his own.
 texto.txt:	a comfort of retirement lives in this.
-texto.txt:vernon	pray god my news be worth a welcome, lord.
 texto.txt:scene ii	a public road near coventry.
 texto.txt:falstaff	bardolph, get thee before to coventry; fill me a
 texto.txt:	twice on the banns; such a commodity of warm slaves,
@@ -1538,7 +1522,6 @@ texto.txt:	and move in that obedient orb again
 texto.txt:	that even our love durst not come near your sight
 texto.txt:	more daring or more bold, is now alive
 texto.txt:	we love our people well; even those we love
-texto.txt:	that are misled upon your cousin's part;
 texto.txt:	to the dead. but will it not live with the living?
 texto.txt:	the king should keep his word in loving us;
 texto.txt:	suspicion all our lives shall be stuck full of eyes;
@@ -1577,7 +1560,6 @@ texto.txt:	together with remembrance of ourselves.
 texto.txt:	thou know'st 'tis common; all that lives must die,
 texto.txt:	'tis not alone my inky cloak, good mother,
 texto.txt:	and with no less nobility of love
-texto.txt:	than that which dearest father bears his son,
 texto.txt:queen gertrude	let not thy mother lose her prayers, hamlet:
 texto.txt:king claudius	why, 'tis a loving and a fair reply:
 texto.txt:	thaw and resolve itself into a dew!
@@ -1599,7 +1581,6 @@ texto.txt:	for loan oft loses both itself and friend,
 texto.txt:	this above all: to thine ownself be true,
 texto.txt:	as it behoves my daughter and your honour.
 texto.txt:ophelia	my lord, he hath importuned me with love
-texto.txt:	in honourable fashion.
 texto.txt:horatio	                  i think it lacks of twelve.
 texto.txt:	being nature's livery, or fortune's star,--
 texto.txt:	to you alone.
@@ -1742,7 +1723,6 @@ texto.txt:	in his true nature; and we ourselves compell'd,
 texto.txt:scene iv	the queen's closet.
 texto.txt:	[lifts up the array and discovers polonius]
 texto.txt:	from the fair forehead of an innocent love
-texto.txt:	and sets a blister there, makes marriage-vows
 texto.txt:	hyperion's curls; the front of jove himself;
 texto.txt:	you cannot call it love; for at your age
 texto.txt:hamlet	nay, but to live
@@ -1794,7 +1774,6 @@ texto.txt:	the light and careless livery that it wears
 texto.txt:king claudius	not that i think you did not love your father;
 texto.txt:	but that i know love is begun by time;
 texto.txt:	there lives within the very flame of love
-texto.txt:	a kind of wick or snuff that will abate it;
 texto.txt:	will you do this, keep close within your chamber.
 texto.txt:	of crow-flowers, nettles, daisies, and long purples
 texto.txt:	clambering to hang, an envious sliver broke;
@@ -1844,10 +1823,8 @@ texto.txt:	over your friend that loves you.
 texto.txt:	forgets the shows of love to other men.
 texto.txt:	will modestly discover to yourself
 texto.txt:	to stale with ordinary oaths my love
-texto.txt:	to every new protester; if you know
 texto.txt:brutus	i would not, cassius; yet i love him well.
 texto.txt:	for let the gods so speed me as i love
-texto.txt:	the name of honour more than i fear death.
 texto.txt:	i had as lief not be as live to be
 texto.txt:	and stemming it with hearts of controversy;
 texto.txt:	did lose his lustre: i did hear him groan:
@@ -1891,7 +1868,6 @@ texto.txt:	tell me your counsels, i will not disclose 'em:
 texto.txt:	the heavens themselves blaze forth the death of princes.
 texto.txt:	because i love you, i will let you know:
 texto.txt:	pardon me, caesar; for my dear dear love
-texto.txt:	to our proceeding bids me tell you this;
 texto.txt:	and reason to my love is liable.
 texto.txt:	loves thee not: thou hast wronged caius ligarius.
 texto.txt:	the mighty gods defend thee! thy lover,
@@ -2022,7 +1998,6 @@ texto.txt:	and find i am alone felicitate
 texto.txt:	in your dear highness' love.
 texto.txt:	and yet not so; since, i am sure, my love's
 texto.txt:	although the last, not least; to whose young love
-texto.txt:	the vines of france and milk of burgundy
 texto.txt:	my heart into my mouth: i love your majesty
 texto.txt:	you have begot me, bred me, loved me: i
 texto.txt:	obey you, love you, and most honour you.
@@ -2040,7 +2015,6 @@ texto.txt:	that good effects may spring from words of love.
 texto.txt:	or cease your quest of love?
 texto.txt:	i would not from your love make such a stray,
 texto.txt:	what say you to the lady? love's not love
-texto.txt:	when it is mingled with regards that stand
 texto.txt:	that you must lose a husband.
 texto.txt:	since that respects of fortune are his love,
 texto.txt:	most choice, forsaken; and most loved, despised!
@@ -2311,7 +2285,6 @@ texto.txt:	a man. for bardolph, he is white-livered and
 texto.txt:	lute-case, bore it twelve leagues, and sold it for
 texto.txt:	fire-shovel: i knew by that piece of service the
 texto.txt:	familiar with men's pockets as their gloves or their
-texto.txt:	verify as much in his beard: be has no more
 texto.txt:	over, the trompet sound the retreat. by my hand, i
 texto.txt:	it ish give over: i would have blowed up the town, so
 texto.txt:	and i sall quit you with gud leve, as i may pick
@@ -2429,7 +2402,6 @@ texto.txt:	directly to say 'i love you:' then if you urge me
 texto.txt:	or if i might buffet for my love, or bound my horse
 texto.txt:	nor never break for urging. if thou canst love a
 texto.txt:	sun-burning, that never looks in his glass for love
-texto.txt:	of any thing he sees there, let thine eye be thy
 texto.txt:	love me for this, take me: if not, to say to thee
 texto.txt:	that i shall die, is true; but for thy love, by the
 texto.txt:	lord, no; yet i love thee too. and while thou
@@ -2472,7 +2444,6 @@ texto.txt:	of our most sovereign king.
 texto.txt:	cardinal wolsey's shoulder, the nobles, and lovell;
 texto.txt:	thanks you for this great care: i stood i' the level
 texto.txt:	that you would love yourself, and in that love
-texto.txt:	not unconsider'd leave your honour, nor
 texto.txt:	whereof my sovereign would have note, they are
 texto.txt:	live where their prayers did: and it's come to pass,
 texto.txt:	this tractable obedience is a slave
@@ -2788,7 +2759,6 @@ texto.txt:	i warrant i love you more than you do me.
 texto.txt:	or 'what good love may i perform for you?'
 texto.txt:	and ne'er have spoke a loving word to you;
 texto.txt:	nay, you may think my love was crafty love
-texto.txt:	and call it cunning: do, an if you will:
 texto.txt:hubert	go, stand within; let me alone with him.
 texto.txt:hubert	none, but to lose your eyes.
 texto.txt:hubert	well, see to live; i will not touch thine eye
@@ -2808,7 +2778,6 @@ texto.txt:king john	doth arthur live? o, haste thee to the peers,
 texto.txt:	o, answer not, but to my closet bring
 texto.txt:	i am afraid; and yet i'll venture it.
 texto.txt:	whose private with me of the dauphin's love
-texto.txt:	is much more general than these lines import.
 texto.txt:	and prove a deadly bloodshed but a jest,
 texto.txt:	arthur doth live; the king hath sent for you.
 texto.txt:hubert	do not prove me so;
@@ -3188,11 +3157,9 @@ texto.txt:moth	master, let me take you a buttonhole lower. do you
 texto.txt:	you? you will lose your reputation.
 texto.txt:	if over-boldly we have borne ourselves
 texto.txt:	forbid the smiling courtesy of love
-texto.txt:	the holy suit which fain it would convince,
 texto.txt:	yet, since love's argument was first on foot,
 texto.txt:	as love is full of unbefitting strains,
 texto.txt:	which parti-coated presence of loose love
-texto.txt:	put on by us, if, in your heavenly eyes,
 texto.txt:	our love being yours, the error that love makes
 texto.txt:	is likewise yours: we to ourselves prove false,
 texto.txt:princess	we have received your letters full of love;
@@ -3265,7 +3232,6 @@ texto.txt:	clamour'd the livelong night: some say, the earth
 texto.txt:	see, and then speak yourselves.
 texto.txt:	i had lived a blessed time; for, from this instant,
 texto.txt:	the expedition my violent love
-texto.txt:	outrun the pauser, reason. here lay duncan,
 texto.txt:	his silver skin laced with his golden blood;
 texto.txt:	that had a heart to love, and in that heart
 texto.txt:	courage to make 's love known?
@@ -3384,14 +3350,12 @@ texto.txt:mistress overdone	but shall all our houses of resort in the suburbs be
 texto.txt:mistress overdone	why, here's a change indeed in the commonwealth!
 texto.txt:mistress overdone	what's to do here, thomas tapster? let's withdraw.
 texto.txt:	from whom we thought it meet to hide our love
-texto.txt:	till time had made them for us. but it chances
 texto.txt:	a horse whereon the governor doth ride,
 texto.txt:	i stagger in:--but this new governor
 texto.txt:	thy shoulders that a milkmaid, if she be in love,
 texto.txt:	implore her, in my voice, that she make friends
 texto.txt:	such as move men; beside, she hath prosperous art
 texto.txt:	believe not that the dribbling dart of love
-texto.txt:	can pierce a complete bosom. why i desire thee
 texto.txt:	how i have ever loved the life removed
 texto.txt:	i have deliver'd to lord angelo,
 texto.txt:	dead to infliction, to themselves are dead;
@@ -3432,7 +3396,6 @@ texto.txt:	which sorrow is always towards ourselves, not heaven,
 texto.txt:	showing we would not spare heaven as we love it,
 texto.txt:juliet	must die to-morrow! o injurious love,
 texto.txt:	crowd to his presence, where their untaught love
-texto.txt:	must needs appear offence.
 texto.txt:	than to demand what 'tis. your brother cannot live.
 texto.txt:angelo	yet may he live awhile; and, it may be,
 texto.txt:	and rather proved the sliding of your brother
@@ -3458,7 +3421,6 @@ texto.txt:claudio	          sweet sister, let me live:
 texto.txt:	mercy to thee would prove itself a bawd:
 texto.txt:duke vincentio	son, i have overheard what hath passed between you
 texto.txt:claudio	let me ask my sister pardon. i am so out of love
-texto.txt:	with life that i will sue to be rid of it.
 texto.txt:isabella	i am now going to resolve him: i had rather my
 texto.txt:	discover his government.
 texto.txt:	advisings: to the love i have in doing good a
@@ -3633,7 +3595,6 @@ texto.txt:	and in their ship i am sure lorenzo is not.
 texto.txt:	lorenzo and his amorous jessica:
 texto.txt:	let it not enter in your mind of love:
 texto.txt:	to courtship and such fair ostents of love
-texto.txt:	as shall conveniently become you there:'
 texto.txt:salanio	i think he only loves the world for him.
 texto.txt:	to my heart's hope! gold; silver; and base lead.
 texto.txt:	why, then to thee, thou silver treasure-house;
@@ -3673,7 +3634,6 @@ texto.txt:	such as i am: though for myself alone
 texto.txt:	as from her lord, her governor, her king.
 texto.txt:	which when you part from, lose, or give away,
 texto.txt:	let it presage the ruin of your love
-texto.txt:	and be my vantage to exclaim on you.
 texto.txt:	by a beloved prince, there doth appear
 texto.txt:	you loved, i loved for intermission.
 texto.txt:	with oaths of love, at last, if promise last,
@@ -3762,7 +3722,6 @@ texto.txt:	[enter lorenzo and jessica]
 texto.txt:lorenzo	the moon shines bright: in such a night as this,
 texto.txt:lorenzo	in such a night
 texto.txt:	upon the wild sea banks and waft her love
-texto.txt:	to come again to carthage.
 texto.txt:lorenzo	in such a night
 texto.txt:	and with an unthrift love did run from venice
 texto.txt:	did young lorenzo swear he loved her well,
@@ -3897,7 +3856,6 @@ texto.txt:slender	ay, that i do; as well as i love any woman in
 texto.txt:page	now, master slender: love him, daughter anne.
 texto.txt:fenton	good mistress page, for that i love your daughter
 texto.txt:	i must advance the colours of my love
-texto.txt:	and not retire: let me have your good will.
 texto.txt:	my daughter will i question how she loves you,
 texto.txt:	have i lived to be carried in a basket, like a
 texto.txt:	belly's as cold as if i had swallowed snowballs for
@@ -4014,7 +3972,6 @@ texto.txt:	crowns him with flowers and makes him all her joy:
 texto.txt:	and now they never meet in grove or green,
 texto.txt:	but, they do square, that all their elves for fear
 texto.txt:	playing on pipes of corn and versing love
-texto.txt:	to amorous phillida. why art thou here,
 texto.txt:	your buskin'd mistress and your warrior love,
 texto.txt:	knowing i know thy love to theseus?
 texto.txt:	that they have overborne their continents:
@@ -4046,7 +4003,6 @@ texto.txt:	quite over-canopied with luscious woodbine,
 texto.txt:	lull'd in these flowers with dances and delight;
 texto.txt:	take thou some of it, and seek through this grove:
 texto.txt:	a sweet athenian lady is in love
-texto.txt:	with a disdainful youth: anoint his eyes;
 texto.txt:	effect it with some care, that he may prove
 texto.txt:	more fond on her than she upon her love:
 texto.txt:	to make my small elves coats, and some keep back
@@ -4178,7 +4134,6 @@ texto.txt:	that is, the madman: the lover, all as frantic,
 texto.txt:hippolyta	but all the story of the night told over,
 texto.txt:theseus	here come the lovers, full of joy and mirth.
 texto.txt:	joy, gentle friends! joy and fresh days of love
-texto.txt:	accompany your hearts!
 texto.txt:	we'll none of that: that have i told my love,
 texto.txt:	and his love thisbe; very tragical mirth.'
 texto.txt:	it is not for you: i have heard it over,
@@ -4264,7 +4219,6 @@ texto.txt:benedick	o god, sir, here's a dish i love not: i cannot
 texto.txt:	should prove the mother of fools. i have brought
 texto.txt:	they would talk themselves mad.
 texto.txt:claudio	to-morrow, my lord: time goes on crutches till love
-texto.txt:	have all his rites.
 texto.txt:	strain, of approved valour and confirmed honesty. i
 texto.txt:	shall fall in love with benedick; and i, with your
 texto.txt:	shall fall in love with beatrice. if we can do this,
@@ -4335,7 +4289,6 @@ texto.txt:claudio	if there be any impediment, i pray you discover it.
 texto.txt:don john	you may think i love you not: let that appear
 texto.txt:	before her wedding-day: if you love her then,
 texto.txt:dogberry	why, then, let them alone till they are sober: if
-texto.txt:verges	by'r lady, i think it be so.
 texto.txt:borachio	stand thee close, then, under this pent-house, for
 texto.txt:watchman	[aside]  some treason, masters: yet stand close.
 texto.txt:	recovered the most dangerous piece of lechery that
@@ -4369,7 +4322,6 @@ texto.txt:	than when she lived indeed; then shall he mourn,
 texto.txt:	if ever love had interest in his liver,
 texto.txt:	but if all aim but this be levell'd false,
 texto.txt:	and though you know my inwardness and love
-texto.txt:	is very much unto the prince and claudio,
 texto.txt:	come, lady, die to live: this wedding-day
 texto.txt:benedick	i do love nothing in the world so well as you: is
 texto.txt:	possible for me to say i loved nothing so well as
@@ -4405,7 +4357,6 @@ texto.txt:leonato	art thou the slave that with thy breath hast kill'd
 texto.txt:borachio	yea, even i alone.
 texto.txt:leonato	i cannot bid you bid my daughter live;
 texto.txt:	how innocent she died; and if your love
-texto.txt:	can labour ought in sad invention,
 texto.txt:	and she alone is heir to both of us:
 texto.txt:	your over-kindness doth wring tears from me!
 texto.txt:dogberry	moreover, sir, which indeed is not under white and
@@ -4446,7 +4397,6 @@ texto.txt:leonato	come, cousin, i am sure you love the gentleman.
 texto.txt:claudio	and i'll be sworn upon't that he loves her;
 texto.txt:	kinsman, live unbruised and love my cousin.
 texto.txt:montano	othello's predecessor in the government of cyprus.
-texto.txt:emilia	wife to iago.
 texto.txt:	but he; as loving his own pride and purposes,
 texto.txt:	one michael cassio, a florentine,
 texto.txt:	to love the moor.
@@ -4524,7 +4474,6 @@ texto.txt:	till the bell have told eleven. heaven bless the
 texto.txt:	let's teach ourselves that honourable stop,
 texto.txt:		       come, my dear love,
 texto.txt:	clock. our general cast us thus early for the love
-texto.txt:	of his desdemona; who let us not therefore blame:
 texto.txt:	she is sport for jove.
 texto.txt:iago	and when she speaks, is it not an alarum to love?
 texto.txt:	whom love hath turn'd almost the wrong side out,
@@ -4594,7 +4543,6 @@ texto.txt:othello	fear not my government.
 texto.txt:	of human dealings. if i do prove her haggard,
 texto.txt:	and live upon the vapour of a dungeon,
 texto.txt:	than keep a corner in the thing i love
-texto.txt:	for others' uses. yet, 'tis the plague of great ones;
 texto.txt:	let it alone. come, i'll go in with you.
 texto.txt:	woo'd me to steal it; but she so loves the token,
 texto.txt:iago	how now! what do you here alone?
@@ -4623,7 +4571,6 @@ texto.txt:	entirely to her love, but if she lost it
 texto.txt:	to lose't or give't away were such perdition
 texto.txt:	hath founded his good fortunes on your love,
 texto.txt:	exist, and be a member of his love
-texto.txt:	whom i with all the office of my heart
 texto.txt:	can ransom me into his love again,
 texto.txt:	if i do find him fit, i'll move your suit
 texto.txt:	i' faith, sweet love, i was coming to your house.
@@ -4683,7 +4630,6 @@ texto.txt:	though i lost twenty lives.--help! help, ho! help!
 texto.txt:emilia	disprove this villain, if thou be'st a man:
 texto.txt:	shore his old thread in twain: did he live now,
 texto.txt:	with that recognizance and pledge of love
-texto.txt:	which i first gave her; i saw it in his hand:
 texto.txt:	which i have here recover'd from the moor:
 texto.txt:	for 'tis a damned slave.
 texto.txt:	but why should honour outlive honesty?
@@ -4798,7 +4744,6 @@ texto.txt:thaisa	yes, if you love me, sir.
 texto.txt:	and crickets sing at the oven's mouth,
 texto.txt:	why do you make us love your goodly gifts,
 texto.txt:	it hath done to me the worst. yet, for the love
-texto.txt:	of this poor infant, this fresh-new sea-farer,
 texto.txt:first sailor	sir, your queen must overboard: the sea works high,
 texto.txt:	briefly yield her; for she must overboard straight.
 texto.txt:	that can recover him.
@@ -5203,7 +5148,6 @@ texto.txt:	sweet, sweet, sweet nurse, tell me, what says my love?
 texto.txt:nurse	your love says, like an honest gentleman, and a
 texto.txt:	'your love says, like an honest gentleman,
 texto.txt:	to fetch a ladder, by the which your love
-texto.txt:	must climb a bird's nest soon when it is dark:
 texto.txt:	do thou but close our hands with holy words,
 texto.txt:	then love-devouring death do what he dare;
 texto.txt:	therefore love moderately; long love doth so;
@@ -5418,7 +5362,6 @@ texto.txt:first drawer	why, then, cover, and set them down: and see if
 texto.txt:	faith; i must live among my neighbours: i'll no
 texto.txt:	here: i have not lived all this while, to have
 texto.txt:	house, nor no cheater: but i do not love
-texto.txt:	swaggering, by my troth; i am the worse, when one
 texto.txt:pistol	god let me not live, but i will murder your ruff for this.
 texto.txt:	them. you a captain! you slave, for what? for
 texto.txt:	captain! hang him, rogue! he lives upon mouldy
@@ -5462,7 +5405,6 @@ texto.txt:	the king that loved him, as the state stood then,
 texto.txt:	then threw he down himself and all their lives
 texto.txt:	he ne'er had borne it out of coventry:
 texto.txt:	cried hate upon him; and all their prayers and love
-texto.txt:	were set on hereford, whom they doted on
 texto.txt:	and it proceeds from policy, not love.
 texto.txt:westmoreland	mowbray, you overween to take it so;
 texto.txt:	that, were our royal faiths martyrs in love,
@@ -5821,7 +5763,6 @@ texto.txt:even those that said i could not love you dearer:
 texto.txt:might i not then say 'now i love you best,'
 texto.txt:  love is a babe; then might i not say so,
 texto.txt:admit impediments. love is not love
-texto.txt:which alters when it alteration finds,
 texto.txt:or bends with the remover to remove:
 texto.txt:love's not time's fool, though rosy lips and cheeks
 texto.txt:love alters not with his brief hours and weeks,
@@ -6088,7 +6029,6 @@ texto.txt:	this controversy.
 texto.txt:	gods! o fine villain! a silken doublet! a velvet
 texto.txt:vincentio	lives my sweet son?
 texto.txt:lucentio	love wrought these miracles. bianca's love
-texto.txt:	made me exchange my state with tranio,
 texto.txt:katharina	nay, i will give thee a kiss: now pray thee, love, stay.
 texto.txt:	to smile at scapes and perils overblown.
 texto.txt:	and thou, hortensio, with thy loving widow,
@@ -6353,7 +6293,6 @@ texto.txt:	for how can tyrants safely govern home,
 texto.txt:	to prove him tyrant this reason may suffice,
 texto.txt:	that henry liveth still: but were he dead,
 texto.txt:	tell me for truth the measure of his love
-texto.txt:	unto our sister bona.
 texto.txt:	that this his love was an eternal plant,
 texto.txt:king lewis xi	now, sister, let us hear your firm resolve.
 texto.txt:warwick	henry now lives in scotland at his ease,
@@ -6518,7 +6457,6 @@ texto.txt:	why do fond men expose themselves to battle,
 texto.txt:	to overcome him: in that beastly fury
 texto.txt:	and be in debt to none--yet, more to move you,
 texto.txt:	and, for i know your reverend ages love
-texto.txt:	security, i'll pawn my victories, all
 texto.txt:	it could not else be, i should prove so base,
 texto.txt:alcibiades	now the gods keep you old enough; that you may live
 texto.txt:second lord	all covered dishes!
@@ -6599,7 +6537,6 @@ texto.txt:	each man apart, all single and alone,
 texto.txt:	hence, pack! there's gold; you came for gold, ye slaves:
 texto.txt:	what we are sorry for ourselves in thee.
 texto.txt:	the senators with one consent of love
-texto.txt:	entreat thee back to athens; who have thought
 texto.txt:	ay, even such heaps and sums of love and wealth
 texto.txt:	and write in thee the figures of their love,
 texto.txt:	live with authority: so soon we shall drive back
@@ -6618,7 +6555,6 @@ texto.txt:	some beast rear'd this; there does not live a man.
 texto.txt:	to wipe out our ingratitude with loves
 texto.txt:	above their quantity.
 texto.txt:	transformed timon to our city's love
-texto.txt:	by humble message and by promised means:
 texto.txt:second senator	throw thy glove,
 texto.txt:alcibiades	then there's my glove;
 texto.txt:	whom you yourselves shall set out for reproof
@@ -6900,7 +6836,6 @@ texto.txt:	the one is my sovereign, whom both my oath
 texto.txt:green	besides, our nearness to the king in love
 texto.txt:	is near the hate of those love not the king.
 texto.txt:bagot	and that's the wavering commons: for their love
-texto.txt:	lies in their purses, and whoso empties them
 texto.txt:	he was not so resolved when last we spake together.
 texto.txt:	and sent me over by berkeley, to discover
 texto.txt:	to more approved service and desert.
@@ -6917,7 +6852,6 @@ texto.txt:	therefore we will disperse ourselves: farewell.
 texto.txt:	the one in fear to lose what they enjoy,
 texto.txt:	with too much urging your pernicious lives,
 texto.txt:	near to the king in blood, and near in love
-texto.txt:	till you did make him misinterpret me,
 texto.txt:	condemns you to the death. see them deliver'd over
 texto.txt:	take special care my greetings be deliver'd.
 texto.txt:	with letters of your love to her at large.
@@ -6951,7 +6885,6 @@ texto.txt:	for on my heart they tread now whilst i live;
 texto.txt:	give richard leave to live till richard die?
 texto.txt:	[exeunt from above]
 texto.txt:	me rather had my heart might feel your love
-texto.txt:	than my unpleased eye see your courtesy.
 texto.txt:	as my true service shall deserve your love.
 texto.txt:	tears show their love, but want their remedies.
 texto.txt:	all must be even in our government.
@@ -7103,7 +7036,6 @@ texto.txt:	wife, love lord hastings, let him kiss your hand;
 texto.txt:king edward iv	dorset, embrace him; hastings, love lord marquess.
 texto.txt:dorset	this interchange of love, i here protest,
 texto.txt:	but with all duteous love
-texto.txt:	doth cherish you and yours, god punish me
 texto.txt:	with hate in those where i expect most love!
 texto.txt:gloucester	good morrow to my sovereign king and queen:
 texto.txt:	made peace enmity, fair love of hate,
@@ -7129,7 +7061,6 @@ texto.txt:	that i, being govern'd by the watery moon,
 texto.txt:	let him be crown'd; in him your comfort lives:
 texto.txt:	love, charity, obedience, and true duty!
 texto.txt:	now cheer each other in each other's love
-texto.txt:	though we have spent our harvest of this king,
 texto.txt:	by how much the estate is green and yet ungovern'd:
 texto.txt:	i fear, i fear 'twill prove a troublous world.
 texto.txt:third citizen	woe to the land that's govern'd by a child!
@@ -7262,7 +7193,6 @@ texto.txt:	if this inducement force her not to love,
 texto.txt:king richard iii	say that i did all this for love of her.
 texto.txt:	having bought love with such a bloody spoil.
 texto.txt:	a grandam's name is little less in love
-texto.txt:	than is the doting title of a mother;
 texto.txt:	of golden sovereignty; acquaint the princess
 texto.txt:	that god, the law, my honour and her love,
 texto.txt:king richard iii	say, i will love her everlastingly.
@@ -7295,7 +7225,6 @@ texto.txt:	these letters will resolve him of my mind. farewell.
 texto.txt:richmond	fellows in arms, and my most loving friends,
 texto.txt:	tell me, how fares our loving mother?
 texto.txt:	cuts off the ceremonious vows of love
-texto.txt:	and ample interchange of sweet discourse,
 texto.txt:	god give us leisure for these rites of love!
 texto.txt:	doth comfort thee in thy sleep: live, and flourish!
 texto.txt:	good angels guard thy battle! live, and flourish!
@@ -7444,7 +7373,6 @@ texto.txt:	love, friendship, charity, are subjects all
 texto.txt:	if thou wouldst not entomb thyself alive
 texto.txt:	made emulous missions 'mongst the gods themselves
 texto.txt:	'tis known, achilles, that you are in love
-texto.txt:	with one of priam's daughters.
 texto.txt:	farewell, my lord: i as your lover speak;
 texto.txt:patroclus	to this effect, achilles, have i moved you:
 texto.txt:	and your great love to me restrains you thus:
@@ -7456,12 +7384,10 @@ texto.txt:	no man alive can love in such a sort
 texto.txt:diomedes	we sympathize: jove, let aeneas live,
 texto.txt:	the noblest hateful love, that e'er i heard of.
 texto.txt:	as tediously as hell, but flies the grasps of love
-texto.txt:	with wings more momentary-swift than thought.
 texto.txt:	deliver'd to us; and for him forthwith,
 texto.txt:pandarus	would i were as deep under the earth as i am above!
 texto.txt:	no kin no love, no blood, no soul so near me
 texto.txt:	but the strong base and building of my love
-texto.txt:	is as the very centre of the earth,
 texto.txt:	of her delivery to this valiant greek
 texto.txt:	and to his hand when i deliver her,
 texto.txt:paris	i know what 'tis to love;
@@ -7568,14 +7494,12 @@ texto.txt:	war, no taxation of homage: i hold the olive in my
 texto.txt:olivia	give us the place alone: we will hear this divinity.
 texto.txt:	lady, you are the cruell'st she alive,
 texto.txt:	my lord and master loves you: o, such love
-texto.txt:	could be but recompensed, though you were crown'd
 texto.txt:olivia	how does he love me?
 texto.txt:	with groans that thunder love, with sighs of fire.
 texto.txt:olivia	your lord does know my mind; i cannot love him:
 texto.txt:	a gracious person: but yet i cannot love him;
 texto.txt:viola	if i did love you in my master's flame,
 texto.txt:	write loyal cantons of contemned love
-texto.txt:	and sing them loud even in the dead of night;
 texto.txt:viola	above my fortunes, yet my state is well:
 texto.txt:	i cannot love him: let him send no more;
 texto.txt:	love make his heart of flint that you shall love;
@@ -7602,7 +7526,6 @@ texto.txt:maria	for the love o' god, peace!
 texto.txt:	deliver thy indignation to him by word of mouth.
 texto.txt:	alone with him: if i do not gull him into a
 texto.txt:	his grounds of faith that all that look on him love
-texto.txt:	him; and on that vice in him will my revenge find
 texto.txt:	love; wherein, by the colour of his beard, the shape
 texto.txt:	love with him.
 texto.txt:sir andrew	if i cannot recover your niece, i am a foul way out.
@@ -7757,7 +7680,6 @@ texto.txt:valentine	so, by your circumstance, i fear you'll prove.
 texto.txt:proteus	'tis love you cavil at: i am not love.
 texto.txt:valentine	love is your master, for he masters you:
 texto.txt:	the eating canker dwells, so eating love
-texto.txt:	inhabits in the finest wits of all.
 texto.txt:	even so by love the young and tender wit
 texto.txt:	of thy success in love, and what news else
 texto.txt:proteus	he after honour hunts, i after love:
@@ -7787,7 +7709,6 @@ texto.txt:julia	they do not love that do not show their love.
 texto.txt:lucetta	o, they love least that let men know their love.
 texto.txt:lucetta	to plead for love deserves more fee than hate.
 texto.txt:	fie, fie, how wayward is this foolish love
-texto.txt:	that, like a testy babe, will scratch the nurse
 texto.txt:julia	some love of yours hath writ to you in rhyme.
 texto.txt:	best sing it to the tune of 'light o' love.'
 texto.txt:	o hateful hands, to tear such loving words!
@@ -7842,7 +7763,6 @@ texto.txt:thurio	that hath more mind to feed on your blood than live
 texto.txt:	followers, for it appears by their bare liveries,
 texto.txt:	that they live by your bare words.
 texto.txt:	he is as worthy for an empress' love
-texto.txt:	as meet to be an emperor's counsellor.
 texto.txt:valentine	why, lady, love hath twenty pair of eyes.
 texto.txt:thurio	they say that love hath not an eye at all.
 texto.txt:valentine	to see such lovers, thurio, as yourself:
@@ -7866,7 +7786,6 @@ texto.txt:	because thou see'st me dote upon my love.
 texto.txt:	for love, thou know'st, is full of jealousy.
 texto.txt:proteus	but she loves you?
 texto.txt:	so the remembrance of my former love
-texto.txt:	is by a newer object quite forgotten.
 texto.txt:	she is fair; and so is julia that i love--
 texto.txt:	that i did love, for now my love is thaw'd;
 texto.txt:	and that i love him not as i was wont.
@@ -7905,7 +7824,6 @@ texto.txt:	till the last step have brought me to my love;
 texto.txt:	with twenty odd-conceited true-love knots.
 texto.txt:julia	lucetta, as thou lovest me, let me have
 texto.txt:	and instances of infinite of love
-texto.txt:	warrant me welcome to my proteus.
 texto.txt:	but truer stars did govern proteus' birth
 texto.txt:	his love sincere, his thoughts immaculate,
 texto.txt:lucetta	pray heaven he prove so, when you come to him!
@@ -7930,7 +7848,6 @@ texto.txt:duke	but, hark thee; i will go to her alone:
 texto.txt:	and slaves they are to me that send them flying:
 texto.txt:	go, base intruder! overweening slave!
 texto.txt:	by heaven! my wrath shall far exceed the love
-texto.txt:	i ever bore my daughter or thyself.
 texto.txt:	but, as thou lovest thy life, make speed from hence.
 texto.txt:	foster'd, illumined, cherish'd, kept alive.
 texto.txt:	sad sighs, deep groans, nor silver-shedding tears,
@@ -7982,7 +7899,6 @@ texto.txt:	in breaking faith with julia whom i loved:
 texto.txt:	the least whereof would quell a lover's hope,
 texto.txt:	yet, spaniel-like, the more she spurns my love,
 texto.txt:proteus	ay, gentle thurio: for you know that love
-texto.txt:	will creep in service where it cannot go.
 texto.txt:thurio	ay, but i hope, sir, that you love not here.
 texto.txt:	for beauty lives with kindness.
 texto.txt:	love doth to her eyes repair,
@@ -8032,7 +7948,6 @@ texto.txt:julia	[aside]  but love will not be spurr'd to what
 texto.txt:thurio	but well, when i discourse of love and peace?
 texto.txt:	than for the love of reckless silvia.
 texto.txt:proteus	and i will follow, more for silvia's love
-texto.txt:	than hate of eglamour that goes with her.
 texto.txt:julia	and i will follow, more to cross that love
 texto.txt:	than hate for silvia that is gone for love.
 texto.txt:	here can i sit alone, unseen of any,
@@ -8046,7 +7961,6 @@ texto.txt:silvia	when proteus cannot love where he's beloved.
 texto.txt:	read over julia's heart, thy first best love,
 texto.txt:	descended into perjury, to love me.
 texto.txt:proteus	in love
-texto.txt:	who respects friend?
 texto.txt:	and love you 'gainst the nature of love,--force ye.
 texto.txt:valentine	thou common friend, that's without faith or love,
 texto.txt:	i have one friend alive; thou wouldst disprove me.
@@ -8128,7 +8042,6 @@ texto.txt:loseth his pride and never waxeth strong.
 texto.txt:remove your siege from my unyielding heart;
 texto.txt:to love's alarms it will not ope the gate:
 texto.txt:'had i no eyes but ears, my ears would love
-texto.txt:that inward beauty and invisible;
 texto.txt:or were i deaf, thy outward parts would move
 texto.txt:yet should i be in love by touching thee.
 texto.txt:yet would my love to thee be still as much;
@@ -8373,7 +8286,6 @@ texto.txt:camillo	he's irremoveable,
 texto.txt:	resolved for flight. now were i happy, if
 texto.txt:	save him from danger, do him love and honour,
 texto.txt:	you have heard of my poor services, i' the love
-texto.txt:	that i have borne your father?
 texto.txt:florizel	very nobly
 texto.txt:	if you may please to think i love the king
 texto.txt:	ourselves to be the slaves of chance and flies
@@ -8644,7 +8556,6 @@ texto.txt:                   the obscure bird clamoured the livelong night:
 texto.txt:                   see, and then speak yourselves.--
 texto.txt:                   i had lived a blessed time; for, from this instant,
 texto.txt:                   the expedition of my violent love
-texto.txt:                   outran the pauser reason.--here lay duncan,
 texto.txt:                   his silver skin laced with his golden blood;
 texto.txt:                   that had a heart to love, and in that heart
 texto.txt:                   courage, to make 's love known?

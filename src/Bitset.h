@@ -16,8 +16,6 @@ class Bitset
 		
 	public:
 		
-		
-		
 		unsigned long long *bits;
 		int size;
 		int n_bits;

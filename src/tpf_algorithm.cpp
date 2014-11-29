@@ -32,8 +32,8 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)		
 		
 		for (string &pat : patterns){
-			//tpf_wu_manber(pat, textfile, error, count);
-			tpf_sellers(pat, textfile, error, count);			
+			tpf_wu_manber(pat, textfile, error, count);
+			//tpf_sellers(pat, textfile, error, count);			
 		}
 
 	} else {
@@ -135,27 +135,9 @@ int char_mask(string &pat, Bitset *C)
 
 int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 {
-	int m = pat.length();
-	Bitset *C = new Bitset[ALPHABET_SIZE];
-	char_mask(pat, C);
+	
 
 	int occ = 0;
-
-	// msb = 2 ** (m-1)
-	Bitset msb(m);
-	msb.set(m-1);
-
-	Bitset *S = new Bitset[error+1];
-	S[0] = Bitset(m);
-	S[0].set();
-
-	for (int q = 1; q <= error; q++){
-		S[q] = S[q-1] << 1;
-	}
-
-	Bitset S1(m);
-	Bitset S2(m);
-
 	ifstream istream(textfile);
 
 	if (! istream.good()){
@@ -165,7 +147,32 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 
 	cout << "pattern:" << pat << endl;
 
+	
+	//inicializar bitset 
+	
+	int m = pat.length();
+	Bitset *C = new Bitset[ALPHABET_SIZE];
+	char_mask(pat, C);
+	
+	Bitset *S = new Bitset[error+1];
+	
+	// msb = 2 ** (m-1)
+	Bitset msb(m);
+	msb.set(m-1);
+	
+	Bitset S1(m);
+	Bitset S2(m);
+	
+	
 	while ( getline(istream, line) ){
+		
+		S[0] = Bitset(m);
+		S[0].set();
+
+		for (int q = 1; q <= error; q++){
+			S[q] = S[q-1] << 1;
+		}
+
 		int n = line.length();
 		bool printed = false;
 
@@ -200,6 +207,11 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 
 // ---- Fim WU-MANBER ---- //
 
+// ---- Inicio UKKONEN ---- //
+
+
+// ---- Fim UKKONEN ---- //
+
 // ---- Inicio SELLERS ---- //
 
 
@@ -214,37 +226,35 @@ int tpf_sellers(string &pat, string &textfile, int error, bool count)
 	}
 	string line;
 
-	cout << "pattern:" << pat << endl;
+	cout << "pattern - sellers:" << pat << endl;
 	
 	while ( getline(istream, line) ){
-		vector< vector<int> > D;
-		// x = pat size m
-		// y = line size n
+		vector< vector<int> > D;		
 		
 		bool printed = false;
 	
 		int n = line.length();
-		// cout << n << " " << line <<endl;
-		// cout << m << " " << pat <<endl;
 		
 		for( int i = 0; i <= m+1; i++){
-			D.push_back( vector<int>( n+1 ));
+			D.push_back( vector<int>( 2 ));
 		}
 		
 		for( int i =0; i <=m; i++) 
 			D[i][0] = i;
-		for( int j =0; j <=n; j++) 
+		for( int j =0; j < 2; j++)
 			D[0][j] = 0;
 
-		for( int j =1; j <=n; j++){			
+		for( int j =1; j <=n; j++){
+		
+			int cur_j = j % 2; // posicao atual da matriz
+			int ant_j = cur_j ^ 1; // posicao anterior da matriz
+			
 			for( int i = 1; i<=m; i++){
 				
-				D[i][j] = min( D[i-1][j-1] + ((pat[i-1] == line[j-1])? 0 : 1), 
-					min( D[i][j-1] + 1, D[i][j-1] + 1 ));
-					
-				// cerr << "lol = " << j << " " << i << " " << D[i][j] << endl;					
+				D[i][cur_j] = min( D[i-1][ant_j] + ((pat[i-1] == line[j-1])? 0 : 1), 
+					min( D[i][ant_j] + 1, D[i-1][cur_j] + 1 ));
 			}
-			if( D[m][j] <= error ){
+			if( D[m][cur_j] <= error ){
 				occ++;
 				if( !count && !printed ){
 					cout << textfile << ":" << line << endl;
