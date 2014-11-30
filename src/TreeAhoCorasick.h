@@ -17,16 +17,16 @@ class TreeAhoCorasick
 	public:
 		
 		int P; // Numero de nos na arvore de prefixo 
-		char ltt[MAXNODES]; // caractere para este no
+		char chartonode[MAXNODES]; // caractere para este no
 		vector<int> word_end[MAXNODES]; // Numero das palavras terminando aqui
 		int adj[MAXNODES][ALPHABET_SIZE]; // lista de adjacencia: [no][charactere] = no filho (-1 se nao-existente)
 		vector<int> vadj[MAXNODES]; // Numero dos nos filhos	
 		
 		///aho-corasick
 		int suf[MAXNODES];
-		int preend[MAXNODES];
-		int dep[MAXNODES];
-		int par[MAXNODES];
+		int preend[MAXNODES]; // back link 
+		int dep[MAXNODES]; // depth do no
+		int par[MAXNODES]; // pai do no
 		
 		// inicializar variaveis e alocar espaco
 		void init() {
@@ -44,7 +44,7 @@ class TreeAhoCorasick
 				if (cs == -1){
 					cs = P;
 					vadj[c].push_back(P);
-					ltt[P] = pat[i];
+					chartonode[P] = pat[i];
 					word_end[P].clear();
 					fill_n(adj[P], ALPHABET_SIZE, -1);		
 					vadj[P].clear();
@@ -68,9 +68,9 @@ class TreeAhoCorasick
 					suf[i] = preend[i] = -1;
 				else {
 					int s = suf[par[i]];
-					while(s != -1 && adj[s][(int)ltt[i]] == -1)
+					while(s != -1 && adj[s][(int)chartonode[i]] == -1)
 						s = suf[s];
-					suf[i] = s == -1 ? 0 : adj[s][(int)ltt[i]];
+					suf[i] = s == -1 ? 0 : adj[s][(int)chartonode[i]];
 					preend[i] = word_end[suf[i]].size() ? suf[i] : preend[suf[i]];
 				}
 				for (int k : vadj[i]) {
