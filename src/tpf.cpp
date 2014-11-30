@@ -16,7 +16,7 @@ vector<string> handle_wildcard(string &str)
 	vector<string> files;
 	files.reserve(5);
 
-	unsigned found = str.find_last_of("/\\");
+	size_t found = str.find_last_of("/\\");
 	bool no_path = found==string::npos;
 	string path = no_path ? "./" : str.substr(0,found+1);
 	string file = no_path ? str : str.substr(found+1);
