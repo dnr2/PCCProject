@@ -1,2 +1,0 @@
-pattern - sellers:love
-texto.txt:173816
