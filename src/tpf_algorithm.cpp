@@ -101,7 +101,7 @@ int tpf_aho_corasick(vector<string> & pats, string &textfile, bool count)
 	}
 	if (count){
 		for( int i =0; i < (int)pats.size();i++){
-			cout << "pattern:" << pats[i] << endl;
+			cout << "padrao:" << pats[i] << endl;
 			cout << textfile << ":" << occ[i] << endl;
 		}
 	}
@@ -145,7 +145,7 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 	}
 	string line;
 
-	cout << "pattern:" << pat << endl;
+	cout << "padrao:" << pat << endl;
 
 	
 	//inicializar bitset 
@@ -226,7 +226,7 @@ int tpf_sellers(string &pat, string &textfile, int error, bool count)
 	}
 	string line;
 
-	cout << "pattern - sellers:" << pat << endl;
+	cout << "padrao - sellers:" << pat << endl;
 	
 	while ( getline(istream, line) ){
 		vector< vector<int> > D;		
