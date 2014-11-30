@@ -21,6 +21,8 @@ vector<string> handle_wildcard(string &str)
 	string path = no_path ? "./" : str.substr(0,found+1);
 	string file = no_path ? str : str.substr(found+1);
 
+	if (path == "")	path = "./";
+
 	// verifica se tem wildcard
 	found = file.find_last_of('*');
 	// sem wildcard
@@ -50,6 +52,8 @@ vector<string> handle_wildcard(string &str)
 		}
 		(void) closedir (dp);
 	} else {
+		cout << "path: " << path << endl;
+		cout << "file: " << file << endl;
 		cout << "Diretório << " << path << " >> inválido" << endl;
 	}
 
