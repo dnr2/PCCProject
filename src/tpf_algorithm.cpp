@@ -10,12 +10,6 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 {
 	int ret = TPF_OK;
 
-	for (string &pat : patterns){
-		if ( (int) pat.length() < error){			
-			error = (int) pat.length();
-		}
-	}
-
 	if (tpf_type == TPF_EXACT){ // Boyer Moore
 	// int tpf_boyer_moore(string &pat, string &textfile, bool count)
 		string pat = patterns[0];
@@ -29,7 +23,8 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	} else if (tpf_type == TPF_APPROXIMATE){ // Wu-Manber
 	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)		
 		
-		for (string &pat : patterns){
+		for (string &pat : patterns){		
+			error = min( error, (int) pat.length());
 			if( error < 3 && pat.length() > 100 ) 
 				tpf_wu_manber(pat, textfile, error, count);
 			else 
