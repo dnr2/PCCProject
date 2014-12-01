@@ -1,19 +1,19 @@
-The Pattern Finder (TPF) √© uma ferramenta de busca de padr√µes que implementa conhecidos algoritmos da √°rea. O TPF foi constru√≠do para a disciplina de Processamento de Cadeias de Caracteres, ministrada no Centro de Inform√°tica da UFPE no semestre 2014.2.
+The Pattern Finder (TPF) È uma ferramenta de busca de padrıes que implementa conhecidos algoritmos da ·rea. O TPF foi construÌdo para a disciplina de Processamento de Cadeias de Caracteres, ministrada no Centro de Inform·tica da UFPE no semestre 2014.2.
 
-O TPF foi constru√≠do por Danilo Neves e V√≠tor Antero.
+O TPF foi construÌdo por Danilo Neves (dnr2) e VÌtor Antero (vham).
 
-##Compila√ß√£o
+##CompilaÁ„o
 
-Para facilitar o processo de compila√ß√£o, foram criados scripts para Windows e sistemas Unix.
+Para facilitar o processo de compilaÁ„o, foram criados scripts para Windows e sistemas Unix.
 
 ###Windows
 
-O script de compila√ß√£o para Windows foi criado e testado no Windows 8.1.
+O script de compilaÁ„o para Windows foi criado e testado no Windows 8.1.
 Para compilar o programa, basta rodar o arquivo compile.bat a partir da pasta src/.
-O execut√°vel tpf.exe estar√° na pasta bin/.
+O execut·vel tpf.exe estar· na pasta bin/.
 
 ###Sistemas Unix
 
-O script de compila√ß√£o para sistemas Unix foi criado e testado no Linux Mint 17.
-A pasta src/ cont√©m um arquivo Makefile, bastando executar o comando make a partir dela para compilar o programa.
-O execut√°vel tpf estar√° na pasta bin/.
+O script de compilaÁ„o para sistemas Unix foi criado e testado no Linux Mint 17.
+A pasta src/ contÈm um arquivo Makefile, bastando executar o comando make a partir dela para compilar o programa.
+O execut·vel tpf estar· na pasta bin/.
