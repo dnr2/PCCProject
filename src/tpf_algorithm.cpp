@@ -8,13 +8,11 @@ using namespace std;
 
 int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
 {
-	// TODO: adicionar distancia de edição como parametro e checar se é maior que o padrão
 	int ret = TPF_OK;
 
 	for (string &pat : patterns){
 		if ( (int) pat.length() < error){
-			ret = TPF_ERROR_TOO_LONG;
-			return ret;
+			error = pat.length();
 		}
 	}
 
