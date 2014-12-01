@@ -228,7 +228,7 @@ int tpf_sellers(string &pat, string &textfile, int error, bool count)
 	}
 	string line;
 
-	cout << "padrao - sellers:" << pat << endl;
+	cout << "padrao:" << pat << endl;
 	
 	while ( getline(istream, line) ){
 		vector< vector<int> > D;		
