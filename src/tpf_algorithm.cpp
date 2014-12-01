@@ -24,11 +24,11 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	// int tpf_wu_manber(string &pat, string &textfile, int error, bool count)		
 		
 		for (string &pat : patterns){		
-			error = min( error, (int) pat.length());
+			int cur_error = min( error, (int) pat.length());
 			if( error < 3 && pat.length() > 100 ) 
-				tpf_wu_manber(pat, textfile, error, count);
+				tpf_wu_manber(pat, textfile, cur_error, count);
 			else 
-				tpf_sellers(pat, textfile, error, count);			
+				tpf_sellers(pat, textfile, cur_error, count);			
 		}
 
 	} else {
