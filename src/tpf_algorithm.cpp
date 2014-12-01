@@ -25,7 +25,8 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 		
 		for (string &pat : patterns){		
 			int cur_error = min( error, (int) pat.length());
-			if( error < 3 && pat.length() > 100 ) 
+			if( (error < 10 && pat.length() < 63 ) || (error < 2 && pat.length() > 100) ) 
+			// if( (error < 2 && pat.length() > 100) ) 
 				tpf_wu_manber(pat, textfile, cur_error, count);
 			else 
 				tpf_sellers(pat, textfile, cur_error, count);			
@@ -128,10 +129,14 @@ int char_mask(string &pat, Bitset *C)
 	return TPF_OK;
 }
 
+int optimized_wu_manber(string &pat, string &textfile, int error, bool count);
+
 int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 {
 	
-
+	if( pat.length() < 63 ){
+		return optimized_wu_manber(pat, textfile, error, count);
+	}
 	int occ = 0;
 	ifstream istream(textfile);
 
@@ -182,6 +187,101 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 						&	S1;
 				S1 = S2;
 			}
+			//cerr  << S[error].bits[0] << " " << msb.bits[0] << endl;
+			if (S[error] < msb){
+				occ += 1;
+				
+				if (!printed && !count){
+					cout << textfile << ":" << line << endl;
+					printed = true;
+				}
+			}
+		}
+	}
+
+	if (count){
+		cout << textfile << ":" << occ << endl;
+	}
+
+	return TPF_OK;
+}
+
+
+
+// optimized wu mamber using long long instead of bitset
+
+typedef unsigned long long ulong;
+
+int optimized_char_mask(string &pat, ulong *C)
+{
+	int m = pat.length();
+
+	for (int i = 0; i < ALPHABET_SIZE; i++){
+		C[i] = ~0ULL;
+	}
+
+	ulong Mk = 1ULL;
+
+	for (int k = 0; k < m; k++){
+		C[(int) pat[k]] = C[(int) pat[k]] & ~Mk;
+		Mk = Mk << 1;
+	}
+
+	return TPF_OK;
+}
+
+int optimized_wu_manber(string &pat, string &textfile, int error, bool count)
+{
+	
+	int occ = 0;
+	ifstream istream(textfile);
+
+	if (! istream.good()){
+		return TPF_ERROR_READING_FILE;
+	}
+	string line;
+
+	cout << "padrao:" << pat << endl;
+
+	
+	//inicializar bitset 
+	
+	int m = pat.length();
+	ulong *C = new ulong[ALPHABET_SIZE];
+	optimized_char_mask(pat, C);
+	
+	ulong *S = new ulong[error+1];
+	
+	// msb = 2 ** (m-1)
+	ulong msb = (~0ULL) << (m-1);	
+	
+	ulong S1 = 0ULL;
+	ulong S2 = 0ULL;
+	
+	
+	while ( getline(istream, line) ){
+		
+		S[0] = ~0ULL;		
+
+		for (int q = 1; q <= error; q++){
+			S[q] = S[q-1] << 1;
+		}
+
+		int n = line.length();
+		bool printed = false;
+
+		for (int j = 0; j < n; j++){
+			S1 = S[0];
+			S[0] = (S[0] << 1) | C[(int) line[j]];
+			for (int q = 1; q <= error; q++){
+				S2 = S[q];
+				S[q] = 		((S[q] << 1) | C[(int) line[j]])
+						&	(S1 << 1)
+						&	(S[q-1] << 1)
+						&	S1;
+				S1 = S2;
+			}
+			//cerr << S[error] << " " << msb << endl;
 			if (S[error] < msb){
 				occ += 1;
 				
@@ -201,11 +301,6 @@ int tpf_wu_manber(string &pat, string &textfile, int error, bool count)
 }
 
 // ---- Fim WU-MANBER ---- //
-
-// ---- Inicio UKKONEN ---- //
-
-
-// ---- Fim UKKONEN ---- //
 
 // ---- Inicio SELLERS ---- //
 

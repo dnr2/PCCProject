@@ -5,7 +5,7 @@ O TPF foi construído por Danilo Neves (dnr2) e Vítor Antero (vham).
 ##Compilação
 
 Para facilitar o processo de compilação, foram criados scripts para Windows e sistemas Unix.
-Para executá-los, o usuário precisa ter instalado o compilador `g++`.
+Para executá-los, o usuário precisa ter instalado o compilador `g++` com a versão que suporte c++ 11.
 
 ###Windows
 
