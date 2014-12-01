@@ -24,7 +24,7 @@ class TreeAhoCorasick
 		
 		///aho-corasick
 		int suf[MAXNODES];
-		int preend[MAXNODES]; // back link 
+		int preend[MAXNODES];
 		int dep[MAXNODES]; // depth do no
 		int par[MAXNODES]; // pai do no
 		
