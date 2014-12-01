@@ -11,8 +11,8 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	int ret = TPF_OK;
 
 	for (string &pat : patterns){
-		if ( (int) pat.length() < error){
-			error = pat.length();
+		if ( (int) pat.length() < error){			
+			error = (int) pat.length();
 		}
 	}
 
