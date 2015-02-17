@@ -1,6 +1,6 @@
-The Pattern Finder (TPF) é uma ferramenta de busca de padrões que implementa conhecidos algoritmos da área. O TPF foi construído para a disciplina de Processamento de Cadeias de Caracteres, ministrada no Centro de Informática da UFPE no semestre 2014.2.
+Indexed Pattern Matching Tool (IPMT) é uma ferramenta de busca de padrões que....
 
-O TPF foi construído por Danilo Neves (dnr2) e Vítor Antero (vham).
+O IPMT foi construído por Danilo Neves (dnr2) e Vítor Antero (vham).
 
 ##Compilação
 
