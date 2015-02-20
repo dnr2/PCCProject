@@ -1,13 +1,11 @@
-#include "tpf_algorithm.h"
+#include "ipmt_algorithm.h"
 
 void help()
 {
-	cout << "Uso: tpf [options] [pattern] textfile [textfile...]" << endl << endl;
-	cout << "-h, --help\t\tEste guia de ajuda" << endl;
-	cout << "-e, --edit d\t\tFaz uma busca aproximada em uma distancia maxima 'd'" << endl;
-	cout << "-p, --pattern file\tUtiliza todos os padroes em 'file' como entrada" << endl;
-	cout << "-c, --count\t\tImprime apenas a quantidade de ocorrências encontradas por arquivo" << endl;
-
+	cout << "Uso: ipmt index [opcoes] textfile" << endl << endl;
+	cout << "-h, --help\tEste guia de ajuda" << endl;
+	cout << "-t, --tree \tIndexa o arquivo textfile utilizando estrutura de arvore de sufixos" << endl;
+	cout << "-a, --array \tIndexa o arquivo textfile utilizando estrutura de array de sufixos" << endl;	
 	exit(0);
 }
 

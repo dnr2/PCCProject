@@ -1,7 +1,7 @@
-#include "tpf_algorithm.h"
-#include "Bitset.h"
+#include "ipmt_algorithm.h"
+#include "SuffixTree.h"
+#include "SuffixArray.h"
 
-#include "TreeAhoCorasick.h"
 #include <assert.h>
 
 using namespace std;
