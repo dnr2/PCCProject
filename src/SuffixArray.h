@@ -95,8 +95,7 @@ class SuffixArray
 		}
 		
 		
-		
-		
+
 };
 
 #endif
