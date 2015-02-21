@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string>
+#include <cstring>
 #include <tuple>
 #include <sstream>
 
@@ -57,11 +58,11 @@ string tuple_encode(int pos, int size, char lit)
 	return oss.str();
 }
 
-int lz77_encode(string &text, string &ret)
+int lz77_encode(string text, string &ret)
 {
 	ret = "";
 
-	int i = 0;
+	uint i = 0;
 
 	string window, buffer;
 	int f_pos, f_size;
@@ -82,11 +83,8 @@ int lz77_encode(string &text, string &ret)
 				if (i + size < text.length()){
 					lit = text[i+size];
 				}
-				//tup.pos = window.length()-index-1;
 				get<0>(tup) = window.length()-index-1;
-				//tup.size = size;
 				get<1>(tup) = size;
-				//tup.literal = lit;
 				get<2>(tup) = lit;
 				break;
 			}
@@ -99,47 +97,48 @@ int lz77_encode(string &text, string &ret)
 	return 0;
 }
 
-int lz77_decode(string &encoded, string &text)
+int lz77_decode(string encoded, string &text)
 {
 	text = "";
 	int pos = 0;
 	int size = 0;
-	char literal;
-	while (true){
-		int idx = encoded.find('|');
+	char lit;
 
-		if (idx < 0)
-			break;
 
-		string aux = encoded.substr(0,idx);
-		pos = text.length() - atoi(aux.c_str()) - 1;
-		encoded.erase(0,idx+1);
+	char *pch = strtok(const_cast<char*>(encoded.c_str()), "$");
+
+	while (pch != NULL){
+		cout << pch <<endl;
 		
-		idx = encoded.find('|');
-		aux = encoded.substr(0,idx);
-		size = atoi(aux.c_str());
-		encoded.erase(0,idx+1);
+		char *pch2 = strchr(pch, '|');
+		pch2[0] = '\0';
+		pch2 = pch2+1;
+		pos = atoi(pch);
 
-		literal = encoded[0];
-		encoded.erase(0, 2);
+		pch = strchr(pch2, '|');
+		pch[0] = '\0';
+		size = atoi(pch2);
+		lit = pch[1];
 
 		text += text.substr(pos, size);
-		text += literal;
+		text += lit;
 
+		pch = strtok(NULL, "$");
 	}
 
+	return 0;
 }
 
 int main() {
-	string str = "abracadabra";
+	string str = "ababa";
 	string encoded, decoded;
 	lz77_encode(str, encoded);
-	//lz77_decode(encoded, decoded);
-	
 	
 	cout << "Original\t" << str << endl; 
 	cout << "Encoded\t" << encoded << endl;
-	//cout << "Decoded\t" << decoded << endl;
+	lz77_decode(encoded, decoded);
+	
+	cout << "Decoded\t" << decoded << endl;
 	
 	return 0;
 }
