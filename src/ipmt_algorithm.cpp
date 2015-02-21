@@ -1,16 +1,20 @@
-#include "ipmt_algorithm.h"
+/*#include "ipmt_algorithm.h"
 #include "SuffixTree.h"
-#include "SuffixArray.h"
+#include "SuffixArray.h"*/
 
+#include <iostream>
 #include <assert.h>
 #include <stdlib.h>
+#include <string>
+#include <tuple>
+#include <sstream>
 
 #define WINDOW_SIZE		65535
 #define BUFFER_SIZE		255
 
 using namespace std;
 
-int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
+/*int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count)
 {
 	int ret = TPF_OK;
 
@@ -41,24 +45,16 @@ int tpf_find(vector<string> &patterns, string &textfile, int error, int tpf_type
 	}
 
 	return ret;
-}
+}*/
 
-struct tuple{
-	int pos, size;
-	char literal;
-	tuple(int poS, int sizE, char literaL) : pos(poS), size(sizE), literal(literaL)
-	{}
-};
-
-string tuple_encode(tuple tup)
+string tuple_encode(int pos, int size, char lit)
 {
-	string ret = "";
-	ret += tup.pos;
-	ret += '|';
-	ret += tup.size;
-	ret += '|';
-	ret += tup.literal;
-	ret += '$';
+    ostringstream oss;
+    oss << pos << '|';
+    oss << size << '|';
+    oss << lit << '$';
+
+	return oss.str();
 }
 
 int lz77_encode(string &text, string &ret)
@@ -68,6 +64,8 @@ int lz77_encode(string &text, string &ret)
 	int i = 0;
 
 	string window, buffer;
+	int f_pos, f_size;
+	char f_lit;
 
 	while (i < text.length()){
 		int begin = (i > WINDOW_SIZE)? i-WINDOW_SIZE : 0;
@@ -75,23 +73,27 @@ int lz77_encode(string &text, string &ret)
 		window = text.substr(begin, i-begin);
 		buffer = text.substr(i, BUFFER_SIZE);
 
-		tuple tup = tuple(0, 0, text[i]);
+		auto tup = make_tuple(0, 0, text[i]);
 
 		for (int size = buffer.length(); size>0; size--){
 			int index = window.rfind(buffer.substr(0, size));
 			if (index >= 0){
-				char lit = '';
+				char lit = '\0';
 				if (i + size < text.length()){
 					lit = text[i+size];
 				}
-				tup.pos = window.length()-index-1;
-				tup.size = size;
-				tup.literal = lit;
+				//tup.pos = window.length()-index-1;
+				get<0>(tup) = window.length()-index-1;
+				//tup.size = size;
+				get<1>(tup) = size;
+				//tup.literal = lit;
+				get<2>(tup) = lit;
 				break;
 			}
 		}
-		i = i + tup.size + 1;
-		ret += tuple_encode(tup);
+		i = i + get<1>(tup) + 1;
+		tie (f_pos, f_size, f_lit) = tup;
+		ret += tuple_encode(f_pos, f_size, f_lit);
 	}
 
 	return 0;
@@ -109,11 +111,13 @@ int lz77_decode(string &encoded, string &text)
 		if (idx < 0)
 			break;
 
-		pos = text.length() - atoi(encoded.substr(0,idx)) - 1;
+		string aux = encoded.substr(0,idx);
+		pos = text.length() - atoi(aux.c_str()) - 1;
 		encoded.erase(0,idx+1);
 		
 		idx = encoded.find('|');
-		size = atoi(encoded.substr(0,idx));
+		aux = encoded.substr(0,idx);
+		size = atoi(aux.c_str());
 		encoded.erase(0,idx+1);
 
 		literal = encoded[0];
@@ -124,4 +128,18 @@ int lz77_decode(string &encoded, string &text)
 
 	}
 
+}
+
+int main() {
+	string str = "abracadabra";
+	string encoded, decoded;
+	lz77_encode(str, encoded);
+	//lz77_decode(encoded, decoded);
+	
+	
+	cout << "Original\t" << str << endl; 
+	cout << "Encoded\t" << encoded << endl;
+	//cout << "Decoded\t" << decoded << endl;
+	
+	return 0;
 }
