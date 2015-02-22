@@ -12,15 +12,12 @@ using namespace std;
 
 class SuffixArray
 {
-	//TODO considera apenas caractereas alpha numericos!!!
-	
-	static const int MAXSIZE = 100005;
+	//TODO considera apenas caractereas alpha numericos!!!	
 	
 	public:
 		
-		int RA[MAXSIZE], SA[MAXSIZE], tmpRA[MAXSIZE], tmpSA[MAXSIZE], cnt[MAXSIZE];
-		int lcp[DOTS], phi[DOTS];
-		char str[DOTS]; // A string de entrada
+		int *RA, *SA, * tmpRA, *tmpSA, *cnt;		
+		char *str; // A string de entrada
 		int stringSize;
 				
 		
@@ -84,10 +81,22 @@ class SuffixArray
 			}
 		}
 		
+		void initialize()
+		{
+			RA = new int[stringSize + 1]; 
+			SA = new int[stringSize + 1];
+			tmpRA = new int[stringSize + 1];
+			tmpSA = new int[stringSize + 1];
+			cnt = new int[stringSize + 1];		
+			str = new char[stringSize + 1];
+		}
+		
 		SuffixArray(const string & _str)
 		{
-			strncpy( str, _str, _str.size()	);
+			
 			stringSize = _str.size();
+			initialize();
+			strncpy( str, _str, _str.size()	);
 		}
 		
 		bool comparator( int suffix, string & patt ){
