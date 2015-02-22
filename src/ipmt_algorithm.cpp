@@ -78,7 +78,7 @@ int lz77_encode(string text, string &ret)
 
 		for (int size = buffer.length(); size>0; size--){
 			int index = window.rfind(buffer.substr(0, size));
-			cout << window << '\t' << buffer << '\t' << index<<endl;
+			//cout << window << '\t' << buffer << '\t' << index<<endl;
 			if (index >= 0){
 				char lit = '\0';
 				if (i + size < text.length()){
@@ -109,7 +109,7 @@ int lz77_decode(string encoded, string &text)
 	char *pch = strtok(const_cast<char*>(encoded.c_str()), "$");
 
 	while (pch != NULL){
-		cout << pch <<endl;
+		//cout << pch <<endl;
 		
 		char *pch2 = strchr(pch, '|');
 		pch2[0] = '\0';
@@ -134,7 +134,8 @@ int lz77_decode(string encoded, string &text)
 }
 
 int main() {
-	string str = "abracadabra";
+	string str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
 	string encoded, decoded;
 	lz77_encode(str, encoded);
 	
@@ -143,6 +144,9 @@ int main() {
 	lz77_decode(encoded, decoded);
 	
 	cout << "Decoded\t" << decoded << endl;
+
+	cout << str.length() << endl;
+	cout << encoded.length() << endl;
 	
 	return 0;
 }
