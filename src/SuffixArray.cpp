@@ -1,23 +1,16 @@
-#include <cmath>
-#include <string>
-#include <cstring>
-#include <algorithm>
-#include <vector>
-#include <queue>
+
+#include<bits/stdc++.h>
 
 using namespace std;
 
 class SuffixArray
 {
-	//TODO considera apenas caractereas alpha numericos!!!
-	
-	static const int MAXSIZE = 100005;
+	//TODO considera apenas caractereas alpha numericos!!!	
 	
 	public:
 		
-		int RA[MAXSIZE], SA[MAXSIZE], tmpRA[MAXSIZE], tmpSA[MAXSIZE], cnt[MAXSIZE];
-		int lcp[DOTS], phi[DOTS];
-		char str[DOTS]; // A string de entrada
+		int *RA, *SA, * tmpRA, *tmpSA, *cnt;		
+		char *str; // A string de entrada
 		int stringSize;
 				
 		
@@ -25,9 +18,7 @@ class SuffixArray
 		void csort(int k)
 		{
 			int ind, cub = max(stringSize, 300);
-			FILL(cnt, 0);			
-			if( SA[i]+k < stringSize) 
-				ind = RA[SA[i]+k];	
+			memset( cnt, 0, sizeof( cnt ) );			
 			
 			for(int i = 0; i < stringSize; i++){
 				ind = 0;
@@ -81,10 +72,23 @@ class SuffixArray
 			}
 		}
 		
+		void initialize()
+		{
+			RA = new int[stringSize + 1]; 
+			SA = new int[stringSize + 1];
+			tmpRA = new int[stringSize + 1];
+			tmpSA = new int[stringSize + 1];
+			cnt = new int[stringSize + 1];		
+			str = new char[stringSize + 1];
+		}
+		
 		SuffixArray(const string & _str)
 		{
-			strncpy( str, _str, _str.size()	);
+			
 			stringSize = _str.size();
+			initialize();
+			strncpy( str, _str.c_str(), _str.size()	);
+			buildSA();
 		}
 		
 		bool comparator( int suffix, string & patt ){
@@ -95,24 +99,24 @@ class SuffixArray
 		//string matching usando lower_bound e upper_bound em tempo O( m * log(n) )
 		pair<int,int> findOccurrences( const string & patt)
 		{			
-			int lower = lower_bound( SA, SA + stringSize, patt, compatator);
+			int lower = lower_bound( SA, SA + stringSize, patt, comparator);
 			if( strncmp( str + SA[lower], patt.c_str(), patt.size()) != 0){				
 				return make_pair(-1,-1); //nao encontrado
 			}
-			int upper = upper_bound( SA, SA + stringSize, patt, compataror);
+			int upper = upper_bound( SA, SA + stringSize, patt, comparator);
 			if( strncmp( str + SA[upper], patt.c_str(), patt.size()) != 0){
-`				return upper--;	//caso especial
+				upper--;	//caso especial
 			}
 			return make_pair( lower, upper );
-		}		
-		
-
+		}
 };
+
 
 int main(){
 		
-	string = "AGATAGACA$";
-	SuffixArray(  );
+	string str = "AGATAGACA$";
+	SuffixArray sArray( str );
+	sArray.findOccurrences("GA");
 	
 	return 0;
 }

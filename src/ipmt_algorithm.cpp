@@ -41,8 +41,7 @@ void ipmt_index_tree(string &textfile)
 	string encoded;
 
 	lzw_encode( textPlusTree, encoded);
-
-	writeToFile("danilo.txt", encoded);
+	
 
 	string outputFileName;
 	int index = textfile.rfind(".");
@@ -73,7 +72,7 @@ void lzw_encode(const string & text, string & ret)
 	string s = "";
 	char ch;
 
-	for (uint i = 0; i < text.length(); i++){
+	for ( int i = 0; i < (int) text.length(); i++){
 		ch = text[i];
 
 		string sch = s + ch;
@@ -111,7 +110,7 @@ string lzw_decode(const vector<int> encoded)
 	prevcode = encoded[0];
 	ret = dictionary[prevcode];
 	aux = ret;
-	for (uint i = 1; i < encoded.size(); i++){
+	for (int i = 1; i < (int) encoded.size(); i++){
 		currcode = encoded[i];
 
 		if (dictionary.count(currcode)){
@@ -134,11 +133,12 @@ string lzw_decode(const vector<int> encoded)
 }
 
 void vectorToString(vector<int> v, string & ret){
+	ostringstream os;
 	
 	for (vector<int>::iterator it = v.begin() ; it != v.end(); ++it){
-		ret += *it;
-		ret += '\n';
+		os << *it << '\n';
 	}
+	ret = os.str();
 }
 
 
