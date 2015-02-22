@@ -2,10 +2,70 @@
 
 void lzw_encode(const string &text, vector<int> &ret)
 {
+	map<string,int> dictionary;
+	for (int i = 0; i < 256; i++){
+		dictionary[string(1, i)] = i;
+	}
+
 	string s = "";
-	char lit = '\0';
+	char ch;
+
+	for (uint i = 0; i < text.length(); i++){
+		ch = text[i];
+
+		string sch = s + ch;
+
+		if (dictionary.count(sch)){
+			s = sch;
+		}else{
+			ret.push_back(dictionary[s]);
+			int size = dictionary.size() + 1;
+			dictionary[sch] = size;
+
+			s = ch;
+		}
+	}
+	if (! s.empty()){
+		ret.push_back(dictionary[s]);
+	}
 
 
+}
+
+string lzw_decode(const vector<int> encoded)
+{
+	std::map<int,std::string> dictionary;
+	for (int i = 0; i < 256; i++){
+		dictionary[i] = std::string(1, i);
+	}
+
+	int prevcode, currcode;
+	string ret;
+	string entry;
+	string aux;
+
+	prevcode = encoded[0];
+	ret = dictionary[prevcode];
+	aux = ret;
+	for (uint i = 1; i < encoded.size(); i++){
+		currcode = encoded[i];
+
+		if (dictionary.count(currcode)){
+			entry = dictionary[currcode];
+		} else{
+			entry = aux + aux[0];
+		}
+		ret += entry;
+
+		int size = dictionary.size() + 1;
+		dictionary[size] = aux + entry[0];
+
+		prevcode = currcode;
+		aux = entry;
+
+	}
+
+	return ret;
 
 }
 
@@ -16,17 +76,24 @@ int main(int argc, char** argv) {
 		str += "\n";
 	}
 
-	string encoded, decoded;
-	lz77_encode(str, encoded);
+	
+	vector<int> encoded;
+	lzw_encode(str, encoded);
 	
 	//cout << "Encoded\t" << encoded << endl;
-	lz77_decode(encoded, decoded);
+	string decoded = lzw_decode(encoded);
 	
 	//cout << "Decoded\t" << decoded << endl;
-
+	cout << decoded << endl;
 	cout << str.length() << endl;
 	cout << decoded.length() << endl;
-	cout << encoded.length() << endl;
+	string enc;
+	for (uint i = 0; i < encoded.size(); i++){
+		enc += encoded[i];
+		enc += '\n';
+	}
+	cout << enc.length() << endl;
+
 	
 	return 0;
 }

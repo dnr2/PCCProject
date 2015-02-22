@@ -28,8 +28,8 @@ int ipmt_index_tree(string &textfile, int error, int tpf_type, bool count);
 int ipmt_index_array(string &textfile, int error, int tpf_type, bool count);
 int ipmt_search(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count);
 
-int lz77_encode(string &text, string &ret);
-int lz77_decode(string &encoded, string &ret);
+void lzw_encode(const string &text, vector<int> &ret);
+string lzw_decode(const vector<int> encoded);
 
 
 #endif
