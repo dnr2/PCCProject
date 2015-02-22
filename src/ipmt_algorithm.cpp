@@ -42,8 +42,6 @@ void ipmt_index_tree(string &textfile)
 
 	lzw_encode( textPlusTree, encoded);
 
-	writeToFile("danilo.txt", encoded);
-
 	string outputFileName;
 	int index = textfile.rfind(".");
 	outputFileName = textfile.substr( 0, index);
@@ -96,7 +94,7 @@ void lzw_encode(const string & text, string & ret)
 	vectorToString( encoded , ret);
 }
 
-string lzw_decode(const vector<int> encoded)
+void lzw_decode(const vector<int> encoded, string &ret)
 {
 	std::map<int,std::string> dictionary;
 	for (int i = 0; i < 256; i++){
@@ -104,7 +102,6 @@ string lzw_decode(const vector<int> encoded)
 	}
 
 	int prevcode, currcode;
-	string ret;
 	string entry;
 	string aux;
 
@@ -128,8 +125,6 @@ string lzw_decode(const vector<int> encoded)
 		aux = entry;
 
 	}
-
-	return ret;
 
 }
 
