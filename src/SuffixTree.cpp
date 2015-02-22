@@ -16,6 +16,8 @@ using namespace std;
 #define DB( x ) cerr << #x << " = " << x << endl
 #define _ << " " <<
 
+int tot = 0;
+
 class SuffixTree
 {
 		
@@ -185,7 +187,7 @@ class SuffixTree
 			for( map< pair<int,char> , int >::iterator it = mapEdges.begin(); it != mapEdges.end(); it++){
 				Edge edge = edgesArr[ it->second ];
 				outEdges[edge.noInicial].push_back( str[edge.l] );
-				DB( edge.noInicial _ edge.noFinal _ str[edge.l] );
+				// DB( edge.noInicial _ edge.noFinal _ str[edge.l] );
 			}
 		}
 		
@@ -210,6 +212,7 @@ class SuffixTree
 				active = update( active, i );				
 				active = canonize( active );
 			}
+			createOutEdgesFromMap();
 		}
 		
 		//TODO usar ponteiro ao inves de copiar string para a arvore
@@ -231,7 +234,7 @@ class SuffixTree
 		{
 			int byteMask = (1 << 8) - 1;
 			for( int i = 0;i < 4; i++){
-				buffer[pos++] = val & byteMask;
+				buffer[pos++] = val & byteMask;								
 				val >>= 8;
 			}
 		}
@@ -240,8 +243,8 @@ class SuffixTree
 		{			
 			int ret = 0;
 			for( int i = 0; i < 4; i++){
-				ret += buffer[pos] << (8 * i);				
-				pos++;
+				int aux = (unsigned char) buffer[pos++];
+				ret += (aux << (8 * i));				
 			}
 			return ret;
 		}
@@ -252,6 +255,7 @@ class SuffixTree
 			char * buffer = new char[ (4 * nodeCount * sizeof(int)) + 100];
 			int pos = 0;			
 			insertIntToBuffer( nodeCount, pos, buffer);			
+			// DB( nodeCount );
 			for(int edgeIndex = 1; edgeIndex < nodeCount; edgeIndex++){
 				Edge edge = edgesArr[edgeIndex];
 				insertIntToBuffer( edge.l , pos, buffer);
@@ -267,7 +271,7 @@ class SuffixTree
 			initialize();			
 			int pos = 0;			
 			nodeCount = getIntFromBuffer( pos, buffer );
-			DB( nodeCount );
+			// DB( nodeCount );
 			outEdges = new list<char>[nodeCount + 1];
 			for(int edgeIndex = 1; edgeIndex < nodeCount; edgeIndex++){
 				Edge edge;
@@ -286,7 +290,7 @@ class SuffixTree
 		//findOccurrences deve ser chamado apos constructFromByteRepresentation. 
 		void findOccurrences( const string & patt ){
 			
-			printf("procurando ocorrencias de: %s\n", patt.c_str() );
+			// printf("procurando ocorrencias de: %s\n", patt.c_str() );
 			if( (int) patt.size() == 0 ) return ;
 			
 			int iteratorPatt = 0;			
@@ -328,8 +332,14 @@ class SuffixTree
 	
 		void findOccurrenceHelper(int nodeIndex , int currentSuffixSize){			
 			if( outEdges[nodeIndex].size() == 0){
+				tot++;
 				// no folha
-				printf("ocorrencia na posicao: %d\n", stringSize - currentSuffixSize );
+				// printf("ocorrencia na posicao: %d\n", stringSize - currentSuffixSize );
+				// for(int x = 0; x < 20; x++){
+					// cout << str[stringSize - currentSuffixSize + x] ;;
+				// }
+				// cout << endl;
+				
 			}
 			list<char> & lista = outEdges[nodeIndex];
 			for( list<char>::iterator it = lista.begin(); it != lista.end(); it++){
@@ -343,15 +353,26 @@ class SuffixTree
 
 int main(int argc, char** argv)
 {
-	string str = "GATAGACA$";
+	string str, strbuf; 
+	while( getline( cin, strbuf)){
+		str += strbuf;
+		str += "\n";
+	}
+	
+	// DB( str.size());
     SuffixTree aux(str);
+	
+	// aux.findOccurrences("for");
 	
 	char * buff = aux.getByteRepresentation();
 	SuffixTree tree( str , buff );
-	
-	tree.findOccurrences("A");
-	tree.findOccurrences("GA");
-	tree.findOccurrences("AGA");
+	DB( str.size());
+	DB( tree.nodeCount );	
+	tree.findOccurrences("it");	
+	tree.findOccurrences("to");	
+	tree.findOccurrences("the");	
+	tree.findOccurrences("indicate");
+	DB(tot);
     return 0;
 }
 

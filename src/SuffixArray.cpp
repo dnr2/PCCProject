@@ -1,6 +1,3 @@
-#ifndef SUFFIXARRAY_H
-#define SUFFIXARRAY_H
-
 #include <cmath>
 #include <string>
 #include <cstring>
@@ -112,4 +109,10 @@ class SuffixArray
 
 };
 
-#endif
+int main(){
+		
+	string = "AGATAGACA$";
+	SuffixArray(  );
+	
+	return 0;
+}
