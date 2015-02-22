@@ -69,6 +69,15 @@ string lzw_decode(const vector<int> encoded)
 
 }
 
+string vectorToString(const vector<int> v){
+	string ret;
+
+	for (vector<int>::iterator it = v.begin() ; it != v.end(); ++it){
+		ret += *it;
+		ret += '\n';
+	}
+}
+
 int main(int argc, char** argv) {
 	string str, strbuf; 
 	while( getline( cin, strbuf)){
@@ -87,13 +96,6 @@ int main(int argc, char** argv) {
 	cout << decoded << endl;
 	cout << str.length() << endl;
 	cout << decoded.length() << endl;
-	string enc;
-	for (uint i = 0; i < encoded.size(); i++){
-		enc += encoded[i];
-		enc += '\n';
-	}
-	cout << enc.length() << endl;
-
 	
 	return 0;
 }

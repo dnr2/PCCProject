@@ -24,9 +24,9 @@
 
 using namespace std;
 
-int ipmt_index_tree(string &textfile, int error, int tpf_type, bool count);
-int ipmt_index_array(string &textfile, int error, int tpf_type, bool count);
-int ipmt_search(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count);
+int ipmt_index_tree(string &textfile);
+int ipmt_index_array(string &textfile);
+int ipmt_search(vector<string> &patterns, string &textfile);
 
 void lzw_encode(const string &text, vector<int> &ret);
 string lzw_decode(const vector<int> encoded);
