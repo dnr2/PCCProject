@@ -1,14 +1,4 @@
-#include <cmath>
-#include <string>
-#include <cstring>
-#include <algorithm>
-#include <map>		
-#include <limits>
-#include <algorithm>
-#include <iostream>
-#include <sstream>
-#include <list>
-#include <cstdio>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -16,7 +6,6 @@ using namespace std;
 #define DB( x ) cerr << #x << " = " << x << endl
 #define _ << " " <<
 
-int tot = 0;
 
 class SuffixTree
 {
@@ -222,7 +211,7 @@ class SuffixTree
 			buildTree();
 		}
 		
-		SuffixTree(const string & _str, char * buffer )
+		SuffixTree(const string & _str, string & buffer )
 		{			
 			str = _str;
 			constructFromByteRepresentation( buffer );
@@ -230,16 +219,17 @@ class SuffixTree
 		
 		
 		
-		void insertIntToBuffer( int val, int & pos , char * buffer)
+		void insertIntToBuffer( int val, int & pos , string & buffer)
 		{
 			int byteMask = (1 << 8) - 1;
 			for( int i = 0;i < 4; i++){
-				buffer[pos++] = val & byteMask;								
+				//buffer[pos++] = val & byteMask;
+				buffer += val & byteMask;				
 				val >>= 8;
 			}
 		}
 		
-		int getIntFromBuffer(int & pos, char * buffer )
+		int getIntFromBuffer(int & pos, string & buffer )
 		{			
 			int ret = 0;
 			for( int i = 0; i < 4; i++){
@@ -250,9 +240,10 @@ class SuffixTree
 		}
 	
 		//TODO: Lembrar de dar free no buffer apos usar-lo!!
-		char * getByteRepresentation()
+		void getByteRepresentation(string & buffer)
 		{			
-			char * buffer = new char[ (4 * nodeCount * sizeof(int)) + 100];
+			//buffer.resize((4 * nodeCount * sizeof(int)) + 100);
+			buffer = "";
 			int pos = 0;			
 			insertIntToBuffer( nodeCount, pos, buffer);			
 			// DB( nodeCount );
@@ -263,10 +254,10 @@ class SuffixTree
 				insertIntToBuffer( edge.noInicial , pos, buffer);
 				insertIntToBuffer( edge.noFinal , pos, buffer);
 			}
-			return buffer;
+
 		}
 		
-		void constructFromByteRepresentation(char * buffer)
+		void constructFromByteRepresentation(string & buffer)
 		{
 			initialize();			
 			int pos = 0;			
@@ -332,9 +323,8 @@ class SuffixTree
 	
 		void findOccurrenceHelper(int nodeIndex , int currentSuffixSize){			
 			if( outEdges[nodeIndex].size() == 0){
-				tot++;
 				// no folha
-				// printf("ocorrencia na posicao: %d\n", stringSize - currentSuffixSize );
+				printf("ocorrencia na posicao: %d\n", stringSize - currentSuffixSize );
 				// for(int x = 0; x < 20; x++){
 					// cout << str[stringSize - currentSuffixSize + x] ;;
 				// }
@@ -363,8 +353,8 @@ int main(int argc, char** argv)
     SuffixTree aux(str);
 	
 	// aux.findOccurrences("for");
-	
-	char * buff = aux.getByteRepresentation();
+	string buff;
+	aux.getByteRepresentation(buff);
 	SuffixTree tree( str , buff );
 	DB( str.size());
 	DB( tree.nodeCount );	
@@ -372,7 +362,9 @@ int main(int argc, char** argv)
 	tree.findOccurrences("to");	
 	tree.findOccurrences("the");	
 	tree.findOccurrences("indicate");
-	DB(tot);
+
+
+
     return 0;
 }
 

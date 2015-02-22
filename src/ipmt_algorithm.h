@@ -1,19 +1,14 @@
 #ifndef _TPF_ALGORITHM
 #define _TPF_ALGORITHM
 
-#include <string>
+#include <bits/stdc++.h>
 
-#include <vector>
-#include <queue>
-#include <iostream>
-#include <cstring>
+//#include "SuffixTree.cpp"
 
-#include <getopt.h>
-#include <stdlib.h>
-#include <fstream>
+/*#include <getopt.h>
 #include <dirent.h>
-#include <sys/types.h>
-#include <assert.h>
+#include <sys/types.h>*/
+
 
 
 #define IPMT_INDEX_TREE 			1
@@ -32,6 +27,9 @@ using namespace std;
 int ipmt_index_tree(string &textfile, int error, int tpf_type, bool count);
 int ipmt_index_array(string &textfile, int error, int tpf_type, bool count);
 int ipmt_search(vector<string> &patterns, string &textfile, int error, int tpf_type, bool count);
+
+int lz77_encode(string &text, string &ret);
+int lz77_decode(string &encoded, string &ret);
 
 
 #endif
