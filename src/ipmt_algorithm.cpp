@@ -1,7 +1,70 @@
 #include "ipmt_algorithm.h"
 
-void lzw_encode(const string &text, vector<int> &ret)
+
+void readFromFile(string & textFile, string & input)
 {
+	ifstream infile(textFile);
+
+	if (! infile.good()){
+		cout << "Arquivo de padrão << " << textFile << " >> inválido" << endl;
+		exit(1);
+	}
+	string line;
+	while ( getline( infile, line) ) {
+		line += '\n';
+		input += line;
+	}
+}
+
+void writeToFile( string & textFile, string & output)
+{
+	ofstream ofs;
+ 	ofs.open ( textFile, ofstream::out | ofstream::trunc );
+  	ofs << output;
+  	ofs.close();
+}
+
+
+void ipmt_index_tree(string &textfile)
+{
+	string fileContent;
+	readFromFile( textfile , fileContent);
+	SuffixTree suffixTree(fileContent);
+	string treeRepresentation;
+	suffixTree.getByteRepresentation(treeRepresentation);
+
+	string textPlusTree;
+	textPlusTree += fileContent.size();
+	textPlusTree += '\n';
+	textPlusTree += fileContent;
+	textPlusTree += treeRepresentation;
+	string encoded;
+
+	lzw_encode( textPlusTree, encoded);
+
+	writeToFile("danilo.txt", encoded);
+
+	string outputFileName;
+	int index = textfile.rfind(".");
+	outputFileName = textfile.substr( 0, index);
+	outputFileName += ".idx";
+	writeToFile( outputFileName, encoded);
+
+}
+
+void ipmt_index_array(string &textfile)
+{
+
+}
+
+void ipmt_search(vector<string> &patterns, string &textfile)
+{
+
+}
+
+void lzw_encode(const string & text, string & ret)
+{
+	vector<int> encoded;
 	map<string,int> dictionary;
 	for (int i = 0; i < 256; i++){
 		dictionary[string(1, i)] = i;
@@ -18,7 +81,7 @@ void lzw_encode(const string &text, vector<int> &ret)
 		if (dictionary.count(sch)){
 			s = sch;
 		}else{
-			ret.push_back(dictionary[s]);
+			encoded.push_back(dictionary[s]);
 			int size = dictionary.size() + 1;
 			dictionary[sch] = size;
 
@@ -26,10 +89,11 @@ void lzw_encode(const string &text, vector<int> &ret)
 		}
 	}
 	if (! s.empty()){
-		ret.push_back(dictionary[s]);
+		encoded.push_back(dictionary[s]);
 	}
 
-
+	
+	vectorToString( encoded , ret);
 }
 
 string lzw_decode(const vector<int> encoded)
@@ -69,15 +133,17 @@ string lzw_decode(const vector<int> encoded)
 
 }
 
-string vectorToString(const vector<int> v){
-	string ret;
-
+void vectorToString(vector<int> v, string & ret){
+	
 	for (vector<int>::iterator it = v.begin() ; it != v.end(); ++it){
 		ret += *it;
 		ret += '\n';
 	}
 }
 
+
+
+/*
 int main(int argc, char** argv) {
 	string str, strbuf; 
 	while( getline( cin, strbuf)){
@@ -98,34 +164,4 @@ int main(int argc, char** argv) {
 	cout << decoded.length() << endl;
 	
 	return 0;
-}
-
-/*int main(int argc, char** argv)
-{
-	string str, strbuf; 
-	while( getline( cin, strbuf)){
-		str += strbuf;
-		str += "\n";
-	}
-	
-	// DB( str.size());
-    SuffixTree aux(str);
-	
-	// aux.findOccurrences("for");
-	string buff, buff_encoded;
-	aux.getByteRepresentation(buff);
-
-	//lz77_encode(buff, buff_encoded);
-	DB(buff.length());
-	//DB(buff_encoded.length());
-
-	SuffixTree tree( str , buff );
-	DB( str.size());
-	DB( tree.nodeCount );	
-	//tree.findOccurrences("it");	
-	//tree.findOccurrences("to");	
-	//tree.findOccurrences("the");	
-	//tree.findOccurrences("indicate");
-
-    return 0;
 }*/

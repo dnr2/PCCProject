@@ -340,7 +340,7 @@ class SuffixTree
 			}			
 		}
 };
-
+/*
 int main(int argc, char** argv)
 {
 	string str, strbuf; 
@@ -368,3 +368,4 @@ int main(int argc, char** argv)
     return 0;
 }
 
+*/

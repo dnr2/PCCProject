@@ -2,12 +2,11 @@
 #define _TPF_ALGORITHM
 
 #include <bits/stdc++.h>
+#include "SuffixTree.cpp"
 
-//#include "SuffixTree.cpp"
-
-/*#include <getopt.h>
+#include <getopt.h>
 #include <dirent.h>
-#include <sys/types.h>*/
+#include <sys/types.h>
 
 
 
@@ -24,12 +23,13 @@
 
 using namespace std;
 
-int ipmt_index_tree(string &textfile);
-int ipmt_index_array(string &textfile);
-int ipmt_search(vector<string> &patterns, string &textfile);
+void ipmt_index_tree(string &textfile);
+void ipmt_index_array(string &textfile);
+void ipmt_search(vector<string> &patterns, string &textfile);
 
-void lzw_encode(const string &text, vector<int> &ret);
+void lzw_encode(const string & text, string & ret);
 string lzw_decode(const vector<int> encoded);
+void vectorToString(vector<int> v, string & ret);
 
 
 #endif

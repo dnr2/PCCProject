@@ -9,6 +9,55 @@ void help()
 	exit(0);
 }
 
+vector<string> handle_wildcard(string &str)
+{
+	vector<string> files;
+	files.reserve(5);
+
+	size_t found = str.find_last_of("/\\");
+	bool no_path = found==string::npos;
+	string path = no_path ? "./" : str.substr(0,found+1);
+	string file = no_path ? str : str.substr(found+1);
+
+	if (path == "")	path = "./";
+
+	// verifica se tem wildcard
+	found = file.find_last_of('*');
+	// sem wildcard
+	if (found == string::npos){
+		ifstream check(str);
+		if (check.good())
+			files.push_back(str);
+		else
+			cout << "Arquivo de texto << " << str << " >> inválido" << endl;
+		return files;
+	}
+	// se tiver wildcard, lê até antes do asterisco
+	file = file.substr(0, found);
+
+  	// le arquivos do diretorio
+	DIR *dp;
+	struct dirent *ep;
+
+	dp = opendir (path.c_str());
+	if (dp != NULL)	{
+		while ((ep = readdir(dp))){
+			string possible_match(ep->d_name);
+			if (possible_match.find(file) != string::npos){
+				puts (ep->d_name);
+				files.push_back(possible_match);
+			}
+		}
+		(void) closedir (dp);
+	} else {
+		cout << "path: " << path << endl;
+		cout << "file: " << file << endl;
+		cout << "Diretório << " << path << " >> inválido" << endl;
+	}
+
+	return files;
+}
+
 int main(int argc, char **argv)
 {
 	// make COUT and CIN faster
@@ -18,7 +67,6 @@ int main(int argc, char **argv)
 	bool array = false;
 	bool search;
 
-	int error = 0;
 	vector<string> patterns;
 	string pat_file;
 	vector<string> textfiles;
