@@ -61,7 +61,7 @@ class SuffixTree
 		string str;
 		int nodeCount;
 		int stringSize;
-		Node rootNode;		
+		Node rootNode;			
 		
 		void insertNode(Node & node )
 		{
@@ -197,16 +197,22 @@ class SuffixTree
 				active = update( active, i );				
 				active = canonize( active );
 			}
+			
 		}
 		
 		char * getByteRepresentation(){
 			return NULL;
-		}	
+		}
+		
+		void find_occurrence(string & patt ){
+			
+		}
+
 };
 
 int main(int argc, char** argv)
 {	
-	string str = "GATAGACAAGAGABBGFARFAAF";
+	string str = "GATAGACA";
     SuffixTree t(str);	
     return 0;
 }
