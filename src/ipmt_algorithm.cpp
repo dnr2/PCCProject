@@ -17,7 +17,7 @@ void readFromFile(string & textFile, string & input)
 		line += '\n';
 		input += line;
 	}
-	//input.pop_back();
+	input = input.substr(0, input.length()-1);
 }
 
 void writeToFile( string & textFile, string & output)
@@ -155,9 +155,9 @@ void lzw_decode(string &encoded_str, string &ret)
 	stringToVector(encoded_str, encoded);
 
 
-	std::map<int,std::string> dictionary;
+	map<int, string> dictionary;
 	for (int i = 0; i < 256; i++){
-		dictionary[i] = std::string(1, i);
+		dictionary[i] = string(1, i);
 	}
 
 	int prevcode, currcode;
