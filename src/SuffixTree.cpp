@@ -217,7 +217,7 @@ class SuffixTree
 			constructFromByteRepresentation( buffer );
 		}
 		
-		
+		/*
 		
 		void insertIntToBuffer( int val, int & pos , string & buffer)
 		{
@@ -276,7 +276,46 @@ class SuffixTree
 			}
 			
 		}
+		*/
+
+
+		void getByteRepresentation(string & buffer)
+		{			
+			buffer = "";
+			ostringstream os;
+			os << nodeCount << "\n";
+			for(int edgeIndex = 1; edgeIndex < nodeCount; edgeIndex++){
+				Edge edge = edgesArr[edgeIndex];
+				os << edge.l << "\n";
+				os << edge.r << "\n";
+				os << edge.noInicial << "\n";
+				os << edge.noFinal << "\n";
+			}
+			buffer = os.str();
+
+		}
 		
+		void constructFromByteRepresentation(string & buffer)
+		{
+			initialize();			
+		
+			stringstream ss( buffer );	
+			ss >> nodeCount;
+			
+			outEdges = new list<char>[nodeCount + 1];
+			for(int edgeIndex = 1; edgeIndex < nodeCount; edgeIndex++){
+				Edge edge;
+				ss >> edge.l;
+				ss >> edge.r;
+				ss >> edge.noInicial;
+				ss >> edge.noFinal;
+				insertEdge( edge );
+				
+				outEdges[edge.noInicial].push_back( str[edge.l] );
+			}
+			
+		}
+
 		
 		//findOccurrences deve ser chamado apos constructFromByteRepresentation. 
 		void findOccurrences( const string & patt ){

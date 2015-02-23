@@ -1,6 +1,9 @@
 #include "ipmt_algorithm.h"
 
 
+#define DB( x ) cerr << #x << " = " << x << endl
+#define _ << " " <<
+
 void readFromFile(string & textFile, string & input)
 {
 	ifstream infile(textFile);
@@ -14,6 +17,7 @@ void readFromFile(string & textFile, string & input)
 		line += '\n';
 		input += line;
 	}
+	//input.pop_back();
 }
 
 void writeToFile( string & textFile, string & output)
@@ -24,6 +28,39 @@ void writeToFile( string & textFile, string & output)
   	ofs.close();
 }
 
+void splitInputData(string &input, string &originalText, string &treeRepresentation)
+{
+	int textSize, treeSize;
+
+	
+	char * buf = const_cast<char*> (input.c_str() );
+	sscanf(buf, "%d", &textSize);
+	char *pch;
+	pch = strchr(buf, '\n');
+	buf = pch+1;
+	sscanf(buf, "%d", &treeSize);
+	pch = strchr(buf, '\n');
+	buf = pch+1;
+
+	DB(textSize);
+	DB(treeSize);
+	
+
+	char *text = new char[textSize+1];
+	memcpy(text, buf, textSize);
+	
+	text[textSize] = '\0';
+	originalText = text;
+
+	buf = buf + textSize;
+	char *tree = new char[treeSize+1];
+	memcpy(tree, buf, treeSize);
+
+	tree[treeSize] = '\0';
+	treeRepresentation = tree;
+
+	
+}
 
 void ipmt_index_tree(string &textfile)
 {
@@ -32,23 +69,29 @@ void ipmt_index_tree(string &textfile)
 	SuffixTree suffixTree(fileContent);
 	string treeRepresentation;
 	suffixTree.getByteRepresentation(treeRepresentation);
+	
+	DB(treeRepresentation.size());
 
 	string textPlusTree;
-	textPlusTree += fileContent.size();
-	textPlusTree += '\n';
-	textPlusTree += fileContent;
-	textPlusTree += treeRepresentation;
+	ostringstream os;
+	os << fileContent.size() << '\n';
+	os << treeRepresentation.size() << '\n';
+	os << fileContent;
+	os << treeRepresentation;
+	textPlusTree = os.str();
 	string encoded;
 
 	lzw_encode( textPlusTree, encoded);
-	
+
+	DB(textPlusTree.size());
+	DB(encoded.size());
 
 	string outputFileName;
 	int index = textfile.rfind(".");
 	outputFileName = textfile.substr( 0, index);
 	outputFileName += ".idx";
 	writeToFile( outputFileName, encoded);
-
+	exit(0);
 }
 
 void ipmt_index_array(string &textfile)
@@ -58,7 +101,18 @@ void ipmt_index_array(string &textfile)
 
 void ipmt_search(vector<string> &patterns, string &textfile)
 {
+	string encodedContent, fileContent;
+	readFromFile(textfile, encodedContent);
+	lzw_decode(encodedContent, fileContent);
 
+	string text, treeRepresentation;
+	splitInputData(fileContent, text, treeRepresentation);
+
+	SuffixTree suffixTree(text, treeRepresentation);
+
+	for(string &pat : patterns){
+		suffixTree.findOccurrences(pat);
+	}
 }
 
 void lzw_encode(const string & text, string & ret)
@@ -95,15 +149,18 @@ void lzw_encode(const string & text, string & ret)
 	vectorToString( encoded , ret);
 }
 
-string lzw_decode(const vector<int> encoded)
+void lzw_decode(string &encoded_str, string &ret)
 {
+	vector<int> encoded;
+	stringToVector(encoded_str, encoded);
+
+
 	std::map<int,std::string> dictionary;
 	for (int i = 0; i < 256; i++){
 		dictionary[i] = std::string(1, i);
 	}
 
 	int prevcode, currcode;
-	string ret;
 	string entry;
 	string aux;
 
@@ -128,11 +185,10 @@ string lzw_decode(const vector<int> encoded)
 
 	}
 
-	return ret;
-
 }
 
-void vectorToString(vector<int> v, string & ret){
+void vectorToString(vector<int> &v, string & ret)
+{
 	ostringstream os;
 	
 	for (vector<int>::iterator it = v.begin() ; it != v.end(); ++it){
@@ -141,27 +197,13 @@ void vectorToString(vector<int> v, string & ret){
 	ret = os.str();
 }
 
+void stringToVector(string &encoded, vector<int> &ret)
+{
+	ret.clear();
 
-
-/*
-int main(int argc, char** argv) {
-	string str, strbuf; 
-	while( getline( cin, strbuf)){
-		str += strbuf;
-		str += "\n";
+	int val;
+	stringstream ss(encoded);
+	while ( ss >> val ) {
+		ret.push_back(val);
 	}
-
-	
-	vector<int> encoded;
-	lzw_encode(str, encoded);
-	
-	//cout << "Encoded\t" << encoded << endl;
-	string decoded = lzw_decode(encoded);
-	
-	//cout << "Decoded\t" << decoded << endl;
-	cout << decoded << endl;
-	cout << str.length() << endl;
-	cout << decoded.length() << endl;
-	
-	return 0;
-}*/
+}
