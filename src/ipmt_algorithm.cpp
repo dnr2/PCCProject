@@ -70,6 +70,8 @@ void ipmt_index_tree(string &textfile)
 	string treeRepresentation;
 	suffixTree.getByteRepresentation(treeRepresentation);
 	
+	DB(treeRepresentation.size());
+
 	string textPlusTree;
 	ostringstream os;
 	os << fileContent.size() << '\n';
@@ -80,6 +82,9 @@ void ipmt_index_tree(string &textfile)
 	string encoded;
 
 	lzw_encode( textPlusTree, encoded);
+
+	DB(textPlusTree.size());
+	DB(encoded.size());
 
 	string outputFileName;
 	int index = textfile.rfind(".");
@@ -103,15 +108,10 @@ void ipmt_search(vector<string> &patterns, string &textfile)
 	string text, treeRepresentation;
 	splitInputData(fileContent, text, treeRepresentation);
 
-	cout << "alo" << endl;
-
 	SuffixTree suffixTree(text, treeRepresentation);
-
-	cout << "criou" << endl;
 
 	for(string &pat : patterns){
 		suffixTree.findOccurrences(pat);
-		cout << "achou" << endl;
 	}
 }
 
@@ -207,28 +207,3 @@ void stringToVector(string &encoded, vector<int> &ret)
 		ret.push_back(val);
 	}
 }
-
-
-
-/*int main(int argc, char** argv) {
-	string str, strbuf; 
-	while( getline( cin, strbuf)){
-		str += strbuf;
-		str += "\n";
-	}
-
-	
-	string encoded;
-	lzw_encode(str, encoded);
-	
-	//cout << "Encoded\t" << encoded << endl;
-	string decoded;
-	lzw_decode(encoded, decoded);
-	
-	cout << decoded << endl;
-	//cout << str.length() << endl;
-	//cout << decoded.length() << endl;
-	//cout << encoded.length() << endl;
-	
-	return 0;
-}*/

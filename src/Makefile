@@ -1,18 +1,21 @@
-FLAGS=-std=c++11 -Wall -Wextra -O2
+FLAGS=-std=c++0x -Wall -Wextra -O2
 
-all: makedir tpf clean
+all: makedir ipmt clean
 
-tpf: tpf.o tpf_algorithm.o
-	g++ $(FLAGS) tpf.o tpf_algorithm.o -o ../bin/tpf
+ipmt: ipmt.o ipmt_algorithm.o SuffixTree.o
+	g++ $(FLAGS) ipmt.o ipmt_algorithm.o SuffixTree.o -o ../bin/ipmt
 
-tpf.o: tpf.cpp
-	g++ $(FLAGS) -c tpf.cpp
+ipmt.o: ipmt.cpp
+	g++ $(FLAGS) -c ipmt.cpp
 
-tpf_algorithm.o: tpf_algorithm.cpp
-	g++ $(FLAGS) -c tpf_algorithm.cpp
+ipmt_algorithm.o: ipmt_algorithm.cpp
+	g++ $(FLAGS) -c ipmt_algorithm.cpp
+
+SuffixTree.o: SuffixTree.cpp
+	g++ $(FLAGS) -c SuffixTree.cpp
 
 clean:
-	rm -rf *o tpf
+	rm -rf *o ipmt
 
 makedir:
 	mkdir -p ../bin/
