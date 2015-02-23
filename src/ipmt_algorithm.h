@@ -28,8 +28,9 @@ void ipmt_index_array(string &textfile);
 void ipmt_search(vector<string> &patterns, string &textfile);
 
 void lzw_encode(const string & text, string & ret);
-void lzw_decode(const vector<int> encoded, string &ret);
-void vectorToString(vector<int> v, string & ret);
+void lzw_decode(string &encoded_str, string &ret);
+void vectorToString(vector<int> &v, string & ret);
+void stringToVector(string &encoded, vector<int> &ret);
 
 
 #endif
