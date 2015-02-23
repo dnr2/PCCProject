@@ -216,68 +216,7 @@ class SuffixTree
 			str = _str;
 			constructFromByteRepresentation( buffer );
 		}
-		
-		/*
-		
-		void insertIntToBuffer( int val, int & pos , string & buffer)
-		{
-			int byteMask = (1 << 8) - 1;
-			for( int i = 0;i < 4; i++){
-				//buffer[pos++] = val & byteMask;
-				buffer += val & byteMask;				
-				val >>= 8;
-			}
-		}
-		
-		int getIntFromBuffer(int & pos, string & buffer )
-		{			
-			int ret = 0;
-			for( int i = 0; i < 4; i++){
-				int aux = (unsigned char) buffer[pos++];
-				ret += (aux << (8 * i));				
-			}
-			return ret;
-		}
 	
-		//TODO: Lembrar de dar free no buffer apos usar-lo!!
-		void getByteRepresentation(string & buffer)
-		{			
-			//buffer.resize((4 * nodeCount * sizeof(int)) + 100);
-			buffer = "";
-			int pos = 0;			
-			insertIntToBuffer( nodeCount, pos, buffer);			
-			// DB( nodeCount );
-			for(int edgeIndex = 1; edgeIndex < nodeCount; edgeIndex++){
-				Edge edge = edgesArr[edgeIndex];
-				insertIntToBuffer( edge.l , pos, buffer);
-				insertIntToBuffer( edge.r , pos, buffer);
-				insertIntToBuffer( edge.noInicial , pos, buffer);
-				insertIntToBuffer( edge.noFinal , pos, buffer);
-			}
-
-		}
-		
-		void constructFromByteRepresentation(string & buffer)
-		{
-			initialize();			
-			int pos = 0;			
-			nodeCount = getIntFromBuffer( pos, buffer );
-			// DB( nodeCount );
-			outEdges = new list<char>[nodeCount + 1];
-			for(int edgeIndex = 1; edgeIndex < nodeCount; edgeIndex++){
-				Edge edge;
-				edge.l = getIntFromBuffer( pos, buffer);
-				edge.r = getIntFromBuffer( pos, buffer);
-				edge.noInicial = getIntFromBuffer( pos, buffer);
-				edge.noFinal = getIntFromBuffer( pos, buffer);
-				insertEdge( edge );
-				// DB( edge.noInicial _ edge.noFinal _ str[edge.l]);
-				outEdges[edge.noInicial].push_back( str[edge.l] );
-			}
-			
-		}
-		*/
-
 
 		void getByteRepresentation(string & buffer)
 		{			
@@ -348,8 +287,13 @@ class SuffixTree
 					currentSuffixSize += edge.r - edge.l + 1; 
 					if( edge.r == stringSize ) currentSuffixSize--; //TODO ta certo isso?					
 					if( iteratorPatt == (int) patt.size()){
-						// matching exato encontrado						
-						findOccurrenceHelper( edge.noFinal, currentSuffixSize  );
+						// matching exato encontrado		
+						vector<int> occ;				
+						findOccurrenceHelper( edge.noFinal, currentSuffixSize , occ );
+						sort( occ.begin(), occ.end() );
+						for(int i = 0; i < (int) occ.size(); i++){
+							cout << "encontrado em: " << occ[i] << endl;
+						}
 						searching = false;
 					}
 					currentNode = edge.noFinal;
@@ -360,25 +304,21 @@ class SuffixTree
 		}
 	
 	
-		void findOccurrenceHelper(int nodeIndex , int currentSuffixSize){			
+		void findOccurrenceHelper(int nodeIndex , int currentSuffixSize, vector<int> & occ){			
 			if( outEdges[nodeIndex].size() == 0){
 				// no folha
-				printf("ocorrencia na posicao: %d\n", stringSize - currentSuffixSize );
-				// for(int x = 0; x < 20; x++){
-					// cout << str[stringSize - currentSuffixSize + x] ;;
-				// }
-				// cout << endl;
-				
+				occ.push_back( stringSize - currentSuffixSize  );
 			}
 			list<char> & lista = outEdges[nodeIndex];
 			for( list<char>::iterator it = lista.begin(); it != lista.end(); it++){
 				Edge edge = edgesArr[ mapEdges[make_pair( nodeIndex, *it)] ];
 				int span = edge.r - edge.l + 1;				
 				if( edge.r == stringSize ) span--;
-				findOccurrenceHelper(edge.noFinal, currentSuffixSize + span );
+				findOccurrenceHelper(edge.noFinal, currentSuffixSize + span, occ );
 			}			
 		}
 };
+
 /*
 int main(int argc, char** argv)
 {

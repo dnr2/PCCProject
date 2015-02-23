@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "SuffixTree.cpp"
+#include "SuffixArray.cpp"
 
 #include <getopt.h>
 #include <dirent.h>

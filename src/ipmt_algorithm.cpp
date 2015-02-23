@@ -28,23 +28,27 @@ void writeToFile( string & textFile, string & output)
   	ofs.close();
 }
 
-void splitInputData(string &input, string &originalText, string &treeRepresentation)
+bool splitInputData(string &input, string &originalText, string &structureRepresentation)
 {
-	int textSize, treeSize;
-
+	int textSize, size;
+	bool isArray = false;
 	
 	char * buf = const_cast<char*> (input.c_str() );
 	sscanf(buf, "%d", &textSize);
 	char *pch;
 	pch = strchr(buf, '\n');
 	buf = pch+1;
-	sscanf(buf, "%d", &treeSize);
+	sscanf(buf, "%d", &size);
+	
+	if( size < 0 ){		
+		size = -size;
+		isArray = true;
+	}
 	pch = strchr(buf, '\n');
 	buf = pch+1;
 
-	DB(textSize);
-	DB(treeSize);
-	
+	//DB(textSize);
+	//DB(size);	
 
 	char *text = new char[textSize+1];
 	memcpy(text, buf, textSize);
@@ -53,24 +57,25 @@ void splitInputData(string &input, string &originalText, string &treeRepresentat
 	originalText = text;
 
 	buf = buf + textSize;
-	char *tree = new char[treeSize+1];
-	memcpy(tree, buf, treeSize);
+	char *structure = new char[size+1];
+	memcpy(structure, buf, size);
 
-	tree[treeSize] = '\0';
-	treeRepresentation = tree;
+	structure[size] = '\0';
+	structureRepresentation = structure;
 
-	
+	return isArray;
 }
 
 void ipmt_index_tree(string &textfile)
 {
+	cout << "Gerando índice com árvore de sufixos do arquivo " << textfile << "..." << endl;
 	string fileContent;
 	readFromFile( textfile , fileContent);
 	SuffixTree suffixTree(fileContent);
 	string treeRepresentation;
 	suffixTree.getByteRepresentation(treeRepresentation);
 	
-	DB(treeRepresentation.size());
+	//DB(treeRepresentation.size());
 
 	string textPlusTree;
 	ostringstream os;
@@ -83,20 +88,55 @@ void ipmt_index_tree(string &textfile)
 
 	lzw_encode( textPlusTree, encoded);
 
-	DB(textPlusTree.size());
-	DB(encoded.size());
+	//DB(textPlusTree.size());
+	//DB(encoded.size());
 
 	string outputFileName;
 	int index = textfile.rfind(".");
 	outputFileName = textfile.substr( 0, index);
 	outputFileName += ".idx";
 	writeToFile( outputFileName, encoded);
+	cout << "Arquivo " << outputFileName << " criado" << endl;
 	exit(0);
 }
 
 void ipmt_index_array(string &textfile)
 {
+	cout << "Gerando índice com array de sufixos do arquivo " << textfile << "..." << endl;
 
+	string fileContent;
+	readFromFile( textfile , fileContent);
+
+	
+	SuffixArray SuffixArray(fileContent);
+	
+	string arrayRepresentation;
+	SuffixArray.getByteRepresentation(arrayRepresentation);
+	
+	//DB(arrayRepresentation.size());
+	//DB(arrayRepresentation);
+
+	string textPlusTree;
+	ostringstream os;
+	os << fileContent.size() << '\n';
+	os << ((-1)* ((int)arrayRepresentation.size())) << '\n';
+	os << fileContent;
+	os << arrayRepresentation;
+	textPlusTree = os.str();
+	string encoded;
+
+	lzw_encode( textPlusTree, encoded);
+
+	//DB(textPlusTree.size());
+	//DB(encoded.size());
+
+	string outputFileName;
+	int index = textfile.rfind(".");
+	outputFileName = textfile.substr( 0, index);
+	outputFileName += ".idx";
+	writeToFile( outputFileName, encoded);
+
+	cout << "Arquivo " << outputFileName << " criado" << endl;
 }
 
 void ipmt_search(vector<string> &patterns, string &textfile)
@@ -105,13 +145,22 @@ void ipmt_search(vector<string> &patterns, string &textfile)
 	readFromFile(textfile, encodedContent);
 	lzw_decode(encodedContent, fileContent);
 
-	string text, treeRepresentation;
-	splitInputData(fileContent, text, treeRepresentation);
+	string text, representation;
+	bool isArray = splitInputData(fileContent, text, representation);
+	if( !isArray){
+		//DB( "is searching with tree");
+		SuffixTree suffixTree(text, representation);
 
-	SuffixTree suffixTree(text, treeRepresentation);
-
-	for(string &pat : patterns){
-		suffixTree.findOccurrences(pat);
+		for(string &pat : patterns){
+			cout << "Buscando o padrao \'" << pat << "\'" << endl;
+			suffixTree.findOccurrences(pat);
+		}
+	} else {
+		//DB( "is searching with array");
+		SuffixArray suffixArray(text, representation);
+		for(string &pat : patterns){
+			suffixArray.findOccurrences(pat);
+		}
 	}
 }
 
