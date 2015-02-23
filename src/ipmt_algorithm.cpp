@@ -47,8 +47,6 @@ bool splitInputData(string &input, string &originalText, string &structureRepres
 	pch = strchr(buf, '\n');
 	buf = pch+1;
 
-	//DB(textSize);
-	//DB(size);	
 
 	char *text = new char[textSize+1];
 	memcpy(text, buf, textSize);
@@ -74,8 +72,6 @@ void ipmt_index_tree(string &textfile)
 	SuffixTree suffixTree(fileContent);
 	string treeRepresentation;
 	suffixTree.getByteRepresentation(treeRepresentation);
-	
-	//DB(treeRepresentation.size());
 
 	string textPlusTree;
 	ostringstream os;
@@ -87,9 +83,6 @@ void ipmt_index_tree(string &textfile)
 	string encoded;
 
 	lzw_encode( textPlusTree, encoded);
-
-	//DB(textPlusTree.size());
-	//DB(encoded.size());
 
 	string outputFileName;
 	int index = textfile.rfind(".");
@@ -113,8 +106,6 @@ void ipmt_index_array(string &textfile)
 	string arrayRepresentation;
 	SuffixArray.getByteRepresentation(arrayRepresentation);
 	
-	//DB(arrayRepresentation.size());
-	//DB(arrayRepresentation);
 
 	string textPlusTree;
 	ostringstream os;
@@ -127,8 +118,6 @@ void ipmt_index_array(string &textfile)
 
 	lzw_encode( textPlusTree, encoded);
 
-	//DB(textPlusTree.size());
-	//DB(encoded.size());
 
 	string outputFileName;
 	int index = textfile.rfind(".");
@@ -159,6 +148,7 @@ void ipmt_search(vector<string> &patterns, string &textfile)
 		//DB( "is searching with array");
 		SuffixArray suffixArray(text, representation);
 		for(string &pat : patterns){
+			cout << "Buscando o padrao \'" << pat << "\'" << endl;
 			suffixArray.findOccurrences(pat);
 		}
 	}

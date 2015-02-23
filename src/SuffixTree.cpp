@@ -292,8 +292,17 @@ class SuffixTree
 						findOccurrenceHelper( edge.noFinal, currentSuffixSize , occ );
 						sort( occ.begin(), occ.end() );
 						for(int i = 0; i < (int) occ.size(); i++){
-							cout << "encontrado em: " << occ[i] << endl;
+							cout << "encontrado em: " << occ[i] << " -> ";
+						
+							for(int j = 0; j < 20; j++){
+								if( str[occ[i] + j] == '\n') break;
+								if( occ[j] + j < stringSize){
+									cout << str[occ[i] + j];
+								}
+							}
+							cout << endl;
 						}
+						
 						searching = false;
 					}
 					currentNode = edge.noFinal;
@@ -315,7 +324,7 @@ class SuffixTree
 				int span = edge.r - edge.l + 1;				
 				if( edge.r == stringSize ) span--;
 				findOccurrenceHelper(edge.noFinal, currentSuffixSize + span, occ );
-			}			
+			}
 		}
 };
 
