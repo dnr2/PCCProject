@@ -5,7 +5,6 @@ using namespace std;
 
 class SuffixArray
 {
-	//TODO considera apenas caractereas alpha numericos!!!	
 	
 	public:
 		
@@ -18,7 +17,7 @@ class SuffixArray
 		void csort(int k)
 		{
 			int ind, cub = max(stringSize, 300);
-			memset( cnt, 0, sizeof( cnt ) );			
+			memset( cnt, 0, (stringSize + 400) * sizeof( cnt ) );			
 			
 			for(int i = 0; i < stringSize; i++){
 				ind = 0;
@@ -53,7 +52,7 @@ class SuffixArray
 			}
 			int k = 1;
 			while(k<stringSize){
-				//radix sort no primeiro e no sedundo rank
+				//radix sort no primeiro e no sedundo rank				
 				csort(k); csort(0); 
 				int r = 0;
 				tmpRA[SA[0]] = 0;
@@ -62,61 +61,83 @@ class SuffixArray
 					if(RA[SA[i]]!=RA[SA[i-1]] || RA[SA[i]+k]!=RA[SA[i-1]+k])
 						r++;
 					tmpRA[SA[i]] = r;
-				}				
+				}
 				for( int i = 0; i < stringSize; i++){
 					RA[i] = tmpRA[i];
 				}
 				//caso ja esteja ordenado, pare
-				if(RA[SA[stringSize-1]]==stringSize-1) break;
+				if(RA[SA[stringSize-1]]==stringSize-1) break;				
 				k <<= 1;
 			}
 		}
 		
 		void initialize()
 		{
-			RA = new int[stringSize + 1]; 
-			SA = new int[stringSize + 1];
-			tmpRA = new int[stringSize + 1];
-			tmpSA = new int[stringSize + 1];
-			cnt = new int[stringSize + 1];		
-			str = new char[stringSize + 1];
+			RA = new int[stringSize + 400]; 
+			SA = new int[stringSize + 400];
+			tmpRA = new int[stringSize + 400];
+			tmpSA = new int[stringSize + 400];
+			cnt = new int[stringSize + 400];		
+			str = new char[stringSize + 400];
 		}
 		
-		SuffixArray(const string & _str)
+		SuffixArray(string & _str)
 		{
 			
 			stringSize = _str.size();
 			initialize();
 			strncpy( str, _str.c_str(), _str.size()	);
-			buildSA();
+			buildSA();			
 		}
 		
-		bool comparator( int suffix, string & patt ){
-			int cmp = strncmp( str + suffix, patt.c_str(), patt.size());
-			return cmp < 0;
-		}
 		
 		//string matching usando lower_bound e upper_bound em tempo O( m * log(n) )
-		pair<int,int> findOccurrences( const string & patt)
+		void findOccurrences( string & patt )
 		{			
-			int lower = lower_bound( SA, SA + stringSize, patt, comparator);
-			if( strncmp( str + SA[lower], patt.c_str(), patt.size()) != 0){				
-				return make_pair(-1,-1); //nao encontrado
+			
+			int start, end;
+			int lo = 0, hi = stringSize-1, mid = lo;	
+			while( lo < hi ){
+				mid = (lo+hi) / 2;
+				if( strncmp( str + SA[mid], patt.c_str(), patt.size()) >= 0){
+					hi = mid;
+				} else{
+					lo = mid + 1;
+				}
 			}
-			int upper = upper_bound( SA, SA + stringSize, patt, comparator);
-			if( strncmp( str + SA[upper], patt.c_str(), patt.size()) != 0){
-				upper--;	//caso especial
+			start = lo;
+			if (strncmp( str + SA[lo], patt.c_str(), patt.size()) != 0) 
+				return; //nao encontrado
+			
+			lo = 0, hi = stringSize-1;
+			while( lo < hi ){
+				mid = (lo + hi) / 2;
+				if( strncmp( str + SA[mid], patt.c_str(), patt.size()) > 0){
+					hi = mid;
+				} else{
+					lo = mid + 1;
+				}
 			}
-			return make_pair( lower, upper );
+			
+			if( strncmp( str + SA[hi], patt.c_str(), patt.size() ) )
+				hi--;
+			end = hi;
+			
+			printf("=== encontrado padrao: %s ===\n", patt.c_str());
+			for( int i = start; i < end+1; i++){				
+				printf("ocorrencia na posicao: %d\n", SA[i] );
+			}
 		}
 };
 
 
 int main(){
 		
-	string str = "AGATAGACA$";
+	string str = "GATAGACA$";
+
 	SuffixArray sArray( str );
-	sArray.findOccurrences("GA");
+	string patt = "GATAGA";
+	sArray.findOccurrences(patt);
 	
 	return 0;
 }
